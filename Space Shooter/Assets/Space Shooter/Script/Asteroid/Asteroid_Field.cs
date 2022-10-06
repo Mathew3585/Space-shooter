@@ -8,7 +8,7 @@ public class Asteroid_Field : MonoBehaviour
 
     public GameObject[] asteroid = new GameObject[3];
     public int numberofAsteroid;
-    [HideInInspector]
+    
     public int[] randomAsteroid;
     [HideInInspector]
     public float[] speedRange;
@@ -19,13 +19,13 @@ public class Asteroid_Field : MonoBehaviour
 
     public int seed;
 
-    private GameObject[] asteroidsClones;
+    public List<GameObject> asteroidsClones ;
 
     private void Start()
     {
         randomAsteroid = new int[numberofAsteroid];
         speedRange = new float[numberofAsteroid];
-        asteroidsClones = new GameObject[numberofAsteroid];
+        asteroidsClones = new List<GameObject>(numberofAsteroid);
 
         
         Random.InitState(seed);
@@ -35,17 +35,28 @@ public class Asteroid_Field : MonoBehaviour
             randomAsteroid[i] = Random.Range(0, 3);
             speedRange[i] = Random.Range(minSpeed, maxSpeed);
 
-            asteroidsClones[i] = Instantiate(asteroid[randomAsteroid[i]], new Vector3(transform.position.x + Random.Range(-spawnRange.x, spawnRange.x),
+            GameObject Asteroid = Instantiate(asteroid[randomAsteroid[i]], new Vector3(transform.position.x + Random.Range(-spawnRange.x, spawnRange.x),
                                                                                       transform.position.y + Random.Range(-spawnRange.y, spawnRange.y),
                                                                                       transform.position.z + Random.Range(-spawnRange.z, spawnRange.z)), Quaternion.identity);
+            asteroidsClones.Add(Asteroid);
 
-
-            asteroidsClones[i].transform.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * speedRange[i];
-            asteroidsClones[i].transform.parent = this.transform;
+            Asteroid.transform.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * speedRange[i];
+            Asteroid.transform.parent = this.transform;
         }
     }
 
 
+    /*
+    private void Update()
+    {
+        if (asteroidsClones.Count >= numberofAsteroid)
+        {
+            Instantiate(asteroid[Random.Range(0, asteroid.Length)], new Vector3(transform.position.x + Random.Range(-spawnRange.x, spawnRange.x),
+                                                                                      transform.position.y + Random.Range(-spawnRange.y, spawnRange.y),
+                                                                                      transform.position.z + Random.Range(-spawnRange.z, spawnRange.z)), Quaternion.identity);
+        }
+    }
+    */
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

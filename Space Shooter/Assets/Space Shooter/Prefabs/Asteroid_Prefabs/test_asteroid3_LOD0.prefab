@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5647164766746488507}
   - component: {fileID: 7936941216683119527}
   - component: {fileID: -1154100238771858894}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: test_asteroid3_LOD0
   m_TagString: Asteroid
   m_Icon: {fileID: 0}
@@ -115,6 +115,8 @@ MonoBehaviour:
   stats:
     MaxHealth: 100
     currentHealth: 0
+    dammage: 20
+  field: {fileID: 0}
 --- !u!54 &-1154100238771858894
 Rigidbody:
   m_ObjectHideFlags: 0

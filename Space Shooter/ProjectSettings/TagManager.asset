@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Asteroid
+  - DestroyAsteroid
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Block Player
   - Water
   - UI
-  - 
+  - Asteroid
   - 
   - 
   - 

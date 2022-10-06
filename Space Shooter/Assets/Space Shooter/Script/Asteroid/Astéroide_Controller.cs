@@ -1,3 +1,4 @@
+using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,20 @@ using UnityEngine;
 public class Asteroid_Stats 
 {
     public float MaxHealth;
+    [HideInInspector]
     public float currentHealth;
+
+    public float dammage;
+
 }
 
 public class Astéroide_Controller : MonoBehaviour
 {
     public Asteroid_Stats stats;
     private Quaternion randomRotaion;
-    
+    public Asteroid_Field field;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +29,7 @@ public class Astéroide_Controller : MonoBehaviour
         stats.currentHealth = stats.MaxHealth;
 
         randomRotaion = Random.rotation;
+        field = GameObject.FindObjectOfType<Asteroid_Field>();
     }
 
     // Update is called once per frame
@@ -34,4 +42,15 @@ public class Astéroide_Controller : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "DestroyAsteroid")
+        {
+            field.asteroidsClones.Remove(gameObject);
+            Destroy(gameObject);
+
+        }
+    }
+
 }

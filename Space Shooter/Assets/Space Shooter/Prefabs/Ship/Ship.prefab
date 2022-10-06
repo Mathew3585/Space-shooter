@@ -62,12 +62,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dde2a6c4e297274cbbee87bfc5edc77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    maxHealth: 100
+    CurrentHealth: 0
   bullet: {fileID: 8729678851105911181, guid: d9f15e7e8354ec74795ba328ba7019f8, type: 3}
   FirePoints:
   - {fileID: 0}
   - {fileID: 0}
-  fireRate: 2
-  MoveSpeed: 40
+  fireRate: 5
+  MoveSpeed: 20
   titleAngle: 10
 --- !u!1 &7632138139549961296
 GameObject:

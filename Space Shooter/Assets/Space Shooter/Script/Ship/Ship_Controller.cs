@@ -4,10 +4,23 @@ using TreeEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
+[System.Serializable]
+public class ShipStats
+{
+    [Header("Health")]
+    public float maxHealth;
+    [HideInInspector]
+    public float CurrentHealth;
+}
+
+
 public class Ship_Controller : MonoBehaviour
 {
 
     Rigidbody rb;
+
+    public ShipStats stats;
 
     public GameObject bullet;
     public Transform[] FirePoints = new Transform[2];
@@ -22,7 +35,17 @@ public class Ship_Controller : MonoBehaviour
     {
         rb = transform.GetComponent<Rigidbody>();
 
+        stats.CurrentHealth = stats.maxHealth;
+
         nextFire = 1 / fireRate;   
+    }
+
+    private void Update()
+    {
+        if(stats.CurrentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -56,6 +79,15 @@ public class Ship_Controller : MonoBehaviour
                 }
                 nextFire += 1 / fireRate;
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Asteroid")
+        {
+            stats.CurrentHealth -= collision.transform.GetComponent<Astéroide_Controller>().stats.dammage;
+            Destroy(collision.gameObject);
         }
     }
 }
