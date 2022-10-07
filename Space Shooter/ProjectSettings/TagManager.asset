@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shootable
+  - Asteroid
   layers:
   - Default
   - TransparentFX
@@ -12,12 +13,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - BlockPlayer
+  - Asteroid
   - Lighting
   - Ground
   - Postprocessing
-  - 
+  - Bullet
   - 
   - 
   - 

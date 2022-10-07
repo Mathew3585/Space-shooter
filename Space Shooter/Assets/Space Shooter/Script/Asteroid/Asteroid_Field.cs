@@ -46,17 +46,23 @@ public class Asteroid_Field : MonoBehaviour
     }
 
 
-    /*
+    
     private void Update()
     {
-        if (asteroidsClones.Count >= numberofAsteroid)
+        if (asteroidsClones.Count < numberofAsteroid)
         {
-            Instantiate(asteroid[Random.Range(0, asteroid.Length)], new Vector3(transform.position.x + Random.Range(-spawnRange.x, spawnRange.x),
+            
+            GameObject Asteroid = Instantiate(asteroid[Random.Range(0, asteroid.Length)], new Vector3(transform.position.x + Random.Range(-spawnRange.x, spawnRange.x),
                                                                                       transform.position.y + Random.Range(-spawnRange.y, spawnRange.y),
                                                                                       transform.position.z + Random.Range(-spawnRange.z, spawnRange.z)), Quaternion.identity);
+            asteroidsClones.Add(Asteroid);
+            float val = speedRange[asteroidsClones.Count - 1] = Random.Range(minSpeed, maxSpeed);
+
+            Asteroid.transform.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * val;
+            Asteroid.transform.parent = this.transform;
         }
     }
-    */
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

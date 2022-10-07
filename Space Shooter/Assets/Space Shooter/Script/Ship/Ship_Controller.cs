@@ -26,9 +26,14 @@ public class Ship_Controller : MonoBehaviour
     public Transform[] FirePoints = new Transform[2];
     public float fireRate;
     private float nextFire;
+    private GameManager gameManager;
 
     public float MoveSpeed;
     public  float titleAngle;
+
+    public GameObject explosionShip;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,13 +42,15 @@ public class Ship_Controller : MonoBehaviour
 
         stats.CurrentHealth = stats.maxHealth;
 
-        nextFire = 1 / fireRate;   
+        nextFire = 1 / fireRate;
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     private void Update()
     {
         if(stats.CurrentHealth <= 0)
         {
+            Instantiate(explosionShip, transform.position , Quaternion.identity);
             Destroy(gameObject);
         }
     }
