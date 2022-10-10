@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Shootable
   - Asteroid
+  - DestroyAsteroid
+  - BlockPalyer
   layers:
   - Default
   - TransparentFX

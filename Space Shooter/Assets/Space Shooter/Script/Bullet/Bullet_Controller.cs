@@ -28,5 +28,9 @@ public class Bullet_Controller : MonoBehaviour
             collision.transform.GetComponent<Astéroide_Controller>().stats.currentHealth -= dammage;
             Destroy(gameObject); 
         }
+        if (collision.gameObject.tag == "BlockPalyer")
+        {
+            Destroy(gameObject);
+        }
     }
 }
