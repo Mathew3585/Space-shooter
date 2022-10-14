@@ -5,6 +5,7 @@ using TMPro;
 using JetBrains.Annotations;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,9 +14,17 @@ public class GameManager : MonoBehaviour
     public bool Game;
     [Header("Value")]
     public int money;
+    private int CurrentMoney;
+    [Header("Progresse Paramerter")]
+    public float TimeSpeedDivide;
+    public float Progress;
+    public float ProgressHightScore;
 
     [Header("Text")]
     public TextMeshProUGUI moneyText;
+
+    [Header("Player Is Alive?")]
+    public bool IsDead;
 
     [Header("GameObject")]
     public GameObject UIInGame;
@@ -23,12 +32,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Script")][Tooltip("Il trouve le player tout seul")]
     public Ship_Controller ship_Controller;
-    [Tooltip("Il trouve le script tout seul")]
-    public ProgerssionSlider ProgessSlider;
 
+    [Header("")]
     public Asteroid_Field asteroid_;
 
-    [Header("Gun")]
+    [Header("Upagrade Gun")]
     public bool Gunup1;
     public bool Gunup2;
     public bool Gunup3;
@@ -48,7 +56,10 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
+        money = PlayerPrefs.GetInt("Money");
         Gunup1 = true;
+
+        //Si Menu est activer
         if (Menu == true)
         {
             if (Gunup1 == true)
@@ -62,12 +73,14 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("Menu Activer");
         }
-        if(Game == true)
+
+        //Si Game est Activer
+        if (Game == true)
         {
             ship_Controller = GameObject.FindObjectOfType<Ship_Controller>();
             UILose.SetActive(false);
             UIInGame.SetActive(true);
-            ProgessSlider = gameObject.GetComponent<ProgerssionSlider>();
+            CurrentMoney = PlayerPrefs.GetInt("Money", money);
             asteroid_ = GameObject.FindObjectOfType<Asteroid_Field>();
             Debug.Log("Game Activer");
         }
@@ -75,6 +88,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        //Si Menu est activer
         if (Menu == true)
         {
             if (Gunup2 == true)
@@ -91,39 +105,89 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        //Si Game est Activer
         if(Game == true)
         {
+            
+            ProgressHightScore = PlayerPrefs.GetFloat("Progress", Progress);
+            if (IsDead == false)
+            {
+                Progress += Time.deltaTime / TimeSpeedDivide;
+            }
+
             moneyText.text = "" + money;
-            //PlayerPrefs.SetInt("SpaceShootherMoney", money);
 
             if (ship_Controller.stats.CurrentHealth <= 0)
             {
+                IsDead = true;
                 UILose.SetActive(true);
                 UIInGame.SetActive(false);
+                PlayerPrefs.SetInt("Money", money);
+                if (ProgressHightScore < Progress)
+                {
+                    PlayerPrefs.SetFloat("Progress", Progress);
+                    ProgressHightScore = PlayerPrefs.GetFloat("Progress", Progress);
+                }
             }
-            if (ProgessSlider.Progress >= 70)
+
+            if (Progress >= 70)
             {
                 asteroid_.enabled = false;
                 Debug.Log("Boss fight");
             }
+
         }
 
     }
 
+
+    /// <summary>
+    /// Button Upgrade/Achat avec l'argent que le joueur a gagnier durant la partie
+    /// </summary>
     public void OnClickUpagrade2()
     {
-        Gunup2 = true;
-        PriceGunUp2Button.enabled = false;
+        if(money == PriceGunUp2)
+        {
+            Gunup2 = true;
+            PlayerPrefs.SetInt("Money", money);
+            PriceGunUp2Button.enabled = false;
+        }
+        else
+        {
+            Debug.Log("Argent Manquant");
+        }
     }
     public void OnClickUpagrade3()
     {
-        if(Gunup3 == true)
+        if(money == PriceGunUp3)
         {
+            Gunup2 = true;
+            Gunup3 = true;
+            PlayerPrefs.SetInt("Money", money);
+            PriceGunUp3Button.enabled = false;
             PriceGunUp2Button.enabled = false;
         }
-        Gunup3 = true;
-        PriceGunUp3Button.enabled = false;
+        else
+        {
+            Debug.Log("Argent Manquant");
+        }
+
     }
 
+
+    /// <summary>
+    /// Menu de Start avec le button Quitter, Start , Option
+    /// </summary>
+    public void QuitGame()
+    {
+        Application.Quit();
+        PlayerPrefs.SetInt("Money", money);
+    }
+
+
+    public void LoadScene()
+    {
+        SceneManager.LoadScene(1);
+    }
 
 }

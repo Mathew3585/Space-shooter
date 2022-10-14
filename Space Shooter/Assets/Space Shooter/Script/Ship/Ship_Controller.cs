@@ -27,6 +27,7 @@ public class Ship_Controller : MonoBehaviour
     public float fireRate;
     private float nextFire;
     private GameManager gameManager;
+    private Bullet_Controller bulletController;
 
     public float MoveSpeed;
     public  float titleAngle;
@@ -38,6 +39,9 @@ public class Ship_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        bulletController = bullet.gameObject.GetComponent<Bullet_Controller>();
+        bulletController.Player = true;
         rb = transform.GetComponent<Rigidbody>();
 
         stats.CurrentHealth = stats.maxHealth;

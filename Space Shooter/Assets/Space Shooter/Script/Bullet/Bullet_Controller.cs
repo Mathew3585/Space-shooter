@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bullet_Controller : MonoBehaviour
 {
+    public bool Player;
+    public bool ennemis;
+
     public float bulletSpeed;
 
     public float dammage;
@@ -21,13 +24,36 @@ public class Bullet_Controller : MonoBehaviour
 
     }
 
+
+
+    /// <summary>
+    /// Destroy Collision enter
+    /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Asteroid")
+        if (Player)
         {
-            collision.transform.GetComponent<Astéroide_Controller>().stats.currentHealth -= dammage;
-            Destroy(gameObject); 
+            if (collision.gameObject.tag == "Asteroid")
+            {
+                collision.transform.GetComponent<Astéroide_Controller>().stats.currentHealth -= dammage;
+                Destroy(gameObject);
+            }
+            if (collision.gameObject.tag == "Ennemis")
+            {
+                collision.transform.GetComponent<Ennemis>().stats.currentHealth -= dammage;
+                Destroy(gameObject);
+            }
         }
+        if (ennemis)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                collision.transform.GetComponent<Ship_Controller>().stats.CurrentHealth -= dammage;
+                Destroy(gameObject);
+            }
+        }
+
+
         if (collision.gameObject.tag == "BlockPalyer")
         {
             Destroy(gameObject);

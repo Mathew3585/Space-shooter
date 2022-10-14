@@ -8,6 +8,7 @@ TagManager:
   - Asteroid
   - DestroyAsteroid
   - BlockPalyer
+  - Ennemis
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Water
   - UI
   - BlockPlayer
-  - Asteroid
+  - Ennemis
   - Lighting
   - Ground
   - Postprocessing

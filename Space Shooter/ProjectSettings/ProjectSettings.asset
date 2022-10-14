@@ -843,10 +843,13 @@ PlayerSettings:
     Build: 0
     Collab: 0
     ErrorHub: 0
+    Game Performance: 0
     Game_Performance: 0
     Hub: 0
     Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
     Unity_Ads: 0
   luminIcon:
     m_Name: 
@@ -861,11 +864,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 17a9a08a-c74a-44a3-bcc0-5ff728db1cb3
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: EffectsExamples
-  organizationId: 
+  projectName: Space Shooter
+  organizationId: unity_2fad3c6ff2d6a1fba407
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 1
   playerDataPath: 
