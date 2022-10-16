@@ -21,10 +21,10 @@ TagManager:
   - Lighting
   - Ground
   - Postprocessing
+  - 
+  - BulletEnnemis
+  - "Ast\xE9roid"
   - Bullet
-  - 
-  - 
-  - 
   - 
   - 
   - 

@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5726917906304269573}
   - component: {fileID: 6491803864987298497}
   - component: {fileID: 4881121156850195059}
-  - component: {fileID: 8904958705731967005}
   - component: {fileID: -4842881419075114643}
-  m_Layer: 11
-  m_Name: Bullet
+  - component: {fileID: 7579249869466234703}
+  m_Layer: 12
+  m_Name: BulletEnnemis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,20 +99,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8904958705731967005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8729678851105911181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b21183bca9a08f041a35fcf3dcecbe4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 20
-  dammage: 20
 --- !u!54 &-4842881419075114643
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +115,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &7579249869466234703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729678851105911181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e2f8d71f8b6c34997f3b2749afcb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 10
+  dammage: 20

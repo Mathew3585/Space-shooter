@@ -1,6 +1,6 @@
-using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -28,16 +28,17 @@ public class Ennemis : MonoBehaviour
     public float fireRate;
     private float nextFire;
     public GameObject bullet;
-    public Transform[] FirePoints = new Transform[2];
+    public Transform[] FirePoints;
+    private float firepointlist;
     public bool isAlvie;
     // Start is called before the first frame update
     void Start()
     {
         stats.currentHealth = stats.MaxHealth;
         bulletController = bullet.gameObject.GetComponent<Bullet_Controller>();
-        bulletController.ennemis = true;
         field = GameObject.FindObjectOfType<Asteroid_Field>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        firepointlist = FirePoints.Count();
     }
 
     // Update is called once per frame
@@ -61,7 +62,7 @@ public class Ennemis : MonoBehaviour
             nextFire -= Time.fixedDeltaTime;
             if (nextFire <= 0)
             {
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < firepointlist; i++)
                 {
                     GameObject bulletClone = Instantiate(bullet, FirePoints[i].position, FirePoints[i].rotation);
 
@@ -77,7 +78,7 @@ public class Ennemis : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Bu")
+        if (collision.gameObject.tag == "DestroyAsteroid")
         {
             field.asteroidsClones.Remove(gameObject);
             isAlvie = false;

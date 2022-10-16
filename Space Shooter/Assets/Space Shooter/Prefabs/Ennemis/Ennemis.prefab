@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2977629309885737218
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2525418790330349490}
-  m_Layer: 7
-  m_Name: FirePoint (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2525418790330349490
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2977629309885737218}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.86, y: 0, z: 2.02}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1588325650522299674}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &5492414698591193788
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +31,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7240326609066303804}
-  - {fileID: 2525418790330349490}
   - {fileID: 2197273888625766157}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -86,11 +54,10 @@ MonoBehaviour:
   MoneyDrop: 200
   explosionPrefabs: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 3}
-  fireRate: 2
-  bullet: {fileID: 8729678851105911181, guid: d9f15e7e8354ec74795ba328ba7019f8, type: 3}
+  fireRate: 1
+  bullet: {fileID: 8729678851105911181, guid: c03ffa5823aaa094f9e8b51ad2acbd0a, type: 3}
   FirePoints:
   - {fileID: 7240326609066303804}
-  - {fileID: 2525418790330349490}
   isAlvie: 1
 --- !u!54 &4017525038501299903
 Rigidbody:
@@ -132,7 +99,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6728424719743862423}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 2.11, y: 0, z: 1.73}
+  m_LocalPosition: {x: -0.08, y: 0, z: 2.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -149,7 +116,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 30249b1445eebc347b5a7b4973387213,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30249b1445eebc347b5a7b4973387213,
         type: 3}
@@ -221,6 +188,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 30249b1445eebc347b5a7b4973387213,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b9e7ef944c8fee4a92e60f8cff94e35, type: 2}
     - target: {fileID: 919132149155446097, guid: 30249b1445eebc347b5a7b4973387213,
         type: 3}
       propertyPath: m_Name

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1648808600628399680}
   - component: {fileID: 4752157840717468850}
   - component: {fileID: 5916753341700668144}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: test_asteroid_LOD0
   m_TagString: Asteroid
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44f9d629006bb76409d3626dd82797c0, type: 2}
+  - {fileID: 2100000, guid: dbbdc30bededc664580f6bcca3b21624, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

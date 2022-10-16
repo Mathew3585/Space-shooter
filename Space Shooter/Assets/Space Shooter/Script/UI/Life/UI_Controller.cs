@@ -10,6 +10,9 @@ public class UI_Controller : MonoBehaviour
 
     public Slider healthBar;
     public Image healthBarFill;
+    public Slider PowerBar;
+    public Image PowerBarFill;
+
     public Color[] fillColour = new Color[3];
 
     private void Start()
@@ -17,6 +20,7 @@ public class UI_Controller : MonoBehaviour
         shipController = GameObject.FindObjectOfType<Ship_Controller>();
         healthBar.wholeNumbers = true;
         healthBar.minValue = 0;
+        PowerBar.minValue = 0;
 
         fillColour[0] = new Color(0, 255, 0);
         fillColour[1] = new Color(255, 194, 0);
@@ -28,6 +32,8 @@ public class UI_Controller : MonoBehaviour
     {
         healthBar.maxValue = shipController.stats.maxHealth;
         healthBar.value = shipController.stats.CurrentHealth;
+        PowerBar.value = shipController.stats.CurrentPower;
+
 
         healthBarFill.color = fillColour[0];
         if (healthBar.value <= shipController.stats.maxHealth / 2) healthBarFill.color = fillColour[1];

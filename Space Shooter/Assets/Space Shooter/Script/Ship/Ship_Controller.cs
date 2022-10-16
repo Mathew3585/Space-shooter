@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
+using UnityEngine.UI;
 
 [System.Serializable]
 public class ShipStats
 {
     [Header("Health")]
     public float maxHealth;
+    public float maxPower;
     [HideInInspector]
     public float CurrentHealth;
+    [HideInInspector]
+    public float CurrentPower;
+
 }
 
 
@@ -23,11 +27,14 @@ public class Ship_Controller : MonoBehaviour
     public ShipStats stats;
 
     public GameObject bullet;
-    public Transform[] FirePoints = new Transform[2];
+    public Transform[] FirePoints;
     public float fireRate;
+    public GameObject Ultimategun;
     private float nextFire;
     private GameManager gameManager;
     private Bullet_Controller bulletController;
+    private float CurrentIndexGun;
+
 
     public float MoveSpeed;
     public  float titleAngle;
@@ -41,21 +48,39 @@ public class Ship_Controller : MonoBehaviour
     {
 
         bulletController = bullet.gameObject.GetComponent<Bullet_Controller>();
-        bulletController.Player = true;
         rb = transform.GetComponent<Rigidbody>();
+        CurrentIndexGun = FirePoints.Count();
 
         stats.CurrentHealth = stats.maxHealth;
 
         nextFire = 1 / fireRate;
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        Ultimategun.SetActive(false);
     }
 
     private void Update()
     {
+
+        //Voir si le joueur et mort 
         if(stats.CurrentHealth <= 0)
         {
             Instantiate(explosionShip, transform.position , Quaternion.identity);
             Destroy(gameObject);
+        }
+
+
+        //Ulti Activation/Tire
+        if(stats.CurrentPower == 100)
+        {
+            Debug.Log("Ultimate is ready");
+            Ultimategun.SetActive(true);
+            if (Input.GetButtonDown("Ultimate"))
+            {
+                GameObject bulletClone = Instantiate(bullet, Ultimategun.gameObject.transform.position, Quaternion.identity);
+                Debug.Log(CurrentIndexGun);
+                stats.CurrentPower = 0;
+                Ultimategun.SetActive(false);
+            }
         }
     }
 
@@ -79,7 +104,7 @@ public class Ship_Controller : MonoBehaviour
             nextFire -= Time.fixedDeltaTime;  
             if(nextFire <= 0)
             {
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < CurrentIndexGun; i++)
                 {
                     GameObject bulletClone = Instantiate(bullet, FirePoints[i].position, Quaternion.identity);
 

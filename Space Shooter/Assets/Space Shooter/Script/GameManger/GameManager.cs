@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("Menu or Game")]
     public bool Menu;
     public bool Game;
+
     [Header("Value")]
     public int money;
     private int CurrentMoney;

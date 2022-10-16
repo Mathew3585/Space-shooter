@@ -1,4 +1,3 @@
-using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,6 +44,7 @@ public class Astéroide_Controller : MonoBehaviour
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
             gameManager.money += MoneyDrop;
+            gameManager.ship_Controller.stats.CurrentPower++;
             Destroy(gameObject);
         }
     }
