@@ -23,7 +23,8 @@ Material:
   m_Name: New Material
   m_Shader: {fileID: -6465566751694194690, guid: bf36778a400a0894b86a1f49c422fa62,
     type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - LIGHTMAP_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -104,7 +105,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - LIGHTMAP: 0
+    - LIGHTMAP: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -122,14 +123,14 @@ Material:
     - _LightProbeContribution: 3.5
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutlineDepthSensitivity: 0.654
+    - _OutlineDepthSensitivity: 0.575
     - _OutlineNormalsSensitivity: 1
     - _OutlineThickness: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.525
+    - _Smoothness: 0.626
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

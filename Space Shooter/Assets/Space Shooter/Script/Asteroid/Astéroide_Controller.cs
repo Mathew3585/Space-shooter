@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -23,6 +24,7 @@ public class Astéroide_Controller : MonoBehaviour
     private GameManager gameManager;
 
     public GameObject explosionPrefabs;
+    public Ship_Controller shipController;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,7 @@ public class Astéroide_Controller : MonoBehaviour
         randomRotaion = Random.rotation;
         field = GameObject.FindObjectOfType<Asteroid_Field>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        shipController = GameObject.FindObjectOfType<Ship_Controller>();
     }
 
     // Update is called once per frame
@@ -44,7 +47,14 @@ public class Astéroide_Controller : MonoBehaviour
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
             gameManager.money += MoneyDrop;
-            gameManager.ship_Controller.stats.CurrentPower++;
+            if(shipController.stats.CurrentPower == shipController.stats.maxPower)
+            {
+                gameManager.ship_Controller.stats.CurrentPower += 0;
+            }
+            else
+            {
+                gameManager.ship_Controller.stats.CurrentPower ++;
+            }
             Destroy(gameObject);
         }
     }

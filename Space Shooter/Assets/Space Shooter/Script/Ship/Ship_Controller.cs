@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using EZCameraShake;
 
 [System.Serializable]
 public class ShipStats
@@ -13,7 +14,7 @@ public class ShipStats
     public float maxPower;
     [HideInInspector]
     public float CurrentHealth;
-    [HideInInspector]
+    //[HideInInspector]
     public float CurrentPower;
 
 }
@@ -25,8 +26,10 @@ public class Ship_Controller : MonoBehaviour
     Rigidbody rb;
 
     public ShipStats stats;
+    public CameraShaker cameraShaker;
 
     public GameObject bullet;
+    public GameObject Ultimates;
     public Transform[] FirePoints;
     public float fireRate;
     public GameObject Ultimategun;
@@ -46,7 +49,6 @@ public class Ship_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         bulletController = bullet.gameObject.GetComponent<Bullet_Controller>();
         rb = transform.GetComponent<Rigidbody>();
         CurrentIndexGun = FirePoints.Count();
@@ -55,7 +57,6 @@ public class Ship_Controller : MonoBehaviour
 
         nextFire = 1 / fireRate;
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        Ultimategun.SetActive(false);
     }
 
     private void Update()
@@ -73,13 +74,15 @@ public class Ship_Controller : MonoBehaviour
         if(stats.CurrentPower == 100)
         {
             Debug.Log("Ultimate is ready");
-            Ultimategun.SetActive(true);
             if (Input.GetButtonDown("Ultimate"))
             {
-                GameObject bulletClone = Instantiate(bullet, Ultimategun.gameObject.transform.position, Quaternion.identity);
+                gameManager.UltimateActive = true;
+                cameraShaker.ShakeOnce(4f,4f,4f,4f);
+                GameObject VfxUltimateClone = Instantiate(Ultimates, Ultimategun.gameObject.transform);
                 Debug.Log(CurrentIndexGun);
+                Destroy(VfxUltimateClone,3);
+                gameManager.UltimateActive = false;
                 stats.CurrentPower = 0;
-                Ultimategun.SetActive(false);
             }
         }
     }

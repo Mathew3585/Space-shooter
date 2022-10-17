@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     [Header("Player Is Alive?")]
     public bool IsDead;
 
+    public bool UltimateActive;
+
     [Header("GameObject")]
     public GameObject UIInGame;
     public GameObject UILose;
