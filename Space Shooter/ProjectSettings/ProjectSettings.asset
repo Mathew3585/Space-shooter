@@ -849,7 +849,7 @@ PlayerSettings:
     Purchasing: 0
     UDP: 0
     UNet: 1
-    Unity Ads: 0
+    Unity Ads: 1
     Unity_Ads: 0
   luminIcon:
     m_Name: 

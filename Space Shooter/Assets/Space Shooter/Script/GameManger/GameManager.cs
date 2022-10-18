@@ -6,12 +6,17 @@ using JetBrains.Annotations;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
+using EZCameraShake;
+using Unity.Services.Core;
+using Unity.Services.Analytics;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Menu or Game")]
+    [Header("Mode")]
     public bool Menu;
     public bool Game;
+    public bool WarpMode;
 
     [Header("Value")]
     public int money;
@@ -48,14 +53,16 @@ public class GameManager : MonoBehaviour
     public GameObject Gun2;
     public GameObject Gun3;
     [Header("Price Value")]
-    public float PriceGunUp2;
-    public float PriceGunUp3;
+    public int PriceGunUp2;
+    public int PriceGunUp3;
     [Header("Price Text")]
     public TextMeshProUGUI PriceGunUp2Text;
     public TextMeshProUGUI PriceGunUp3Text;
     [Header("Button Upgradde")]
     public Button PriceGunUp2Button;
     public Button PriceGunUp3Button;
+
+    public CameraShaker cameraShaker;
 
     public void Awake()
     {
@@ -89,7 +96,21 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    void Update()
+
+    async void Start()
+    {
+        try
+        {
+            await UnityServices.InitializeAsync();
+            List<string> consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
+        }
+        catch (ConsentCheckException e)
+        {
+            // Something went wrong when checking the GeoIP, check the e.Reason and handle appropriately.
+        }
+
+    }
+        void Update()
     {
         //Si Menu est activer
         if (Menu == true)
@@ -132,13 +153,17 @@ public class GameManager : MonoBehaviour
                     ProgressHightScore = PlayerPrefs.GetFloat("Progress", Progress);
                 }
             }
-
             if (Progress >= 70)
             {
                 asteroid_.enabled = false;
                 Debug.Log("Boss fight");
             }
 
+        }
+        if (WarpMode == true)
+        {
+            Debug.Log(WarpMode);
+            cameraShaker.ShakeOnce(0.7f, 0.2f, 0.2f, 0.7f);
         }
 
     }
@@ -147,28 +172,59 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Button Upgrade/Achat avec l'argent que le joueur a gagnier durant la partie
     /// </summary>
+    //Button Upagrade Gun 1
     public void OnClickUpagrade2()
     {
-        if(money == PriceGunUp2)
+        if(money >= PriceGunUp2)
         {
             Gunup2 = true;
             PlayerPrefs.SetInt("Money", money);
             PriceGunUp2Button.enabled = false;
+            money -= PriceGunUp2;
+            PlayerPrefs.SetInt("Money", money);
+            Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
+        {
+            { "Upgrade Gun 1",  Gunup2 },
+        };
+
+            // The ‘myEvent’ event will get queued up and sent every minute
+            AnalyticsService.Instance.CustomData("Upgarde", UpgardeGunShip);
+
+            // Optional - You can call Events.Flush() to send the event immediately
+            AnalyticsService.Instance.Flush();
+
+            Debug.Log("analitics Résult : " + UpgardeGunShip);
         }
         else
         {
             Debug.Log("Argent Manquant");
         }
     }
+
+    //Button Upagrade Gun 2
     public void OnClickUpagrade3()
     {
-        if(money == PriceGunUp3)
+        if(money >= PriceGunUp3)
         {
             Gunup2 = true;
             Gunup3 = true;
             PlayerPrefs.SetInt("Money", money);
             PriceGunUp3Button.enabled = false;
             PriceGunUp2Button.enabled = false;
+            money -= PriceGunUp3;
+            PlayerPrefs.SetInt("Money", money);
+            Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
+        {
+            { "Upgrade Gun 2",  Gunup3 },
+        };
+
+            // The ‘myEvent’ event will get queued up and sent every minute
+            AnalyticsService.Instance.CustomData("Upgarde", UpgardeGunShip);
+
+            // Optional - You can call Events.Flush() to send the event immediately
+            AnalyticsService.Instance.Flush();
+
+            Debug.Log("analitics Résult : " + UpgardeGunShip);
         }
         else
         {
@@ -177,6 +233,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    void SendEnvent()
+    {
+        
+    }
 
     /// <summary>
     /// Menu de Start avec le button Quitter, Start , Option
