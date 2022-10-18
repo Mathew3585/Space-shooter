@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("Money", money);
             Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
         {
-            { "Upgrade Gun 1",  Gunup2 },
+            { "UpgradeGun1",  Gunup2 },
         };
 
             // The ‘myEvent’ event will get queued up and sent every minute
@@ -215,7 +215,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("Money", money);
             Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
         {
-            { "Upgrade Gun 2",  Gunup3 },
+            { "UpgradeGun2",  Gunup3 },
         };
 
             // The ‘myEvent’ event will get queued up and sent every minute
