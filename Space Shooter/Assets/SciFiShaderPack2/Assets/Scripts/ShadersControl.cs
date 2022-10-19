@@ -10,6 +10,7 @@ public class ShadersControl : MonoBehaviour {
     bool back = false;
 
 	void Update () {
+        timer = 0;
         if (timer <= -0.2f)
             back = false;
         if (timer > 1.2f)
@@ -33,7 +34,9 @@ public class ShadersControl : MonoBehaviour {
 
         timerSciFi += Time.deltaTime / 3;
 
-        Shader.SetGlobalFloat("_ShaderSciFi", timerSciFi);
         
+        Shader.SetGlobalFloat("_ShaderSciFi", timerSciFi);
+
+        gameObject.SetActive(false);
     }
 }

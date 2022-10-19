@@ -2,14 +2,15 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DissolveRefraction
-  m_Shader: {fileID: 4800000, guid: 05a73fccbca0a4f4f94641456ab26cca, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: f0de06806c53f2f4ba305e0b2ae1be00, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -63,7 +64,9 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _ChromaticAberration: 0.1
     - _Cutoff: 0.5
     - _DissolvePower: 0.02
@@ -73,7 +76,7 @@ Material:
     - _Metallic1: 0
     - _NoisePower: 0
     - _NoisePower1: 0
-    - _OpacityPower: 0.06
+    - _OpacityPower: 0.03
     - _OpacityPower1: 0.01
     - _Refraction: 0.9
     - _Refraction1: 0
@@ -89,3 +92,4 @@ Material:
     - _DissolveColor1: {r: 0.180188, g: 4.594794, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor1: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
 
     async void Start()
     {
+
         try
         {
             await UnityServices.InitializeAsync();
