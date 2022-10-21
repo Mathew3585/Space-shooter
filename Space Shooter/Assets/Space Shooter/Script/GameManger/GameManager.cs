@@ -205,9 +205,8 @@ public class GameManager : MonoBehaviour
     //Button Upagrade Gun 2
     public void OnClickUpagrade3()
     {
-        if(money >= PriceGunUp3)
+        if(money >= PriceGunUp3 || Gunup2 == true)
         {
-            Gunup2 = true;
             Gunup3 = true;
             PlayerPrefs.SetInt("Money", money);
             PriceGunUp3Button.enabled = false;
