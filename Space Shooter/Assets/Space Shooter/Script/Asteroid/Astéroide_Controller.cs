@@ -49,11 +49,11 @@ public class Astéroide_Controller : MonoBehaviour
             gameManager.money += MoneyDrop;
             if(shipController.stats.CurrentPower == shipController.stats.maxPower)
             {
-                gameManager.ship_Controller.stats.CurrentPower += 0;
+                gameManager.game.ship_Controller.stats.CurrentPower += 0;
             }
             else
             {
-                gameManager.ship_Controller.stats.CurrentPower ++;
+                gameManager.game.ship_Controller.stats.CurrentPower ++;
             }
             Destroy(gameObject);
         }

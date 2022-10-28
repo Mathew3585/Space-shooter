@@ -11,47 +11,35 @@ using EZCameraShake;
 using Unity.Services.Core;
 using Unity.Services.Analytics;
 
-public class GameManager : MonoBehaviour
+[System.Serializable]
+public class Game
 {
-    [Header("Mode")]
-    public bool Menu;
-    public bool Game;
-    public bool WarpMode;
-
-    [Header("Value")]
-    public int money;
-    private int CurrentMoney;
     [Header("Progresse Paramerter")]
     public float TimeSpeedDivide;
     public float Progress;
     public float ProgressHightScore;
-
     [Header("Text")]
     public TextMeshProUGUI moneyText;
-
     [Header("Player Is Alive?")]
     public bool IsDead;
-
     public bool UltimateActive;
 
     [Header("GameObject")]
     public GameObject UIInGame;
     public GameObject UILose;
 
-    [Header("Script")][Tooltip("Il trouve le player tout seul")]
+    [Header("Script")]
+    [Tooltip("Il trouve le player tout seul")]
     public Ship_Controller ship_Controller;
 
-    [Header("")]
+    [Header("Asteroid générator")]
     public Asteroid_Field asteroid_;
+    public CameraShaker cameraShaker;
+}
 
-    [Header("Upagrade Gun")]
-    public bool Gunup1;
-    public bool Gunup2;
-    public bool Gunup3;
-    [Header("Gun GameObject")]
-    public GameObject Gun1;
-    public GameObject Gun2;
-    public GameObject Gun3;
+[System.Serializable]
+public class Menu
+{
     [Header("Price Value")]
     public int PriceGunUp2;
     public int PriceGunUp3;
@@ -61,25 +49,54 @@ public class GameManager : MonoBehaviour
     [Header("Button Upgradde")]
     public Button PriceGunUp2Button;
     public Button PriceGunUp3Button;
+}
+[System.Serializable]
+public class Upgrade
+{
+    [Header("Upagrade Gun")]
+    public bool Gunup1;
+    public bool Gunup2;
+    public bool Gunup3;
+    [Header("Gun GameObject")]
+    public GameObject Gun1;
+    public GameObject Gun2;
+    public GameObject Gun3;
 
-    public CameraShaker cameraShaker;
+}
+
+public class GameManager : MonoBehaviour
+{
+    
+
+    [Header("Mode")]
+    public bool Menu;
+    public bool Game;
+    public bool WarpMode;
+
+    [Header("Value")]
+    public int money;
+    private int CurrentMoney;
+
+    public Game game;
+    public Menu menu;
+    public Upgrade upgrade;
 
     public void Awake()
     {
         money = PlayerPrefs.GetInt("Money");
-        Gunup1 = true;
+        upgrade.Gunup1 = true;
 
         //Si Menu est activer
         if (Menu == true)
         {
-            if (Gunup1 == true)
+            if (upgrade.Gunup1 == true)
             {
-                Gun1.SetActive(true);
-                Gun2.SetActive(false);
-                Gun3.SetActive(false);
+                upgrade.Gun1.SetActive(true);
+                upgrade.Gun2.SetActive(false);
+                upgrade.Gun3.SetActive(false);
             }
-            PriceGunUp2Text.text = PriceGunUp2.ToString();
-            PriceGunUp3Text.text = PriceGunUp3.ToString();
+            menu.PriceGunUp2Text.text = menu.PriceGunUp2.ToString();
+            menu.PriceGunUp3Text.text = menu.PriceGunUp3.ToString();
 
             Debug.Log("Menu Activer");
         }
@@ -87,11 +104,11 @@ public class GameManager : MonoBehaviour
         //Si Game est Activer
         if (Game == true)
         {
-            ship_Controller = GameObject.FindObjectOfType<Ship_Controller>();
-            UILose.SetActive(false);
-            UIInGame.SetActive(true);
+            game.ship_Controller = GameObject.FindObjectOfType<Ship_Controller>();
+            game.UILose.SetActive(false);
+            game.UIInGame.SetActive(true);
             CurrentMoney = PlayerPrefs.GetInt("Money", money);
-            asteroid_ = GameObject.FindObjectOfType<Asteroid_Field>();
+            game.asteroid_ = GameObject.FindObjectOfType<Asteroid_Field>();
             Debug.Log("Game Activer");
         }
 
@@ -116,47 +133,47 @@ public class GameManager : MonoBehaviour
         //Si Menu est activer
         if (Menu == true)
         {
-            if (Gunup2 == true)
+            if (upgrade.Gunup2 == true)
             {
-                Gun1.SetActive(true);
-                Gun2.SetActive(true);
+                upgrade.Gun1.SetActive(true);
+                upgrade.Gun2.SetActive(true);
             }
 
-            if (Gunup3 == true)
+            if (upgrade.Gunup3 == true)
             {
-                Gun1.SetActive(true);
-                Gun2.SetActive(true);
-                Gun3.SetActive(true);
+                upgrade.Gun1.SetActive(true);
+                upgrade.Gun2.SetActive(true);
+                upgrade.Gun3.SetActive(true);
             }
         }
 
         //Si Game est Activer
         if(Game == true)
         {
-            
-            ProgressHightScore = PlayerPrefs.GetFloat("Progress", Progress);
-            if (IsDead == false)
+
+            game.ProgressHightScore = PlayerPrefs.GetFloat("Progress", game.Progress);
+            if (game.IsDead == false)
             {
-                Progress += Time.deltaTime / TimeSpeedDivide;
+                game.Progress += Time.deltaTime / game.TimeSpeedDivide;
             }
 
-            moneyText.text = "" + money;
+            game.moneyText.text = "" + money;
 
-            if (ship_Controller.stats.CurrentHealth <= 0)
+            if (game.ship_Controller.stats.CurrentHealth <= 0)
             {
-                IsDead = true;
-                UILose.SetActive(true);
-                UIInGame.SetActive(false);
+                game.IsDead = true;
+                game.UILose.SetActive(true);
+                game.UIInGame.SetActive(false);
                 PlayerPrefs.SetInt("Money", money);
-                if (ProgressHightScore < Progress)
+                if (game.ProgressHightScore < game.Progress)
                 {
-                    PlayerPrefs.SetFloat("Progress", Progress);
-                    ProgressHightScore = PlayerPrefs.GetFloat("Progress", Progress);
+                    PlayerPrefs.SetFloat("Progress", game.Progress);
+                    game.ProgressHightScore = PlayerPrefs.GetFloat("Progress", game.Progress);
                 }
             }
-            if (Progress >= 70)
+            if (game.Progress >= 70)
             {
-                asteroid_.enabled = false;
+                game.asteroid_.enabled = false;
                 Debug.Log("Boss fight");
             }
 
@@ -164,7 +181,7 @@ public class GameManager : MonoBehaviour
         if (WarpMode == true)
         {
             Debug.Log(WarpMode);
-            cameraShaker.ShakeOnce(0.7f, 0.2f, 0.2f, 0.7f);
+            game.cameraShaker.ShakeOnce(0.7f, 0.2f, 0.2f, 0.7f);
         }
 
     }
@@ -176,16 +193,16 @@ public class GameManager : MonoBehaviour
     //Button Upagrade Gun 1
     public void OnClickUpagrade2()
     {
-        if(money >= PriceGunUp2)
+        if(money >= menu.PriceGunUp2)
         {
-            Gunup2 = true;
+            upgrade.Gunup2 = true;
             PlayerPrefs.SetInt("Money", money);
-            PriceGunUp2Button.enabled = false;
-            money -= PriceGunUp2;
+            menu.PriceGunUp2Button.enabled = false;
+            money -= menu.PriceGunUp2;
             PlayerPrefs.SetInt("Money", money);
             Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
         {
-            { "UpgradeGun1",  Gunup2 },
+            { "UpgradeGun1",  upgrade.Gunup2 },
         };
 
             // The ‘myEvent’ event will get queued up and sent every minute
@@ -205,17 +222,17 @@ public class GameManager : MonoBehaviour
     //Button Upagrade Gun 2
     public void OnClickUpagrade3()
     {
-        if(money >= PriceGunUp3 || Gunup2 == true)
+        if(money >= menu.PriceGunUp3 || upgrade.Gunup2 == true)
         {
-            Gunup3 = true;
+            upgrade.Gunup3 = true;
             PlayerPrefs.SetInt("Money", money);
-            PriceGunUp3Button.enabled = false;
-            PriceGunUp2Button.enabled = false;
-            money -= PriceGunUp3;
+            menu.PriceGunUp3Button.enabled = false;
+            menu.PriceGunUp2Button.enabled = false;
+            money -= menu.PriceGunUp3;
             PlayerPrefs.SetInt("Money", money);
             Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
         {
-            { "UpgradeGun2",  Gunup3 },
+            { "UpgradeGun2",  upgrade.Gunup3 },
         };
 
             // The ‘myEvent’ event will get queued up and sent every minute

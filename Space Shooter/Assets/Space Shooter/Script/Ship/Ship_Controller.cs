@@ -14,8 +14,10 @@ public class ShipStats
     public float maxPower;
     [HideInInspector]
     public float CurrentHealth;
-    //[HideInInspector]
+    [Header("Speed")]
     public float CurrentPower;
+    [Header("Fire rate")]
+    public float fireRate;
 
 }
 
@@ -31,7 +33,6 @@ public class Ship_Controller : MonoBehaviour
     public GameObject bullet;
     public GameObject Ultimates;
     public Transform[] FirePoints;
-    public float fireRate;
     public GameObject Ultimategun;
     private float nextFire;
     private GameManager gameManager;
@@ -55,7 +56,7 @@ public class Ship_Controller : MonoBehaviour
 
         stats.CurrentHealth = stats.maxHealth;
 
-        nextFire = 1 / fireRate;
+        nextFire = 1 / stats.fireRate;
         gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
@@ -76,12 +77,12 @@ public class Ship_Controller : MonoBehaviour
             Debug.Log("Ultimate is ready");
             if (Input.GetButtonDown("Ultimate"))
             {
-                gameManager.UltimateActive = true;
+                gameManager.game.UltimateActive = true;
                 cameraShaker.ShakeOnce(4f,4f,4f,4f);
                 GameObject VfxUltimateClone = Instantiate(Ultimates, Ultimategun.gameObject.transform);
                 Debug.Log(CurrentIndexGun);
                 Destroy(VfxUltimateClone,3);
-                gameManager.UltimateActive = false;
+                gameManager.game.UltimateActive = false;
                 stats.CurrentPower = 0;
             }
         }
@@ -116,7 +117,7 @@ public class Ship_Controller : MonoBehaviour
                           Physics.IgnoreCollision(bulletClone.transform.GetComponent<Collider>(), shipCollider[x]);
                     }
                 }
-                nextFire += 1 / fireRate;
+                nextFire += 1 / stats.fireRate;
             }
         }
     }
