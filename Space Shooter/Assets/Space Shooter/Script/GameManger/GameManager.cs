@@ -41,14 +41,14 @@ public class Game
 public class Menu
 {
     [Header("Price Value")]
-    public int PriceGunUp2;
-    public int PriceGunUp3;
+    public int PriceGunUpgarde1;
+    public int PriceGunUpgarde2;
     [Header("Price Text")]
+    public TextMeshProUGUI PriceGunUp1Text;
     public TextMeshProUGUI PriceGunUp2Text;
-    public TextMeshProUGUI PriceGunUp3Text;
     [Header("Button Upgradde")]
+    public Button PriceGunUp1Button;
     public Button PriceGunUp2Button;
-    public Button PriceGunUp3Button;
 }
 [System.Serializable]
 public class Upgrade
@@ -95,8 +95,8 @@ public class GameManager : MonoBehaviour
                 upgrade.Gun2.SetActive(false);
                 upgrade.Gun3.SetActive(false);
             }
-            menu.PriceGunUp2Text.text = menu.PriceGunUp2.ToString();
-            menu.PriceGunUp3Text.text = menu.PriceGunUp3.ToString();
+            menu.PriceGunUp1Text.text = menu.PriceGunUpgarde1.ToString();
+            menu.PriceGunUp2Text.text = menu.PriceGunUpgarde2.ToString();
 
             Debug.Log("Menu Activer");
         }
@@ -193,12 +193,12 @@ public class GameManager : MonoBehaviour
     //Button Upagrade Gun 1
     public void OnClickUpagrade2()
     {
-        if(money >= menu.PriceGunUp2)
+        if(money >= menu.PriceGunUpgarde1)
         {
             upgrade.Gunup2 = true;
             PlayerPrefs.SetInt("Money", money);
-            menu.PriceGunUp2Button.enabled = false;
-            money -= menu.PriceGunUp2;
+            menu.PriceGunUp1Button.enabled = false;
+            money -= menu.PriceGunUpgarde1;
             PlayerPrefs.SetInt("Money", money);
             Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
         {
@@ -222,13 +222,13 @@ public class GameManager : MonoBehaviour
     //Button Upagrade Gun 2
     public void OnClickUpagrade3()
     {
-        if(money >= menu.PriceGunUp3 || upgrade.Gunup2 == true)
+        if(money >= menu.PriceGunUpgarde2 || upgrade.Gunup2 == true)
         {
             upgrade.Gunup3 = true;
             PlayerPrefs.SetInt("Money", money);
-            menu.PriceGunUp3Button.enabled = false;
             menu.PriceGunUp2Button.enabled = false;
-            money -= menu.PriceGunUp3;
+            menu.PriceGunUp1Button.enabled = false;
+            money -= menu.PriceGunUpgarde2;
             PlayerPrefs.SetInt("Money", money);
             Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
         {

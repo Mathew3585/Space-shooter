@@ -3075,29 +3075,32 @@ MonoBehaviour:
   Game: 0
   WarpMode: 0
   money: 0
-  TimeSpeedDivide: 0
-  Progress: 0
-  ProgressHightScore: 0
-  moneyText: {fileID: 0}
-  IsDead: 0
-  UltimateActive: 0
-  UIInGame: {fileID: 0}
-  UILose: {fileID: 0}
-  ship_Controller: {fileID: 0}
-  asteroid_: {fileID: 0}
-  Gunup1: 0
-  Gunup2: 0
-  Gunup3: 0
-  Gun1: {fileID: 97150766}
-  Gun2: {fileID: 691515912}
-  Gun3: {fileID: 2144458132}
-  PriceGunUp2: 2000
-  PriceGunUp3: 5000
-  PriceGunUp2Text: {fileID: 1797921703}
-  PriceGunUp3Text: {fileID: 25153215}
-  PriceGunUp2Button: {fileID: 556519458}
-  PriceGunUp3Button: {fileID: 772185081}
-  cameraShaker: {fileID: 0}
+  game:
+    TimeSpeedDivide: 0
+    Progress: 0
+    ProgressHightScore: 0
+    moneyText: {fileID: 0}
+    IsDead: 0
+    UltimateActive: 0
+    UIInGame: {fileID: 0}
+    UILose: {fileID: 0}
+    ship_Controller: {fileID: 0}
+    asteroid_: {fileID: 0}
+    cameraShaker: {fileID: 0}
+  menu:
+    PriceGunUpgarde1: 0
+    PriceGunUpgarde2: 0
+    PriceGunUp1Text: {fileID: 1797921703}
+    PriceGunUp2Text: {fileID: 1797921703}
+    PriceGunUp1Button: {fileID: 556519458}
+    PriceGunUp2Button: {fileID: 556519458}
+  upgrade:
+    Gunup1: 0
+    Gunup2: 0
+    Gunup3: 0
+    Gun1: {fileID: 97150766}
+    Gun2: {fileID: 691515912}
+    Gun3: {fileID: 2144458132}
 --- !u!114 &1151146389
 MonoBehaviour:
   m_ObjectHideFlags: 0
