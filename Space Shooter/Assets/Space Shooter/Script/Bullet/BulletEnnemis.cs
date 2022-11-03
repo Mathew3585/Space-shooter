@@ -29,7 +29,7 @@ public class BulletEnnemis : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.transform.GetComponent<Ship_Controller>().stats.CurrentHealth -= dammage;
+            collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentHealth -= dammage;
             Destroy(gameObject);
         }
 

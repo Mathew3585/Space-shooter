@@ -10,6 +10,7 @@ using UnityEngine.Analytics;
 using EZCameraShake;
 using Unity.Services.Core;
 using Unity.Services.Analytics;
+using System.Linq;
 
 [System.Serializable]
 public class Game
@@ -34,39 +35,93 @@ public class Game
 
     [Header("Asteroid générator")]
     public Asteroid_Field asteroid_;
+
+}
+
+[System.Serializable]
+public class Warp
+{
     public CameraShaker cameraShaker;
 }
 
 [System.Serializable]
-public class Menu
+public class UpgradeGun
 {
     [Header("Price Value")]
     public int PriceGunUpgarde1;
     public int PriceGunUpgarde2;
+
+    [Space(10)]
     [Header("Price Text")]
     public TextMeshProUGUI PriceGunUp1Text;
     public TextMeshProUGUI PriceGunUp2Text;
+
+    [Space(10)]
     [Header("Button Upgradde")]
     public Button PriceGunUp1Button;
     public Button PriceGunUp2Button;
-}
-[System.Serializable]
-public class Upgrade
-{
+
+    [Space(10)]
     [Header("Upagrade Gun")]
-    public bool Gunup1;
-    public bool Gunup2;
-    public bool Gunup3;
-    [Header("Gun GameObject")]
-    public GameObject Gun1;
-    public GameObject Gun2;
-    public GameObject Gun3;
+    public bool[] UpagradeBaseShip;
+    public bool[] GunUpgardeShip1;
+    public bool[] GunUpgardeShip2;
+    public bool[] GunUpgardeShip3;
+    public bool[] GunUpgardeShip4;
+
+
+}
+
+[System.Serializable]
+public class ShipUnlock
+{
+    [Header("Price Value")]
+    public int PriceGunUpgarde1;
+    public int PriceGunUpgarde2;
+
+    [Space(10)]
+    [Header("Bools")]
+    public bool BaseShip = true;
+    public bool Ship2;
+    public bool Ship3;
+    public bool Ship4;
+    public bool Ship5;
+
+    [Space(10)]
+    [Header("Price Text")]
+    public TextMeshProUGUI SpecShip1TextLife;
+    public TextMeshProUGUI SpecShip1TextMoveSpeed;
+    public TextMeshProUGUI SpecShip1TextFireRate;
+    public TextMeshProUGUI SpecShip1TextPrice;
+
+    [Space(10)]
+    public TextMeshProUGUI SpecShip2TextLife;
+    public TextMeshProUGUI SpecShip2TextMoveSpeed;
+    public TextMeshProUGUI SpecShip2TextFireRate;
+    public TextMeshProUGUI SpecShip2TextPrice;
+
+    [Space(10)]
+    public TextMeshProUGUI SpecShip3TextLife;
+    public TextMeshProUGUI SpecShip3TextMoveSpeed;
+    public TextMeshProUGUI SpecShip3TextFireRate;
+    public TextMeshProUGUI SpecShip3TextPrice;
+
+    [Space(10)]
+    public TextMeshProUGUI SpecShip4TextLife;
+    public TextMeshProUGUI SpecShip4TextMoveSpeed;
+    public TextMeshProUGUI SpecShip4TextFireRate;
+    public TextMeshProUGUI SpecShip4TextPrice;
+
+    [Space(10)]
+    public TextMeshProUGUI SpecShip5TextLife;
+    public TextMeshProUGUI SpecShip5TextMoveSpeed;
+    public TextMeshProUGUI SpecShip5TextFireRate;
+    public TextMeshProUGUI SpecShip5TextPrice;
 
 }
 
 public class GameManager : MonoBehaviour
 {
-    
 
     [Header("Mode")]
     public bool Menu;
@@ -77,29 +132,36 @@ public class GameManager : MonoBehaviour
     public int money;
     private int CurrentMoney;
 
+    public ChangeShip changeShip;
     public Game game;
-    public Menu menu;
-    public Upgrade upgrade;
+    public ShipUnlock shipUnlock;
+    public UpgradeGun upgrade;
+    public Warp warp;
+    public Upgrade upgradeScript;
+
+    [Header("Float")]
+    public float MaxHealthAllShip;
+    public float MaxSpeedAllShip;
+    public float MaxFireRateAllShip;
+
 
     public void Awake()
     {
+        //Load bools ShipUnlock
+        shipUnlock.Ship2 = PlayerPrefs.GetInt("shipUnlock.Ship2") == 1 ? true : false;
+        shipUnlock.Ship3 = PlayerPrefs.GetInt("shipUnlock.Ship3") == 1 ? true : false;
+        shipUnlock.Ship4 = PlayerPrefs.GetInt("shipUnlock.Ship4") == 1 ? true : false;
+        shipUnlock.Ship5 = PlayerPrefs.GetInt("shipUnlock.Ship5") == 1 ? true : false;
+
+        //Load Bools Upagrades
+        upgrade.UpagradeBaseShip[1] = PlayerPrefs.GetInt("UpagradeGunBaseShip 1") == 1 ? true : false;
+        upgrade.UpagradeBaseShip[2] = PlayerPrefs.GetInt("UpagradeGunBaseShip 2") == 1 ? true : false;
+
+        //Load Money Player
         money = PlayerPrefs.GetInt("Money");
-        upgrade.Gunup1 = true;
 
-        //Si Menu est activer
-        if (Menu == true)
-        {
-            if (upgrade.Gunup1 == true)
-            {
-                upgrade.Gun1.SetActive(true);
-                upgrade.Gun2.SetActive(false);
-                upgrade.Gun3.SetActive(false);
-            }
-            menu.PriceGunUp1Text.text = menu.PriceGunUpgarde1.ToString();
-            menu.PriceGunUp2Text.text = menu.PriceGunUpgarde2.ToString();
 
-            Debug.Log("Menu Activer");
-        }
+        shipUnlock.BaseShip = true;
 
         //Si Game est Activer
         if (Game == true)
@@ -111,12 +173,15 @@ public class GameManager : MonoBehaviour
             game.asteroid_ = GameObject.FindObjectOfType<Asteroid_Field>();
             Debug.Log("Game Activer");
         }
+        if (WarpMode)
+        {
+            warp.cameraShaker = GameObject.FindObjectOfType<CameraShaker>();
+        }
 
     }
 
     async void Start()
     {
-
         try
         {
             await UnityServices.InitializeAsync();
@@ -127,26 +192,151 @@ public class GameManager : MonoBehaviour
             // Something went wrong when checking the GeoIP, check the e.Reason and handle appropriately.
         }
 
-    }
-        void Update()
-    {
         //Si Menu est activer
         if (Menu == true)
         {
-            if (upgrade.Gunup2 == true)
+            upgrade.PriceGunUp1Text.text = upgrade.PriceGunUpgarde1.ToString();
+            upgrade.PriceGunUp2Text.text = upgrade.PriceGunUpgarde2.ToString();
+            Debug.Log("Menu Activer");
+
+            //Afficher et Changer les emplacement des upgrades par rapport au vaisau au start  
+            if (changeShip.CurrentSpaceShipSelect == 0)
             {
-                upgrade.Gun1.SetActive(true);
-                upgrade.Gun2.SetActive(true);
+                Debug.Log("Vaiseaux de Base Activer");
+                upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                //A retravailler
+                foreach (GameObject ship in upgradeScript.UpagrdeShip1) { ship.SetActive(false); }
+                //Upagrade Gun
+                if (upgrade.UpagradeBaseShip[1] == true)
+                {
+                    Debug.Log("Upgrade 1 mise a jour");
+                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                }
+
+                if (upgrade.UpagradeBaseShip[2] == true)
+                {
+                    Debug.Log("Upgrade 2 mise a jour");
+                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                    upgradeScript.UpagrdeBaseShip[2].SetActive(true);
+                }
             }
 
-            if (upgrade.Gunup3 == true)
+            if (changeShip.CurrentSpaceShipSelect == 1)
             {
-                upgrade.Gun1.SetActive(true);
-                upgrade.Gun2.SetActive(true);
-                upgrade.Gun3.SetActive(true);
+                upgradeScript.UpagrdeShip1[0].SetActive(true);
+                foreach (GameObject ship in upgradeScript.UpagrdeBaseShip) { ship.SetActive(false); }
+                Debug.Log("Vaiseaux 1");
+                //Upagrade Gun
+                if (upgrade.GunUpgardeShip1[1] == true)
+                {
+                    Debug.Log("Upgrade 1 mise a jour");
+                    upgradeScript.UpagrdeShip1[0].SetActive(true);
+                    upgradeScript.UpagrdeShip1[1].SetActive(true);
+                }
+
+                if (upgrade.GunUpgardeShip1[2] == true)
+                {
+                    Debug.Log("Upgrade 2 mise a jour");
+                    upgradeScript.UpagrdeShip1[0].SetActive(true);
+                    upgradeScript.UpagrdeShip1[1].SetActive(true);
+                    upgradeScript.UpagrdeShip1[2].SetActive(true);
+                }
             }
+
         }
 
+
+        //Faire spawn le vaisseaux séléctionné
+        if (changeShip.CurrentSpaceShipSelect == 0)
+        {
+            changeShip.SpaceShip[0].SetActive(true);
+            changeShip.SpaceShip[1].SetActive(false);
+            changeShip.SpaceShip[2].SetActive(false);
+            changeShip.SpaceShip[3].SetActive(false);
+            changeShip.SpaceShip[4].SetActive(false);
+        }
+        if (changeShip.CurrentSpaceShipSelect == 1)
+        {
+            changeShip.SpaceShip[0].SetActive(false);
+            changeShip.SpaceShip[1].SetActive(true);
+            changeShip.SpaceShip[2].SetActive(false);
+            changeShip.SpaceShip[3].SetActive(false);
+            changeShip.SpaceShip[4].SetActive(false);
+        }
+        if (changeShip.CurrentSpaceShipSelect == 2)
+        {
+            changeShip.SpaceShip[0].SetActive(false);
+            changeShip.SpaceShip[1].SetActive(false);
+            changeShip.SpaceShip[2].SetActive(true);
+            changeShip.SpaceShip[3].SetActive(false);
+            changeShip.SpaceShip[4].SetActive(false);
+        }
+        if (changeShip.CurrentSpaceShipSelect == 3)
+        {
+            changeShip.SpaceShip[0].SetActive(false);
+            changeShip.SpaceShip[1].SetActive(false);
+            changeShip.SpaceShip[2].SetActive(false);
+            changeShip.SpaceShip[3].SetActive(true);
+            changeShip.SpaceShip[4].SetActive(false);
+        }
+        if (changeShip.CurrentSpaceShipSelect == 4)
+        {
+            changeShip.SpaceShip[0].SetActive(false);
+            changeShip.SpaceShip[1].SetActive(false);
+            changeShip.SpaceShip[2].SetActive(false);
+            changeShip.SpaceShip[4].SetActive(true);
+        }
+    }
+
+    void Update()
+    {
+       if(Menu == true)
+        {
+            //Afficher et Changer les emplacement des upgrades par rapport au vaisau au start  
+            if (changeShip.CurrentSpaceShipSelect == 0)
+            {
+                Debug.Log("Vaiseaux de Base Activer");
+                upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                //Upagrade Gun
+                if (upgrade.UpagradeBaseShip[1] == true)
+                {
+                    Debug.Log("Upgrade 1 mise a jour");
+                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                }
+
+                if (upgrade.UpagradeBaseShip[2] == true)
+                {
+                    Debug.Log("Upgrade 2 mise a jour");
+                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                    upgradeScript.UpagrdeBaseShip[2].SetActive(true);
+                }
+            }
+
+            if (changeShip.CurrentSpaceShipSelect == 1)
+            {
+                upgradeScript.UpagrdeShip1[0].SetActive(true);
+                Debug.Log("Vaiseaux de Base Activer");
+                //Upagrade Gun
+                if (upgrade.GunUpgardeShip1[1] == true)
+                {
+                    Debug.Log("Upgrade 1 mise a jour");
+                    upgradeScript.UpagrdeShip1[0].SetActive(true);
+                    upgradeScript.UpagrdeShip1[1].SetActive(true);
+                }
+
+                if (upgrade.GunUpgardeShip1[2] == true)
+                {
+                    Debug.Log("Upgrade 2 mise a jour");
+                    upgradeScript.UpagrdeShip1[0].SetActive(true);
+                    upgradeScript.UpagrdeShip1[1].SetActive(true);
+                    upgradeScript.UpagrdeShip1[2].SetActive(true);
+                }
+            }
+        }
         //Si Game est Activer
         if(Game == true)
         {
@@ -159,7 +349,7 @@ public class GameManager : MonoBehaviour
 
             game.moneyText.text = "" + money;
 
-            if (game.ship_Controller.stats.CurrentHealth <= 0)
+            if (game.ship_Controller.shipStats.CurrentHealth <= 0)
             {
                 game.IsDead = true;
                 game.UILose.SetActive(true);
@@ -178,10 +368,12 @@ public class GameManager : MonoBehaviour
             }
 
         }
+
+        //Si WarpMode est Activer
         if (WarpMode == true)
         {
             Debug.Log(WarpMode);
-            game.cameraShaker.ShakeOnce(0.7f, 0.2f, 0.2f, 0.7f);
+            warp.cameraShaker.ShakeOnce(0.7f, 0.2f, 0.2f, 0.7f);
         }
 
     }
@@ -193,28 +385,34 @@ public class GameManager : MonoBehaviour
     //Button Upagrade Gun 1
     public void OnClickUpagrade2()
     {
-        if(money >= menu.PriceGunUpgarde1)
+        if(money >= upgrade.PriceGunUpgarde1)
         {
-            upgrade.Gunup2 = true;
-            PlayerPrefs.SetInt("Money", money);
-            menu.PriceGunUp1Button.enabled = false;
-            money -= menu.PriceGunUpgarde1;
-            PlayerPrefs.SetInt("Money", money);
-            Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
-        {
-            { "UpgradeGun1",  upgrade.Gunup2 },
-        };
+            if(changeShip.CurrentSpaceShipSelect == 0)
+            {
+                upgrade.UpagradeBaseShip[1] = true;
+                PlayerPrefs.SetInt("UpagradeGunBaseShip 1", upgrade.UpagradeBaseShip[1] ? 1 : 0);
+                PlayerPrefs.SetInt("Money", money);
+                upgrade.PriceGunUp1Button.enabled = false;
+                money -= upgrade.PriceGunUpgarde1;
+                PlayerPrefs.SetInt("Money", money);
+                Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
+                {
+                    { "UpgradeGun1",  upgrade.UpagradeBaseShip[1] },
+                };
 
-            // The ‘myEvent’ event will get queued up and sent every minute
-            AnalyticsService.Instance.CustomData("Upgarde", UpgardeGunShip);
+                // The ‘myEvent’ event will get queued up and sent every minute
+                AnalyticsService.Instance.CustomData("Upgarde", UpgardeGunShip);
 
-            // Optional - You can call Events.Flush() to send the event immediately
-            AnalyticsService.Instance.Flush();
+                // Optional - You can call Events.Flush() to send the event immediately
+                AnalyticsService.Instance.Flush();
 
-            Debug.Log("analitics Résult : " + UpgardeGunShip);
+                Debug.Log("analitics Résult : " + UpgardeGunShip);
+            }
         }
         else
         {
+            upgrade.UpagradeBaseShip[0] = false;
+            upgrade.UpagradeBaseShip[1] = false;
             Debug.Log("Argent Manquant");
         }
     }
@@ -222,29 +420,35 @@ public class GameManager : MonoBehaviour
     //Button Upagrade Gun 2
     public void OnClickUpagrade3()
     {
-        if(money >= menu.PriceGunUpgarde2 || upgrade.Gunup2 == true)
+        if(money >= upgrade.PriceGunUpgarde2 && upgrade.UpagradeBaseShip[1] == true)
         {
-            upgrade.Gunup3 = true;
-            PlayerPrefs.SetInt("Money", money);
-            menu.PriceGunUp2Button.enabled = false;
-            menu.PriceGunUp1Button.enabled = false;
-            money -= menu.PriceGunUpgarde2;
-            PlayerPrefs.SetInt("Money", money);
-            Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
+            if (changeShip.CurrentSpaceShipSelect == 0)
+            {
+                upgrade.UpagradeBaseShip[2] = true;
+                PlayerPrefs.SetInt("UpagradeGunBaseShip 2", upgrade.UpagradeBaseShip[2] ? 1 : 0);
+                PlayerPrefs.SetInt("Money", money);
+                upgrade.PriceGunUp2Button.enabled = false;
+                upgrade.PriceGunUp1Button.enabled = false;
+                money -= upgrade.PriceGunUpgarde2;
+                PlayerPrefs.SetInt("Money", money);
+                Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
         {
-            { "UpgradeGun2",  upgrade.Gunup3 },
+            { "UpgradeGun2",  upgrade.UpagradeBaseShip[2] },
         };
 
-            // The ‘myEvent’ event will get queued up and sent every minute
-            AnalyticsService.Instance.CustomData("Upgarde", UpgardeGunShip);
+                // The ‘myEvent’ event will get queued up and sent every minute
+                AnalyticsService.Instance.CustomData("Upgarde", UpgardeGunShip);
 
-            // Optional - You can call Events.Flush() to send the event immediately
-            AnalyticsService.Instance.Flush();
+                // Optional - You can call Events.Flush() to send the event immediately
+                AnalyticsService.Instance.Flush();
 
-            Debug.Log("analitics Résult : " + UpgardeGunShip);
+                Debug.Log("analitics Résult : " + UpgardeGunShip);
+            }
         }
+                
         else
         {
+            upgrade.UpagradeBaseShip[2] = false;
             Debug.Log("Argent Manquant");
         }
 

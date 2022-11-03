@@ -9,6 +9,11 @@ TagManager:
   - DestroyAsteroid
   - BlockPalyer
   - Ennemis
+  - Ship2
+  - Ship3
+  - Ship4
+  - Ship5
+  - BulletEnemis
   layers:
   - Default
   - TransparentFX

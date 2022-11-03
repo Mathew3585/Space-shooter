@@ -12,9 +12,11 @@ public class ShipStats
     [Header("Health")]
     public float maxHealth;
     public float maxPower;
+    [Header("Speed")]
+    public float MoveSpeed;
     [HideInInspector]
     public float CurrentHealth;
-    [Header("Speed")]
+    [Header("Current Power")]
     public float CurrentPower;
     [Header("Fire rate")]
     public float fireRate;
@@ -27,7 +29,7 @@ public class Ship_Controller : MonoBehaviour
 
     Rigidbody rb;
 
-    public ShipStats stats;
+    public ShipStats shipStats;
     public CameraShaker cameraShaker;
 
     public GameObject bullet;
@@ -40,7 +42,7 @@ public class Ship_Controller : MonoBehaviour
     private float CurrentIndexGun;
 
 
-    public float MoveSpeed;
+
     public  float titleAngle;
 
     public GameObject explosionShip;
@@ -54,36 +56,38 @@ public class Ship_Controller : MonoBehaviour
         rb = transform.GetComponent<Rigidbody>();
         CurrentIndexGun = FirePoints.Count();
 
-        stats.CurrentHealth = stats.maxHealth;
+        shipStats.CurrentHealth = shipStats.maxHealth;
 
-        nextFire = 1 / stats.fireRate;
+        nextFire = 1 / shipStats.fireRate;
         gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     private void Update()
     {
-
-        //Voir si le joueur et mort 
-        if(stats.CurrentHealth <= 0)
+        if (gameManager.Game)
         {
-            Instantiate(explosionShip, transform.position , Quaternion.identity);
-            Destroy(gameObject);
-        }
-
-
-        //Ulti Activation/Tire
-        if(stats.CurrentPower == 100)
-        {
-            Debug.Log("Ultimate is ready");
-            if (Input.GetButtonDown("Ultimate"))
+            //Voir si le joueur et mort 
+            if (shipStats.CurrentHealth <= 0)
             {
-                gameManager.game.UltimateActive = true;
-                cameraShaker.ShakeOnce(4f,4f,4f,4f);
-                GameObject VfxUltimateClone = Instantiate(Ultimates, Ultimategun.gameObject.transform);
-                Debug.Log(CurrentIndexGun);
-                Destroy(VfxUltimateClone,3);
-                gameManager.game.UltimateActive = false;
-                stats.CurrentPower = 0;
+                Instantiate(explosionShip, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+
+
+            //Ulti Activation/Tire
+            if (shipStats.CurrentPower == 100)
+            {
+                Debug.Log("Ultimate is ready");
+                if (Input.GetButtonDown("Ultimate"))
+                {
+                    gameManager.game.UltimateActive = true;
+                    cameraShaker.ShakeOnce(4f, 4f, 4f, 4f);
+                    GameObject VfxUltimateClone = Instantiate(Ultimates, Ultimategun.gameObject.transform);
+                    Debug.Log(CurrentIndexGun);
+                    Destroy(VfxUltimateClone, 3);
+                    gameManager.game.UltimateActive = false;
+                    shipStats.CurrentPower = 0;
+                }
             }
         }
     }
@@ -91,43 +95,51 @@ public class Ship_Controller : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float moveRL = Input.GetAxis("Horizontal");
-        float moveFB = Input.GetAxis("Vertical");
-
-        Vector3 mouvement = new Vector3(moveRL, 0, moveFB)  ;
-        rb.velocity = mouvement *MoveSpeed;
-
-        rb.rotation =Quaternion.Euler(Vector3.forward*moveRL* -titleAngle);
-
-        bool fireButton = Input.GetButton("Fire1");
-
-        Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
-
-        if (fireButton)
+        if (gameManager.Game)
         {
-            nextFire -= Time.fixedDeltaTime;  
-            if(nextFire <= 0)
-            {
-                for (int i = 0; i < CurrentIndexGun; i++)
-                {
-                    GameObject bulletClone = Instantiate(bullet, FirePoints[i].position, Quaternion.identity);
+            float moveRL = Input.GetAxis("Horizontal");
+            float moveFB = Input.GetAxis("Vertical");
 
-                    for (int x = 0; x <  shipCollider.Length; x++)
+            Vector3 mouvement = new Vector3(moveRL, 0, moveFB);
+            rb.velocity = mouvement * shipStats.MoveSpeed;
+
+            rb.rotation = Quaternion.Euler(Vector3.forward * moveRL * -titleAngle);
+
+            bool fireButton = Input.GetButton("Fire1");
+
+            Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
+
+            if (fireButton)
+            {
+                nextFire -= Time.fixedDeltaTime;
+                if (nextFire <= 0)
+                {
+                    for (int i = 0; i < CurrentIndexGun; i++)
                     {
-                          Physics.IgnoreCollision(bulletClone.transform.GetComponent<Collider>(), shipCollider[x]);
+                        GameObject bulletClone = Instantiate(bullet, FirePoints[i].position, Quaternion.identity);
+
+                        for (int x = 0; x < shipCollider.Length; x++)
+                        {
+                            Physics.IgnoreCollision(bulletClone.transform.GetComponent<Collider>(), shipCollider[x]);
+                        }
                     }
+                    nextFire += 1 / shipStats.fireRate;
                 }
-                nextFire += 1 / stats.fireRate;
             }
         }
+       
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Asteroid")
+        if (gameManager.Game)
         {
-            stats.CurrentHealth -= collision.transform.GetComponent<Astéroide_Controller>().stats.dammage;
-            Destroy(collision.gameObject);
+            if (collision.gameObject.tag == "Asteroid")
+            {
+                shipStats.CurrentHealth -= collision.transform.GetComponent<Astéroide_Controller>().stats.dammage;
+                Destroy(collision.gameObject);
+            }
         }
+        
     }
 }

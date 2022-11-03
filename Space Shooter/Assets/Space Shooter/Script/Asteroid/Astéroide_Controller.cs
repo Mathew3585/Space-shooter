@@ -47,13 +47,13 @@ public class Astéroide_Controller : MonoBehaviour
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
             gameManager.money += MoneyDrop;
-            if(shipController.stats.CurrentPower == shipController.stats.maxPower)
+            if(shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
             {
-                gameManager.game.ship_Controller.stats.CurrentPower += 0;
+                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
             }
             else
             {
-                gameManager.game.ship_Controller.stats.CurrentPower ++;
+                gameManager.game.ship_Controller.shipStats.CurrentPower ++;
             }
             Destroy(gameObject);
         }

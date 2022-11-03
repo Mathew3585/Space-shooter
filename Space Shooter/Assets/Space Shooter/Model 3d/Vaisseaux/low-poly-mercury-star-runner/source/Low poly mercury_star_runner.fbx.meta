@@ -3,7 +3,12 @@ guid: 6e4aa49957288284eb7cd04dc60a5839
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mercury_star_runner_1_b_mtl_ship_model
+    second: {fileID: 2100000, guid: 6fd052b9a7c08da46a21086d0c7eb007, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

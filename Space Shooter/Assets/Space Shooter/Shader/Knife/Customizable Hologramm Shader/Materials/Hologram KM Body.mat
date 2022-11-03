@@ -119,12 +119,12 @@ Material:
     - _Float2: 20.35
     - _Float3: 1
     - _FresnelAlphaFeature: 1
-    - _FresnelAlphaPower: 3.65
-    - _FresnelAlphaScale: 1
+    - _FresnelAlphaPower: 1.46
+    - _FresnelAlphaScale: 0.1
     - _FresnelColorFeature: 1
     - _FresnelFeature: 1
-    - _FresnelPower: 1
-    - _FresnelScale: 1
+    - _FresnelPower: 4.66
+    - _FresnelScale: 141
     - _Glitch1Amount: 0.089
     - _Glitch1Speed: -2.3
     - _Glitch1SpeedX: -2.05
@@ -196,7 +196,7 @@ Material:
     - _RandomGlitchConstant: 0
     - _RandomGlitchFeature: 1
     - _RandomGlitchTiling: 2.83
-    - _RandomOffset: 90132.95
+    - _RandomOffset: 51977.57
     - _SoftIntersection: 2
     - _SoftIntersection1Affect: 1
     - _SoftIntersection1Distance: 0
@@ -233,7 +233,7 @@ Material:
     - _LineColor1: {r: 0.620945, g: 1.420074, b: 3.953349, a: 1}
     - _LineColor2: {r: 0.620945, g: 1.420074, b: 3.953349, a: 1}
     - _LineGlitchOffset: {r: 0.03, g: 0, b: 0, a: 0}
-    - _MainColor: {r: 0.620945, g: 1.420074, b: 3.953349, a: 0.05098039}
+    - _MainColor: {r: 0, g: 0.50458884, b: 1.0039216, a: 0.05098039}
     - _MaskCenter: {r: 0, g: 0, b: 0, a: 0}
     - _MaskSize: {r: 0, g: 0, b: 0, a: 0}
     - _RandomGlitchOffset: {r: -0.5, g: 0, b: 0, a: 0}

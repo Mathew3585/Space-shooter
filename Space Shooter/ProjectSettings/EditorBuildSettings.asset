@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Space Shooter/Map/Menu.unity
     guid: 0e09afbe7c39c52478e26fb70656ad31
   - enabled: 1
+    path: Assets/Space Shooter/Map/Warp.unity
+    guid: 85cc5c688d4a6fd4e9a6864aadca8d4d
+  - enabled: 1
     path: Assets/Space Shooter/Map/Map.unity
     guid: 2d7d5a3fa38074f46a561c4acd42c52f
   m_configObjects: {}

@@ -30,13 +30,13 @@ public class UI_Controller : MonoBehaviour
 
     private void Update()
     {
-        healthBar.maxValue = shipController.stats.maxHealth;
-        healthBar.value = shipController.stats.CurrentHealth;
-        PowerBar.value = shipController.stats.CurrentPower;
+        healthBar.maxValue = shipController.shipStats.maxHealth;
+        healthBar.value = shipController.shipStats.CurrentHealth;
+        PowerBar.value = shipController.shipStats.CurrentPower;
 
 
         healthBarFill.color = fillColour[0];
-        if (healthBar.value <= shipController.stats.maxHealth / 2) healthBarFill.color = fillColour[1];
-        if (healthBar.value <= shipController.stats.maxHealth / 10) healthBarFill.color = fillColour[2];
+        if (healthBar.value <= shipController.shipStats.maxHealth / 2) healthBarFill.color = fillColour[1];
+        if (healthBar.value <= shipController.shipStats.maxHealth / 10) healthBarFill.color = fillColour[2];
     }
 }
