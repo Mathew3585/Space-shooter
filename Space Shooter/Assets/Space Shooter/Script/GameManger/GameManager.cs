@@ -47,9 +47,18 @@ public class Warp
 [System.Serializable]
 public class UpgradeGun
 {
-    [Header("Price Value")]
-    public int PriceGunUpgarde1;
-    public int PriceGunUpgarde2;
+    [Header("Price Upgrade Value Base Ship")]
+    public int PriceGunUpgarde1BaseShip;
+    public int PriceGunUpgarde2BaseShip;
+
+    [Space(10)]
+    [Header("Price Upgrade Value Ship 1 ")]
+    public int PriceGunUpgarde1Ship1;
+    public int PriceGunUpgarde2Ship1;
+
+    [Space(10)]
+    [Header("Text Upagrade Already Bought")]
+    public string AlreadyBoughtText;
 
     [Space(10)]
     [Header("Price Text")]
@@ -154,8 +163,15 @@ public class GameManager : MonoBehaviour
         shipUnlock.Ship5 = PlayerPrefs.GetInt("shipUnlock.Ship5") == 1 ? true : false;
 
         //Load Bools Upagrades
+        //BaseShip
+        upgrade.UpagradeBaseShip[0] = true;
         upgrade.UpagradeBaseShip[1] = PlayerPrefs.GetInt("UpagradeGunBaseShip 1") == 1 ? true : false;
         upgrade.UpagradeBaseShip[2] = PlayerPrefs.GetInt("UpagradeGunBaseShip 2") == 1 ? true : false;
+
+        //Gun ship 1
+        upgrade.GunUpgardeShip1[0] = true;
+        upgrade.GunUpgardeShip1[1] = PlayerPrefs.GetInt("UpagradeShip1 Gun1") == 1 ? true : false;
+        upgrade.GunUpgardeShip1[2] = PlayerPrefs.GetInt("UpagradeShip1 Gun2") == 1 ? true : false;
 
         //Load Money Player
         money = PlayerPrefs.GetInt("Money");
@@ -195,56 +211,89 @@ public class GameManager : MonoBehaviour
         //Si Menu est activer
         if (Menu == true)
         {
-            upgrade.PriceGunUp1Text.text = upgrade.PriceGunUpgarde1.ToString();
-            upgrade.PriceGunUp2Text.text = upgrade.PriceGunUpgarde2.ToString();
-            Debug.Log("Menu Activer");
-
-            //Afficher et Changer les emplacement des upgrades par rapport au vaisau au start  
-            if (changeShip.CurrentSpaceShipSelect == 0)
+            if(changeShip.CurrentSpaceShipSelect == 0)
             {
-                Debug.Log("Vaiseaux de Base Activer");
-                upgradeScript.UpagrdeBaseShip[0].SetActive(true);
-                //A retravailler
-                foreach (GameObject ship in upgradeScript.UpagrdeShip1) { ship.SetActive(false); }
-                //Upagrade Gun
+                upgrade.PriceGunUp1Text.text = upgrade.PriceGunUpgarde1BaseShip.ToString();
+                upgrade.PriceGunUp2Text.text = upgrade.PriceGunUpgarde2BaseShip.ToString();
+
                 if (upgrade.UpagradeBaseShip[1] == true)
                 {
-                    Debug.Log("Upgrade 1 mise a jour");
-                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
-                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                    upgrade.PriceGunUp1Text.text = upgrade.AlreadyBoughtText.ToString();
+                    upgrade.PriceGunUp1Button.enabled = false;
                 }
-
                 if (upgrade.UpagradeBaseShip[2] == true)
                 {
-                    Debug.Log("Upgrade 2 mise a jour");
-                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
-                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
-                    upgradeScript.UpagrdeBaseShip[2].SetActive(true);
+                    upgrade.PriceGunUp2Button.enabled = false;
+                    upgrade.PriceGunUp2Text.text = upgrade.AlreadyBoughtText.ToString();
                 }
             }
 
             if (changeShip.CurrentSpaceShipSelect == 1)
             {
-                upgradeScript.UpagrdeShip1[0].SetActive(true);
-                foreach (GameObject ship in upgradeScript.UpagrdeBaseShip) { ship.SetActive(false); }
-                Debug.Log("Vaiseaux 1");
-                //Upagrade Gun
+                upgrade.PriceGunUp1Text.text = upgrade.PriceGunUpgarde1Ship1.ToString();
+                upgrade.PriceGunUp2Text.text = upgrade.PriceGunUpgarde2Ship1.ToString();
+
                 if (upgrade.GunUpgardeShip1[1] == true)
                 {
-                    Debug.Log("Upgrade 1 mise a jour");
-                    upgradeScript.UpagrdeShip1[0].SetActive(true);
-                    upgradeScript.UpagrdeShip1[1].SetActive(true);
+                    upgrade.PriceGunUp1Button.enabled = false;
+                    upgrade.PriceGunUp1Text.text = upgrade.AlreadyBoughtText.ToString();
+                    Debug.Log(upgrade.PriceGunUp1Text.text);
                 }
-
                 if (upgrade.GunUpgardeShip1[2] == true)
                 {
-                    Debug.Log("Upgrade 2 mise a jour");
-                    upgradeScript.UpagrdeShip1[0].SetActive(true);
-                    upgradeScript.UpagrdeShip1[1].SetActive(true);
-                    upgradeScript.UpagrdeShip1[2].SetActive(true);
+                    upgrade.PriceGunUp2Button.enabled = false;
+                    upgrade.PriceGunUp2Text.text = upgrade.AlreadyBoughtText.ToString();
+                    Debug.Log(upgrade.PriceGunUp2Text.text);
                 }
             }
 
+            Debug.Log("Menu Activer");
+        }
+
+        //Afficher et Changer les emplacement des upgrades par rapport au vaisau au start  
+        if (changeShip.CurrentSpaceShipSelect == 0)
+        {
+            Debug.Log("Vaiseaux de Base Activer");
+            upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+            //A retravailler
+            foreach (GameObject ship in upgradeScript.UpagrdeShip1) { ship.SetActive(false); }
+            //Upagrade Gun
+            if (upgrade.UpagradeBaseShip[1] == true)
+            {
+                Debug.Log("Upgrade 1 mise a jour");
+                upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+            }
+
+            if (upgrade.UpagradeBaseShip[2] == true)
+            {
+                Debug.Log("Upgrade 2 mise a jour");
+                upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                upgradeScript.UpagrdeBaseShip[2].SetActive(true);
+            }
+        }
+
+        if (changeShip.CurrentSpaceShipSelect == 1)
+        {
+            upgradeScript.UpagrdeShip1[0].SetActive(true);
+            foreach (GameObject ship in upgradeScript.UpagrdeBaseShip) { ship.SetActive(false); }
+            Debug.Log("Vaiseaux 1");
+            //Upagrade Gun
+            if (upgrade.GunUpgardeShip1[1] == true)
+            {
+                Debug.Log("Upgrade 1 mise a jour");
+                upgradeScript.UpagrdeShip1[0].SetActive(true);
+                upgradeScript.UpagrdeShip1[1].SetActive(true);
+            }
+
+            if (upgrade.GunUpgardeShip1[2] == true)
+            {
+                Debug.Log("Upgrade 2 mise a jour");
+                upgradeScript.UpagrdeShip1[0].SetActive(true);
+                upgradeScript.UpagrdeShip1[1].SetActive(true);
+                upgradeScript.UpagrdeShip1[2].SetActive(true);
+            }
         }
 
 
@@ -294,49 +343,45 @@ public class GameManager : MonoBehaviour
     {
        if(Menu == true)
         {
-            //Afficher et Changer les emplacement des upgrades par rapport au vaisau au start  
+            //Changer les prix en fonction du vaissau selectionner et Activer ou desactiver
             if (changeShip.CurrentSpaceShipSelect == 0)
             {
-                Debug.Log("Vaiseaux de Base Activer");
-                upgradeScript.UpagrdeBaseShip[0].SetActive(true);
-                //Upagrade Gun
+                upgrade.PriceGunUp1Text.text = upgrade.PriceGunUpgarde1BaseShip.ToString();
+                upgrade.PriceGunUp2Text.text = upgrade.PriceGunUpgarde2BaseShip.ToString();
+                upgrade.PriceGunUp1Button.enabled = true;
+                upgrade.PriceGunUp2Button.enabled = true;
+
                 if (upgrade.UpagradeBaseShip[1] == true)
                 {
-                    Debug.Log("Upgrade 1 mise a jour");
-                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
-                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                    upgrade.PriceGunUp1Button.enabled = false;
+                    upgrade.PriceGunUp1Text.text = upgrade.AlreadyBoughtText.ToString();
                 }
-
                 if (upgrade.UpagradeBaseShip[2] == true)
                 {
-                    Debug.Log("Upgrade 2 mise a jour");
-                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
-                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
-                    upgradeScript.UpagrdeBaseShip[2].SetActive(true);
+                    upgrade.PriceGunUp2Button.enabled = false;
+                    upgrade.PriceGunUp2Text.text = upgrade.AlreadyBoughtText.ToString();
                 }
             }
 
             if (changeShip.CurrentSpaceShipSelect == 1)
             {
-                upgradeScript.UpagrdeShip1[0].SetActive(true);
-                Debug.Log("Vaiseaux de Base Activer");
-                //Upagrade Gun
+                upgrade.PriceGunUp1Text.text = upgrade.PriceGunUpgarde1Ship1.ToString();
+                upgrade.PriceGunUp2Text.text = upgrade.PriceGunUpgarde2Ship1.ToString();
+                upgrade.PriceGunUp1Button.enabled = true;
+                upgrade.PriceGunUp2Button.enabled = true;
+
                 if (upgrade.GunUpgardeShip1[1] == true)
                 {
-                    Debug.Log("Upgrade 1 mise a jour");
-                    upgradeScript.UpagrdeShip1[0].SetActive(true);
-                    upgradeScript.UpagrdeShip1[1].SetActive(true);
+                    upgrade.PriceGunUp1Button.enabled = false;
+                    upgrade.PriceGunUp1Text.text = upgrade.AlreadyBoughtText.ToString();             
                 }
-
                 if (upgrade.GunUpgardeShip1[2] == true)
                 {
-                    Debug.Log("Upgrade 2 mise a jour");
-                    upgradeScript.UpagrdeShip1[0].SetActive(true);
-                    upgradeScript.UpagrdeShip1[1].SetActive(true);
-                    upgradeScript.UpagrdeShip1[2].SetActive(true);
+                    upgrade.PriceGunUp2Button.enabled = false;
+                    upgrade.PriceGunUp2Text.text = upgrade.AlreadyBoughtText.ToString();
                 }
             }
-        }
+       }
         //Si Game est Activer
         if(Game == true)
         {
@@ -376,6 +421,75 @@ public class GameManager : MonoBehaviour
             warp.cameraShaker.ShakeOnce(0.7f, 0.2f, 0.2f, 0.7f);
         }
 
+
+        //Afficher et Changer les emplacement des upgrades par rapport au vaisau au start  
+        if (changeShip.CurrentSpaceShipSelect == 0)
+        {
+            if (Game)
+            {
+                if (game.ship_Controller.Isdead)
+                {
+                    return;
+                }
+            }
+
+            Debug.Log("Vaiseaux de Base Activer");
+            upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+            //A Ameliorer 
+            upgradeScript.UpagrdeShip1[0].SetActive(false);
+            upgradeScript.UpagrdeShip1[1].SetActive(false);
+            upgradeScript.UpagrdeShip1[2].SetActive(false);
+            //Upagrade Gun
+            if (upgrade.UpagradeBaseShip[1] == true)
+            {
+                Debug.Log("Upgrade 1 mise a jour");
+                upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+            }
+
+            if (upgrade.UpagradeBaseShip[2] == true)
+            {
+                Debug.Log("Upgrade 2 mise a jour");
+                upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                upgradeScript.UpagrdeBaseShip[2].SetActive(true);
+            }
+        }
+
+        if (changeShip.CurrentSpaceShipSelect == 1)
+        {
+            if (Game)
+            {
+                if (game.ship_Controller.Isdead)
+                {
+                    return;
+                }
+            }
+
+            upgradeScript.UpagrdeShip1[0].SetActive(true);
+            //A Ameliorer 
+            upgradeScript.UpagrdeBaseShip[0].SetActive(false);
+            upgradeScript.UpagrdeBaseShip[1].SetActive(false);
+            upgradeScript.UpagrdeBaseShip[2].SetActive(false);
+            Debug.Log("Vaiseaux 2 Activer");
+            //Upagrade Gun
+            if (upgrade.GunUpgardeShip1[1] == true)
+            {
+                Debug.Log("Upgrade 1 mise a jour");
+                upgradeScript.UpagrdeShip1[0].SetActive(true);
+                upgradeScript.UpagrdeShip1[1].SetActive(true);
+            }
+
+            if (upgrade.GunUpgardeShip1[2] == true)
+            {
+                Debug.Log("Upgrade 2 mise a jour");
+                upgradeScript.UpagrdeShip1[0].SetActive(true);
+                upgradeScript.UpagrdeShip1[1].SetActive(true);
+                upgradeScript.UpagrdeShip1[2].SetActive(true);
+            }
+
+        }
+
     }
 
 
@@ -385,7 +499,7 @@ public class GameManager : MonoBehaviour
     //Button Upagrade Gun 1
     public void OnClickUpagrade2()
     {
-        if(money >= upgrade.PriceGunUpgarde1)
+        if(money >= upgrade.PriceGunUpgarde1BaseShip)
         {
             if(changeShip.CurrentSpaceShipSelect == 0)
             {
@@ -393,7 +507,7 @@ public class GameManager : MonoBehaviour
                 PlayerPrefs.SetInt("UpagradeGunBaseShip 1", upgrade.UpagradeBaseShip[1] ? 1 : 0);
                 PlayerPrefs.SetInt("Money", money);
                 upgrade.PriceGunUp1Button.enabled = false;
-                money -= upgrade.PriceGunUpgarde1;
+                money -= upgrade.PriceGunUpgarde1BaseShip;
                 PlayerPrefs.SetInt("Money", money);
                 Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
                 {
@@ -415,12 +529,41 @@ public class GameManager : MonoBehaviour
             upgrade.UpagradeBaseShip[1] = false;
             Debug.Log("Argent Manquant");
         }
+
+        if (money >= upgrade.PriceGunUpgarde1BaseShip && upgrade.GunUpgardeShip1[0] == true)
+        {
+            if (changeShip.CurrentSpaceShipSelect == 0)
+            {
+                upgrade.GunUpgardeShip1[2] = true;
+                PlayerPrefs.SetInt("UpagradeShip1 Gun1", upgrade.GunUpgardeShip1[1] ? 1 : 0);
+                PlayerPrefs.SetInt("Money", money);
+                upgrade.PriceGunUp2Button.enabled = false;
+                upgrade.PriceGunUp1Button.enabled = false;
+                money -= upgrade.PriceGunUpgarde1Ship1;
+                PlayerPrefs.SetInt("Money", money);
+                Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
+        {
+            { "UpgradeGun1Ship1",  upgrade.GunUpgardeShip1[2] },
+        };
+
+                // The ‘myEvent’ event will get queued up and sent every minute
+                AnalyticsService.Instance.CustomData("Upgarde", UpgardeGunShip);
+
+                // Optional - You can call Events.Flush() to send the event immediately
+                AnalyticsService.Instance.Flush();
+
+                Debug.Log("analitics Résult : " + UpgardeGunShip);
+            }
+
+        }
+
+
     }
 
     //Button Upagrade Gun 2
     public void OnClickUpagrade3()
     {
-        if(money >= upgrade.PriceGunUpgarde2 && upgrade.UpagradeBaseShip[1] == true)
+        if(money >= upgrade.PriceGunUpgarde2BaseShip && upgrade.UpagradeBaseShip[1] == true)
         {
             if (changeShip.CurrentSpaceShipSelect == 0)
             {
@@ -429,7 +572,7 @@ public class GameManager : MonoBehaviour
                 PlayerPrefs.SetInt("Money", money);
                 upgrade.PriceGunUp2Button.enabled = false;
                 upgrade.PriceGunUp1Button.enabled = false;
-                money -= upgrade.PriceGunUpgarde2;
+                money -= upgrade.PriceGunUpgarde2BaseShip;
                 PlayerPrefs.SetInt("Money", money);
                 Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
         {
@@ -444,12 +587,38 @@ public class GameManager : MonoBehaviour
 
                 Debug.Log("analitics Résult : " + UpgardeGunShip);
             }
-        }
-                
+        }  
         else
         {
             upgrade.UpagradeBaseShip[2] = false;
             Debug.Log("Argent Manquant");
+        }
+
+        if (money >= upgrade.PriceGunUpgarde2BaseShip && upgrade.GunUpgardeShip1[1] == true)
+        {
+            if (changeShip.CurrentSpaceShipSelect == 1)
+            {
+                upgrade.GunUpgardeShip1[2] = true;
+                PlayerPrefs.SetInt("UpagradeShip1 Gun2", upgrade.GunUpgardeShip1[2] ? 1 : 0);
+                PlayerPrefs.SetInt("Money", money);
+                upgrade.PriceGunUp2Button.enabled = false;
+                upgrade.PriceGunUp1Button.enabled = false;
+                money -= upgrade.PriceGunUpgarde2BaseShip;
+                PlayerPrefs.SetInt("Money", money);
+                Dictionary<string, object> UpgardeGunShip = new Dictionary<string, object>()
+        {
+            { "UpgradeGun2Ship1",  upgrade.GunUpgardeShip1[2] },
+        };
+
+                // The ‘myEvent’ event will get queued up and sent every minute
+                AnalyticsService.Instance.CustomData("Upgarde", UpgardeGunShip);
+
+                // Optional - You can call Events.Flush() to send the event immediately
+                AnalyticsService.Instance.Flush();
+
+                Debug.Log("analitics Résult : " + UpgardeGunShip);
+            }
+
         }
 
     }

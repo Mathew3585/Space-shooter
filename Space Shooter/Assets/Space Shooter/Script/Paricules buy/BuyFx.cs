@@ -33,10 +33,12 @@ public class BuyFx : MonoBehaviour
             if(Upgarde1 && gameManager.upgrade.UpagradeBaseShip[1])
             {
                 renderer.material = materials[1];
+                return;
             }
             if (Upgarde2 && gameManager.upgrade.UpagradeBaseShip[2])
             {
                 renderer.material = materials[1];
+                return;
             }
         }
         renderer.material = materials[2];

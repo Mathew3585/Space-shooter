@@ -774,7 +774,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &146117932
 GameObject:
@@ -875,6 +875,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1151146389}
+        m_TargetAssemblyTypeName: ChangeShip, Assembly-CSharp
+        m_MethodName: QuitSelectionShip
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2242,7 +2254,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &501879074
 GameObject:
@@ -5411,7 +5423,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1151146388
 MonoBehaviour:
@@ -5470,8 +5482,11 @@ MonoBehaviour:
     SpecShip5TextFireRate: {fileID: 1448420511}
     SpecShip5TextPrice: {fileID: 1758140958}
   upgrade:
-    PriceGunUpgarde1: 2000
-    PriceGunUpgarde2: 5000
+    PriceGunUpgarde1BaseShip: 2000
+    PriceGunUpgarde2BaseShip: 5000
+    PriceGunUpgarde1Ship1: 10000
+    PriceGunUpgarde2Ship1: 15000
+    AlreadyBoughtText: Already Bought
     PriceGunUp1Text: {fileID: 1797921703}
     PriceGunUp2Text: {fileID: 25153215}
     PriceGunUp1Button: {fileID: 556519458}
@@ -5522,6 +5537,7 @@ MonoBehaviour:
   - {fileID: 1703111718}
   - {fileID: 146783567}
   CurrentUnlockShipsSciprt: {fileID: 0}
+  CurrentSpaceShip: {fileID: 0}
   i: 0
   CurrentSpaceShipSelect: 0
 --- !u!114 &1151146390
@@ -7037,7 +7053,7 @@ RectTransform:
   - {fileID: 1591670943}
   - {fileID: 1658944774}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9081,7 +9097,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2032477000
 GameObject:
@@ -9582,7 +9598,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 12.204, y: 134.578, z: 0}
 --- !u!1 &2144458132 stripped
 GameObject:

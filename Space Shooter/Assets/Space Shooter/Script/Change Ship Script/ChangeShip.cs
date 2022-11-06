@@ -22,7 +22,7 @@ public class ChangeShip : MonoBehaviour
     [Space(10)]
     [Header("Gameobject")]
     public UnlockShip CurrentUnlockShipsSciprt;
-    private GameObject CurrentSpaceShip;
+    public GameObject CurrentSpaceShip;
     private GameObject CurrentSpaceShipDescription;
     private GameManager gameManager;
 
@@ -35,13 +35,14 @@ public class ChangeShip : MonoBehaviour
     void Awake()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        CurrentSpaceShipSelect = PlayerPrefs.GetInt("Select Ship", CurrentSpaceShipSelect);
+        CurrentSpaceShipSelect = PlayerPrefs.GetInt("Current_Space_Ship_Select", CurrentSpaceShipSelect);
     }
 
     private void Start()
     {
-        CurrentSpaceShipSelect = PlayerPrefs.GetInt("Select Ship", CurrentSpaceShipSelect);
+        CurrentSpaceShipSelect = PlayerPrefs.GetInt("Current_Space_Ship_Select", CurrentSpaceShipSelect);
         CurrentUnlockShipsSciprt = SpaceShip[CurrentSpaceShipSelect].gameObject.GetComponent<UnlockShip>();
+
         if (gameManager.Menu)
         {
             i = CurrentSpaceShipSelect;
@@ -144,6 +145,8 @@ public class ChangeShip : MonoBehaviour
     public void BuyShip()
     {
         CurrentSpaceShipDescription.gameObject.SetActive(true);
+        i = CurrentSpaceShipSelect;
+        CurrentSpaceShip = SpaceShip[i];
     }
 
     public void Onclicknext()
@@ -391,6 +394,50 @@ public class ChangeShip : MonoBehaviour
             CurrentSpaceShipSelect = i;
 
         }
-        PlayerPrefs.SetInt("Select Ship", CurrentSpaceShipSelect);
+        PlayerPrefs.SetInt("Current_Space_Ship_Select", CurrentSpaceShipSelect);
+    }
+
+    public void QuitSelectionShip()
+    {
+        //Faire spawn le vaisseaux séléctionné
+        if (CurrentSpaceShipSelect == 0)
+        {
+            SpaceShip[0].SetActive(true);
+            SpaceShip[1].SetActive(false);
+            SpaceShip[2].SetActive(false);
+            SpaceShip[3].SetActive(false);
+            SpaceShip[4].SetActive(false);
+        }
+        if (CurrentSpaceShipSelect == 1)
+        {
+            SpaceShip[0].SetActive(false);
+            SpaceShip[1].SetActive(true);
+            SpaceShip[2].SetActive(false);
+            SpaceShip[3].SetActive(false);
+            SpaceShip[4].SetActive(false);
+        }
+        if (CurrentSpaceShipSelect == 2)
+        {
+            SpaceShip[0].SetActive(false);
+            SpaceShip[1].SetActive(false);
+            SpaceShip[2].SetActive(true);
+            SpaceShip[3].SetActive(false);
+            SpaceShip[4].SetActive(false);
+        }
+        if (CurrentSpaceShipSelect == 3)
+        {
+            SpaceShip[0].SetActive(false);
+            SpaceShip[1].SetActive(false);
+            SpaceShip[2].SetActive(false);
+            SpaceShip[3].SetActive(true);
+            SpaceShip[4].SetActive(false);
+        }
+        if (CurrentSpaceShipSelect == 4)
+        {
+            SpaceShip[0].SetActive(false);
+            SpaceShip[1].SetActive(false);
+            SpaceShip[2].SetActive(false);
+            SpaceShip[4].SetActive(true);
+        }
     }
 }

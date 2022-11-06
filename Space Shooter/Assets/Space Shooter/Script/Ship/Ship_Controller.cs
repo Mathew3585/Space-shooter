@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using EZCameraShake;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class ShipStats
@@ -32,9 +33,16 @@ public class Ship_Controller : MonoBehaviour
     public ShipStats shipStats;
     public CameraShaker cameraShaker;
 
+    public bool Isdead;
+
     public GameObject bullet;
     public GameObject Ultimates;
-    public Transform[] FirePoints;
+    public Transform[] FirePointsBaseShip;
+    public Transform[] FirePointsShip1;
+    public Transform[] FirePointsShip2;
+    public Transform[] FirePointsShip3;
+    public Transform[] FirePointsShip4;
+    public List <Transform> CurrentFirePoint;
     public GameObject Ultimategun;
     private float nextFire;
     private GameManager gameManager;
@@ -43,18 +51,122 @@ public class Ship_Controller : MonoBehaviour
 
 
 
+
     public  float titleAngle;
 
     public GameObject explosionShip;
 
-
+    private void Awake()
+    {
+        bulletController = bullet.gameObject.GetComponent<Bullet_Controller>();
+        rb = transform.GetComponent<Rigidbody>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        bulletController = bullet.gameObject.GetComponent<Bullet_Controller>();
-        rb = transform.GetComponent<Rigidbody>();
-        CurrentIndexGun = FirePoints.Count();
+        if (gameManager.Game)
+        {
+            if (gameManager.changeShip.CurrentSpaceShipSelect == 0)
+            {
+                Debug.Log("Ok vaisseaux 1");
+                if (gameManager.upgrade.UpagradeBaseShip[0] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip1[0]);
+                    Debug.Log(CurrentFirePoint);
+                }
+                if (gameManager.upgrade.UpagradeBaseShip[1] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip1[1]);
+                }
+                if (gameManager.upgrade.UpagradeBaseShip[2] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip1[2]);
+                }
+
+                CurrentIndexGun = CurrentFirePoint.Count();
+            }
+            if (gameManager.changeShip.CurrentSpaceShipSelect == 1)
+            {
+                Debug.Log("Ok vaisseaux 1");
+                if (gameManager.upgrade.GunUpgardeShip1[0] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip1[0]);
+                    CurrentFirePoint.Add(FirePointsShip1[1]);
+                    Debug.Log(CurrentFirePoint);
+                }
+                if (gameManager.upgrade.GunUpgardeShip1[1] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip1[1]);
+                }
+                if (gameManager.upgrade.GunUpgardeShip1[2] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip1[2]);
+                }
+
+                CurrentIndexGun = CurrentFirePoint.Count();
+            }
+            if (gameManager.changeShip.CurrentSpaceShipSelect == 2)
+            {
+                Debug.Log("Ok vaisseaux 2");
+                if (gameManager.upgrade.GunUpgardeShip2[0] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip2[0]);
+                    Debug.Log(CurrentFirePoint);
+                }
+                if (gameManager.upgrade.GunUpgardeShip2[1] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip2[1]);
+                }
+                if (gameManager.upgrade.GunUpgardeShip2[2] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip2[2]);
+                }
+
+                CurrentIndexGun = CurrentFirePoint.Count();
+            }
+            if (gameManager.changeShip.CurrentSpaceShipSelect == 3)
+            {
+                Debug.Log("Ok vaisseaux 3");
+                if (gameManager.upgrade.GunUpgardeShip3[0] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip3[0]);
+                    Debug.Log(CurrentFirePoint);
+                }
+                if (gameManager.upgrade.GunUpgardeShip3[1] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip3[1]);
+                }
+                if (gameManager.upgrade.GunUpgardeShip3[2] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip3[2]);
+                }
+
+                CurrentIndexGun = CurrentFirePoint.Count();
+            }
+            if (gameManager.changeShip.CurrentSpaceShipSelect == 4)
+            {
+                Debug.Log("Ok vaisseaux 4");
+                if (gameManager.upgrade.GunUpgardeShip4[0] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip4[0]);
+                    Debug.Log(CurrentFirePoint);
+                }
+                if (gameManager.upgrade.GunUpgardeShip4[1] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip4[1]);
+                }
+                if (gameManager.upgrade.GunUpgardeShip4[2] == true)
+                {
+                    CurrentFirePoint.Add(FirePointsShip4[2]);
+                }
+
+                CurrentIndexGun = CurrentFirePoint.Count();
+            }
+        }
+
+
 
         shipStats.CurrentHealth = shipStats.maxHealth;
 
@@ -70,6 +182,7 @@ public class Ship_Controller : MonoBehaviour
             if (shipStats.CurrentHealth <= 0)
             {
                 Instantiate(explosionShip, transform.position, Quaternion.identity);
+                Isdead = true;
                 Destroy(gameObject);
             }
 
@@ -109,23 +222,47 @@ public class Ship_Controller : MonoBehaviour
 
             Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
 
-            if (fireButton)
+            if(gameManager.changeShip.CurrentSpaceShipSelect == 0)
             {
-                nextFire -= Time.fixedDeltaTime;
-                if (nextFire <= 0)
+                if (fireButton)
                 {
-                    for (int i = 0; i < CurrentIndexGun; i++)
+                    nextFire -= Time.fixedDeltaTime;
+                    if (nextFire <= 0)
                     {
-                        GameObject bulletClone = Instantiate(bullet, FirePoints[i].position, Quaternion.identity);
-
-                        for (int x = 0; x < shipCollider.Length; x++)
+                        for (int i = 0; i < CurrentIndexGun; i++)
                         {
-                            Physics.IgnoreCollision(bulletClone.transform.GetComponent<Collider>(), shipCollider[x]);
+                            GameObject bulletClone = Instantiate(bullet, FirePointsBaseShip[i].position, Quaternion.identity);
+
+                            for (int x = 0; x < shipCollider.Length; x++)
+                            {
+                                Physics.IgnoreCollision(bulletClone.transform.GetComponent<Collider>(), shipCollider[x]);
+                            }
                         }
+                        nextFire += 1 / shipStats.fireRate;
                     }
-                    nextFire += 1 / shipStats.fireRate;
                 }
             }
+            if (gameManager.changeShip.CurrentSpaceShipSelect == 1)
+            {
+                if (fireButton)
+                {
+                    nextFire -= Time.fixedDeltaTime;
+                    if (nextFire <= 0)
+                    {
+                        for (int i = 0; i < CurrentIndexGun; i++)
+                        {
+                            GameObject bulletClone = Instantiate(bullet, FirePointsShip1[i].position, Quaternion.identity);
+
+                            for (int x = 0; x < shipCollider.Length; x++)
+                            {
+                                Physics.IgnoreCollision(bulletClone.transform.GetComponent<Collider>(), shipCollider[x]);
+                            }
+                        }
+                        nextFire += 1 / shipStats.fireRate;
+                    }
+                }
+            }
+
         }
        
     }
