@@ -23,6 +23,9 @@ public class UnlockShip : MonoBehaviour
     public SpecShip specShip;
     public Material[] Holograme;
     public Material[] materials;
+
+    private List<Material[]> materials2 = new List<Material[]>();
+
     public MeshRenderer[] renderers;
     public float waitTime;
     public bool IsShipBase;
@@ -49,6 +52,33 @@ public class UnlockShip : MonoBehaviour
     // Si c est le vaisueax de base alors unlock et desactiver/ recuper le render du GameObject
     void Start()
     {
+        if (gameObject.tag == "Ship2")
+        {
+            {
+                IsUnlock = gameManager.shipUnlock.Ship2;
+            }
+        }
+
+        if (gameObject.tag == "Ship3")
+        {
+            {
+                IsUnlock = gameManager.shipUnlock.Ship3;
+            }
+        }
+
+        if (gameObject.tag == "Ship4")
+        {
+            {
+                IsUnlock = gameManager.shipUnlock.Ship4;
+            }
+        }
+
+        if (gameObject.tag == "Ship5")
+        {
+            {
+                IsUnlock = gameManager.shipUnlock.Ship5;
+            }
+        }
 
         if (gameManager.Menu)
         {
@@ -63,9 +93,17 @@ public class UnlockShip : MonoBehaviour
             }
             if (IsUnlock == false)
             {
-                renderers[0].material = Holograme[0];
-                Debug.Log(renderers[i].material);
-                Debug.Log(Holograme.Length);
+                materials2.Clear();
+                foreach (Renderer renderermats in renderers)
+                {
+                    List<Material> materials = Holograme.ToList();
+                    int j = renderermats.materials.Length - 1;
+                    for (int i = 0; i < j; ++i) materials.AddRange(Holograme);
+                    materials2.Add(renderermats.materials);
+                    renderermats.materials = materials.ToArray();
+                    Debug.Log(renderermats.material);
+                }
+
             }
         }
     }
@@ -177,8 +215,23 @@ public class UnlockShip : MonoBehaviour
     //Couroutine pour le fx
     IEnumerator FxToMaterial()
     {
-        renderers[0].material = Holograme[0];
+/*        foreach (Renderer renderermats in renderers)
+        {
+            List<Material> materials = Holograme.ToList();
+            int j = renderermats.materials.Length - 1;
+            for (int i = 0; i < j; ++i) materials.AddRange(Holograme);
+            renderermats.materials = materials.ToArray();
+        }*/
         yield return new WaitForSeconds(waitTime);
-        renderers[0].material = materials[0];
+
+
+        Debug.Log(renderers.Length);
+        Debug.Log(materials2.Count);
+
+        for (int i = 0; i < renderers.Length && i < materials2.Count; ++i)
+        {
+            Renderer renderer = renderers[i];
+            renderer.materials = materials2[i];
+        }
     }
 }
