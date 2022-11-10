@@ -41,7 +41,7 @@ public class typewriterUI : MonoBehaviour
     {
         _text.text = leadingCharBeforeDelay ? leadingChar : "";
 
-        yield return new WaitForSeconds(delayBeforeStart);
+        yield return new WaitForSecondsRealtime(delayBeforeStart);
 
         foreach (char c in writer)
         {
@@ -51,7 +51,7 @@ public class typewriterUI : MonoBehaviour
             }
             _text.text += c;
             _text.text += leadingChar;
-            yield return new WaitForSeconds(timeBtwChars);
+            yield return new WaitForSecondsRealtime(timeBtwChars);
         }
 
         if (leadingChar != "")
@@ -64,7 +64,7 @@ public class typewriterUI : MonoBehaviour
     {
         _tmpProText.text = leadingCharBeforeDelay ? leadingChar : "";
 
-        yield return new WaitForSeconds(delayBeforeStart);
+        yield return new WaitForSecondsRealtime(delayBeforeStart);
 
         foreach (char c in writer)
         {
@@ -74,7 +74,7 @@ public class typewriterUI : MonoBehaviour
             }
             _tmpProText.text += c;
             _tmpProText.text += leadingChar;
-            yield return new WaitForSeconds(timeBtwChars);
+            yield return new WaitForSecondsRealtime(timeBtwChars);
         }
 
         if (leadingChar != "")
