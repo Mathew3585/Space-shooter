@@ -13,13 +13,21 @@ public class TutoManager : MonoBehaviour
     [Header("Popup"), Tooltip("Cette Variable permet de gère le nombre de popup")]
     public GameObject[] popUps;
     public int popUpIndex;
+    [Header("Timer")]
     public float WaitTime;
     public float MaxWaitTime;
-    public int TimeSpeedDivide; 
+    public int TimeSpeedDivide;
+    [Header("Time Reste Option")]
+    public float TimeMoveLeftRight;
+    public float TimeAsteroid;
     [Header("Text tuto")]
     public TextMeshProUGUI[] text;
     public string[] TextTuto;
     public string[] Commende;
+
+    public GameObject Life;
+    public GameObject Ultimate;
+    public GameObject Money;
 
     [Space(10)]
     [Header("Bools")]
@@ -27,6 +35,9 @@ public class TutoManager : MonoBehaviour
     public bool Back;
     public bool Left;
     public bool Right;
+    public bool ResteTimer;
+    public bool Fire;
+    public bool desactivateText;
 
     [Header("List Audio"), Tooltip("Cette Variable permet de renseigner la List Audio")]
     public List<AudioClip> ListAudio;
@@ -40,6 +51,9 @@ public class TutoManager : MonoBehaviour
         gameManager = GameObject.FindObjectOfType<GameManager>();
         asteroid_Field = GameObject.FindObjectOfType<Asteroid_Field>();
         asteroid_Field.enabled = false;
+        Life.SetActive(false);
+        Money.SetActive(false);
+        Ultimate.SetActive(false);
         text[0].text = TextTuto[0].ToString();
         text[1].text = TextTuto[1].ToString();
         text[2].text = TextTuto[2].Replace("{0}", Commende[0]).Replace("{1}", Commende[1]).ToString();
@@ -104,27 +118,38 @@ public class TutoManager : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+
         else if (popUpIndex == 2)
         {
             WaitTime += Time.deltaTime / TimeSpeedDivide;
-            if (WaitTime >= MaxWaitTime)
+            if (WaitTime >= MaxWaitTime )
             {
                 Debug.Log("Ok timer");
-                if (Input.GetAxis("Vertical") < 0)
+                if (Input.GetAxis("Vertical") < 0 && Front == false)
                 {
-                    Debug.Log("front");
+                    Debug.Log("front" + Front);
                     Front = true;
                 }
+
+                if (Input.GetAxis("Vertical") > 0 && Front == true)
+                {
+                    Debug.Log("Back" + Back);
+                    Back = true;
+                    ResteTimer = true;
+                    popUpIndex++;
+                }
             }
-
-            if(WaitTime >= MaxWaitTime)
-            {
-
-            }
-
         }
-        else if (popUpIndex == 3 )
+
+        else if (popUpIndex == 3 && Back == true)
         {
+            if (ResteTimer == true)
+            {
+                WaitTime = 0;
+                MaxWaitTime = TimeMoveLeftRight;
+                Debug.Log("Ok reste timer");
+                ResteTimer = false;
+            }
             WaitTime += Time.deltaTime / TimeSpeedDivide;
             if (WaitTime >= MaxWaitTime)
             {
@@ -142,24 +167,56 @@ public class TutoManager : MonoBehaviour
                 }
             }
         }
+
         else if (popUpIndex == 4)
         {
             if (Input.GetKeyDown(NextpopupTuto))
             {
+                Fire = true;
+                popUpIndex++;
+                WaitTime = 0;
+                MaxWaitTime = TimeAsteroid;
+            }
+
+        }
+
+        else if (popUpIndex == 5)
+        {
+            asteroid_Field.enabled = true;
+            WaitTime += Time.deltaTime / TimeSpeedDivide;
+            if (WaitTime >= MaxWaitTime)
+            {
+                desactivateText = true;
+            }
+            if (desactivateText)
+            {
+                popUps[5].SetActive(false);
+                ResteTimer = true;
+
+            }
+            if (ResteTimer)
+            {
+                WaitTime = 0;
+                MaxWaitTime = 3;
+                ResteTimer = false;
+            }
+
+            if (WaitTime >= MaxWaitTime)
+            {
+
                 popUpIndex++;
             }
 
         }
         else if (popUpIndex == 5)
         {
-            WaitTime = 0;
-            MaxWaitTime = 10;
-            asteroid_Field.enabled = true;
-            if (WaitTime >= MaxWaitTime)
+            Time.timeScale = 0;
+            Life.SetActive(true);
+            if (Input.GetKeyDown(NextpopupTuto))
             {
+                Time.timeScale = 1;
                 popUpIndex++;
             }
-
         }
     }
 
