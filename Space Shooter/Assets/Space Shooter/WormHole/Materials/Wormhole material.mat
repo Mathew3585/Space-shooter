@@ -21,11 +21,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wormhole material
-  m_Shader: {fileID: -6465566751694194690, guid: 336119f293aedc34bb1c6ddafe3fd48e, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 336119f293aedc34bb1c6ddafe3fd48e,
+    type: 3}
   m_ValidKeywords:
   - _USE_DETAILS_1
   - _USE_DETAILS_2
-  - _USE_MANUAL_TIME
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -36,6 +36,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Cubemap:
+        m_Texture: {fileID: 8900000, guid: 92802ec9c08fa7e429e7cb4dedfc161b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Details_1_texture:
         m_Texture: {fileID: 2800000, guid: f5f10dc3c0ad756429782c3db1d186f3, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -52,8 +56,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Hdri:
+        m_Texture: {fileID: 8900000, guid: 0667dfeeb91984947885405bc6d182d8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Noise_texture:
         m_Texture: {fileID: 2800000, guid: 56d1037e974a98c4ba050076974d3979, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: 0b5345cf23ab840779a8cbf1b89f355a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -77,17 +89,17 @@ Material:
     - _Details_1_distortion_jiggle_speed: 0.1
     - _Details_1_distortion_magnitude: 0.05
     - _Details_1_intensity: 0.8
-    - _Details_1_scroll_speed: 1
+    - _Details_1_scroll_speed: 0.95
     - _Details_2_distortion_frequency: 0.1
     - _Details_2_distortion_jaggedness: 10
     - _Details_2_distortion_jiggle_speed: 0.1
     - _Details_2_distortion_magnitude: 0.05
     - _Details_2_distortion_wobblyness: 10
-    - _Details_2_scroll_speed: 1.2
+    - _Details_2_scroll_speed: 0.66
     - _Details_scroll_speed: 0.6
     - _Details_tiling_vertical: 0
     - _Fresnel_power: 6
-    - _Manual_time: 0
+    - _Manual_time: 0.83
     - _Noise_colour_magnitude: 0.3
     - _Noise_magnitude: 5
     - _Noise_scale: 0.55
@@ -99,18 +111,19 @@ Material:
     - _QueueOffset: 0
     - _Time_multiplier: 1
     - _Twist_frequency: 1
-    - _Twist_magnitude: 5
+    - _Twist_magnitude: 0.3
     - _Twist_speed: 2
     - _USE_DETAILS_1: 1
     - _USE_DETAILS_2: 1
-    - _USE_MANUAL_TIME: 1
+    - _USE_IMAGE: 0
+    - _USE_MANUAL_TIME: 0
     m_Colors:
     - _Colour: {r: 0.34117648, g: 0.854902, b: 0.9176471, a: 1}
-    - _Details_1_colour: {r: 22.627417, g: 0.79861474, b: 0.79861474, a: 1}
-    - _Details_1_tiling: {r: 1, g: 0.25, b: 0, a: 0}
+    - _Details_1_colour: {r: 22.627415, g: 8.666301, b: 8.666301, a: 1}
+    - _Details_1_tiling: {r: 3, g: 0.5, b: 0, a: 0}
     - _Details_2_colour: {r: 15.497374, g: 15.497374, b: 15.497374, a: 1}
-    - _Details_2_tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Details_2_tiling: {r: 2, g: 2, b: 0, a: 0}
     - _Details_colour: {r: 0.7924528, g: 0.20558919, b: 0.20558919, a: 1}
     - _Noise_tiling: {r: 3, g: 1, b: 0, a: 0}
-    - _Wormhole_colour: {r: 0.09878961, g: 0.51541924, b: 0.5660378, a: 1}
+    - _Wormhole_colour: {r: 0.22650455, g: 0.37450984, b: 2.5273144, a: 1}
   m_BuildTextureStacks: []
