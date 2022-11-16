@@ -99,7 +99,7 @@ Material:
     - _Details_scroll_speed: 0.6
     - _Details_tiling_vertical: 0
     - _Fresnel_power: 6
-    - _Manual_time: 0.83
+    - _Manual_time: -0.35
     - _Noise_colour_magnitude: 0.3
     - _Noise_magnitude: 5
     - _Noise_scale: 0.55
