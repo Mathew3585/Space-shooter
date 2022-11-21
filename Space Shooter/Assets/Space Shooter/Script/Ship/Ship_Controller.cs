@@ -37,6 +37,8 @@ public class Ship_Controller : MonoBehaviour
 
     public GameObject bullet;
     public GameObject Ultimates;
+    [Space(10)]
+    [Header("Transphorme List")]
     public Transform[] FirePointsBaseShip;
     public Transform[] FirePointsShip1;
     public Transform[] FirePointsShip2;

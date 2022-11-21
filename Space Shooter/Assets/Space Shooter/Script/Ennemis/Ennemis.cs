@@ -16,7 +16,7 @@ public class Ennemis_Stats
 
 public class Ennemis : MonoBehaviour
 {
-    public Asteroid_Stats stats;
+    public Ennemis_Stats stats;
     [Header("Argent drop")]
     public int MoneyDrop;
     private Asteroid_Field field;
@@ -78,7 +78,7 @@ public class Ennemis : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "DestroyAsteroid")
+        if (collision.gameObject.tag == "DestroyAsteroid" || collision.gameObject.tag == "Player")
         {
             field.asteroidsClones.Remove(gameObject);
             isAlvie = false;

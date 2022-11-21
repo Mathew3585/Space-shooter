@@ -5,8 +5,9 @@ using System.Linq;
 
 public class BulletEnnemis : MonoBehaviour
 {
+    [HideInInspector]
     public float bulletSpeed;
-
+    [HideInInspector]
     public float dammage;
     // Start is called before the first frame update
     void Start()
@@ -32,16 +33,10 @@ public class BulletEnnemis : MonoBehaviour
             collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentHealth -= dammage;
             Destroy(gameObject);
         }
-
-        if (collision.gameObject.tag == "BlockPalyer")
-        {
-            Destroy(gameObject);
-        }
-
+            
         if (collision.gameObject.tag == "DestroyAsteroid")
         {
             Destroy(gameObject);
-
         }
     }
 
