@@ -30,8 +30,17 @@ public class BulletEnnemis : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentHealth -= dammage;
-            Destroy(gameObject);
+            if (collision.transform.GetComponent<Ship_Controller>().ShieldActivate)
+            {
+                collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentShield -= dammage;
+                Destroy(gameObject);
+            }
+
+            if (collision.transform.GetComponent<Ship_Controller>().ShieldActivate == false)
+            {
+                collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentHealth -= dammage;
+                Destroy(gameObject);
+            }
         }
             
         if (collision.gameObject.tag == "DestroyAsteroid")

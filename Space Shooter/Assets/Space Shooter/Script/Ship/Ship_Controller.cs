@@ -23,6 +23,7 @@ public class ShipStats
     public float ShieldTime;
     [HideInInspector]
     public float CurrentHealth;
+    public float CurrentShield;
     [Header("Current Power")]
     public float CurrentPower;
     [Header("Fire rate")]
@@ -216,6 +217,8 @@ public class Ship_Controller : MonoBehaviour
                     shipStats.CurrentPower = 0;
                 }
             }
+
+            //Activation du shield
             if (ShieldActivate)
             {
                 shipStats.ShieldTime += Time.deltaTime;
@@ -223,6 +226,7 @@ public class Ship_Controller : MonoBehaviour
                 if (shipStats.ShieldTime >= shipStats.MaxTimeShield)
                 {
                     shipStats.ShieldTime = 0;
+                    shipStats.CurrentShield = 100;
                     Shield.SetActive(false);
                     ShieldActivate = false;
                 }
