@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using EZCameraShake;
 using Unity.VisualScripting;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 
 [System.Serializable]
 public class ShipStats
@@ -15,6 +17,10 @@ public class ShipStats
     public float maxPower;
     [Header("Speed")]
     public float MoveSpeed;
+    [Header("Shield")]
+    public float MaxShield;
+    public int MaxTimeShield;
+    public float ShieldTime;
     [HideInInspector]
     public float CurrentHealth;
     [Header("Current Power")]
@@ -24,7 +30,6 @@ public class ShipStats
 
 }
 
-
 public class Ship_Controller : MonoBehaviour
 {
 
@@ -33,10 +38,21 @@ public class Ship_Controller : MonoBehaviour
     public ShipStats shipStats;
     public CameraShaker cameraShaker;
 
-    public bool Isdead;
+    [Space(10)]
+    [Header("Float")]
+    public float titleAngle;
 
-    public GameObject bullet;
+    [Space(10)]
+    [Header("Bools")]
+    public bool Isdead;
+    public bool ShieldActivate;
+
+    public GameObject Bullet;
     public GameObject Ultimates;
+    public GameObject Shield;
+    public GameObject Ultimategun;
+    public GameObject explosionShip;
+
     [Space(10)]
     [Header("Transphorme List")]
     public Transform[] FirePointsBaseShip;
@@ -45,24 +61,20 @@ public class Ship_Controller : MonoBehaviour
     public Transform[] FirePointsShip3;
     public Transform[] FirePointsShip4;
     public List <Transform> CurrentFirePoint;
-    public GameObject Ultimategun;
+
+
     private float nextFire;
     private GameManager gameManager;
     private Bullet_Controller bulletController;
     private float CurrentIndexGun;
 
 
-
-
-    public  float titleAngle;
-
-    public GameObject explosionShip;
-
     private void Awake()
     {
-        bulletController = bullet.gameObject.GetComponent<Bullet_Controller>();
+        bulletController = Bullet.gameObject.GetComponent<Bullet_Controller>();
         rb = transform.GetComponent<Rigidbody>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        Shield.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -204,12 +216,24 @@ public class Ship_Controller : MonoBehaviour
                     shipStats.CurrentPower = 0;
                 }
             }
+            if (ShieldActivate)
+            {
+                shipStats.ShieldTime += Time.deltaTime;
+                Shield.SetActive(true);
+                if (shipStats.ShieldTime >= shipStats.MaxTimeShield)
+                {
+                    shipStats.ShieldTime = 0;
+                    Shield.SetActive(false);
+                    ShieldActivate = false;
+                }
+            }
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        //Tires des projectiles
         if (gameManager.Game)
         {
             float moveRL = Input.GetAxis("Horizontal");
@@ -233,7 +257,7 @@ public class Ship_Controller : MonoBehaviour
                     {
                         for (int i = 0; i < CurrentIndexGun; i++)
                         {
-                            GameObject bulletClone = Instantiate(bullet, FirePointsBaseShip[i].position, Quaternion.identity);
+                            GameObject bulletClone = Instantiate(Bullet, FirePointsBaseShip[i].position, Quaternion.identity);
 
                             for (int x = 0; x < shipCollider.Length; x++)
                             {
@@ -253,7 +277,7 @@ public class Ship_Controller : MonoBehaviour
                     {
                         for (int i = 0; i < CurrentIndexGun; i++)
                         {
-                            GameObject bulletClone = Instantiate(bullet, FirePointsShip1[i].position, Quaternion.identity);
+                            GameObject bulletClone = Instantiate(Bullet, FirePointsShip1[i].position, Quaternion.identity);
 
                             for (int x = 0; x < shipCollider.Length; x++)
                             {
@@ -266,7 +290,6 @@ public class Ship_Controller : MonoBehaviour
             }
 
         }
-       
     }
 
     private void OnCollisionEnter(Collision collision)

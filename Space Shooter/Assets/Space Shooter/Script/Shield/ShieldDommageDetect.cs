@@ -8,6 +8,7 @@ public class ShieldDommageDetect : MonoBehaviour
 {
     public GameObject shieldRipples;
     private VisualEffect shieldRippleVfx;
+    public GameObject Ship;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -19,5 +20,7 @@ public class ShieldDommageDetect : MonoBehaviour
 
             Destroy(ripples, 2);
         }
+        Physics.IgnoreCollision(Ship.gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
     }
+
 }
