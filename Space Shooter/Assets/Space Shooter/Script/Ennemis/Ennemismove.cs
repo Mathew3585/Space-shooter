@@ -58,13 +58,13 @@ public class Ennemismove : MonoBehaviour
 
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag == "BlockPalyer")
+        if (collision.gameObject.tag == "BlockPalyer")
         {
+            Debug.Log("collision");
             randDir = Random.Range(1, 3);
         }
-
     }
 
 }

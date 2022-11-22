@@ -55,10 +55,8 @@ public class BossSciript : MonoBehaviour
     [Space(5)]
     [Header("Bools")]
     public bool isAlvie;
-    public bool FireBallActivate;
     private bool FlammeThorwerActivate;
     public bool WindWaveActivate;
-    public bool Attack1;
     public bool Attack2;
 
 
@@ -140,13 +138,6 @@ public class BossSciript : MonoBehaviour
                 }
   
             }
-            else if (WaitFlammeThorwer > WaitFlammeThorwerValue)
-            {
-                Debug.Log("Reste en cour timer Attack1");
-                WaitFlammeThorwer = 0;
-                Destroy(FlammeThowerclone);
-                Attack2 = true;
-            }
         }
     }
     public void InitiateFlammethorwer()
@@ -160,17 +151,17 @@ public class BossSciript : MonoBehaviour
 
                 if (FlammeThorwerActivate)
                 {
-                    FlammeThowerclone = Instantiate(FlammeThower, FirePoints[1].position, FirePoints[1].rotation);
+                    FlammeThowerclone = Instantiate(FlammeThower, FirePoints[1]);
                     FlammeThorwerActivate = false;
                     Debug.Log(FlammeThorwerActivate);
                 }
             } 
-            else if(WaitFlammeThorwer > WaitFlammeThorwerValue)
+            else if(WaitFlammeThorwer >= WaitFlammeThorwerValue)
             {
                 Debug.Log("Reste en cour timer Attack2");
                 WaitFlammeThorwer = 0;
-                Destroy(FlammeThowerclone);
                 Attack2 = false;
+                Destroy(FlammeThowerclone);
             }
 
         }
@@ -181,13 +172,8 @@ public class BossSciript : MonoBehaviour
     {
         if (Attack2 == true)
         {
-            InitiateFlammethorwer();
             WaitFlammeThorwer += Time.fixedDeltaTime;
-            if (WaitFlammeThorwer >= WaitFlammeThorwerValue)
-            {
-                WaitFlammeThorwer = 0;
-                Attack2 = false;
-            }
+            InitiateFlammethorwer();
         }
         else if (Attack2 == false)
         {
@@ -195,7 +181,10 @@ public class BossSciript : MonoBehaviour
             WaitFlammeThorwer += Time.fixedDeltaTime;
             if (WaitFlammeThorwer >= WaitFlammeThorwerValue)
             {
+                WaitFlammeThorwer = 0;
                 Attack2 = true;
+                FlammeThorwerActivate = true;
+                Debug.Log("Acitvation fLAMME tHOROWER");
             }
 
         }
