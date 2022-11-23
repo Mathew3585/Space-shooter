@@ -14,8 +14,10 @@ public class Boss_Stats
     [Header("Damage")]
     public float FireBallDamage;
     public float FireBallSpeed;
+    [Space(10)]
     public float FlammeThorwerDamage;
-    public float WindWaveDamage;
+    [Space(10)]
+    public float FeatherDamage;
 }
 
 

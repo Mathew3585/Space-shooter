@@ -6,14 +6,19 @@ public class FlammeThrowerSript : MonoBehaviour
 {
     private float damage;
     private BossSciript bossSciript;
-    private Ship_Controller ship_Controller;
+    public Ship_Controller ship_Controller;
 
-    // Start is called before the first frame update
+    // Start is called before the first frame update*
+
+    private void Awake()
+    {
+        ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
+    }
     void Start()
     {
         bossSciript = GameObject.FindObjectOfType<BossSciript>();
         damage = bossSciript.stats.FlammeThorwerDamage;
-        ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
+
     }
 
     // Update is called once per frame

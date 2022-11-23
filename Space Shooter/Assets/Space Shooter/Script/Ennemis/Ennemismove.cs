@@ -26,6 +26,8 @@ public class Ennemismove : MonoBehaviour
 
     public Transform targetRight;
 
+    public Transform rootObject;
+
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -45,15 +47,17 @@ public class Ennemismove : MonoBehaviour
         // ....
         if(randDir == 1)
         {
-            transform.position = Vector3.Lerp(transform.position, targetLeft.position, Time.deltaTime);
-            rb.rotation = Quaternion.Euler(Vector3.forward * Force * -titleAngle);
-            transform.position = new Vector3(transform.position.x, 0.8f, transform.position.z);
+            rootObject.position = Vector3.Lerp(rootObject.position, targetLeft.position, Time.deltaTime);
+            Quaternion rotation = Quaternion.Euler(Vector3.forward * Force * -titleAngle);
+            rootObject.rotation = Quaternion.Lerp(rootObject.rotation, rotation, Time.deltaTime);
+            rootObject.position = new Vector3(rootObject.position.x, 0.8f, transform.position.z);
         }
         if (randDir == 2)
         {
-            transform.position = Vector3.Lerp(transform.position, targetRight.position, Time.deltaTime);
-            rb.rotation = Quaternion.Euler(Vector3.forward * Force * titleAngle);
-            transform.position = new Vector3(transform.position.x, 0.8f, transform.position.z);
+            rootObject.position = Vector3.Lerp(rootObject.position, targetRight.position, Time.deltaTime);
+            Quaternion rotation = Quaternion.Euler(Vector3.forward * Force * titleAngle);
+            rootObject.rotation = Quaternion.Lerp(rootObject.rotation, rotation, Time.deltaTime);
+            rootObject.position = new Vector3(rootObject.position.x, 0.8f, transform.position.z);
         }
 
     }
