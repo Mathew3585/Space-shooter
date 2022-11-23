@@ -15,6 +15,7 @@ TagManager:
   - Ship5
   - BulletEnemis
   - Boss
+  - Bullet
   layers:
   - Default
   - TransparentFX

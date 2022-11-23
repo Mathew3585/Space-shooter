@@ -47,13 +47,13 @@ public class Ennemismove : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, targetLeft.position, Time.deltaTime);
             rb.rotation = Quaternion.Euler(Vector3.forward * Force * -titleAngle);
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            transform.position = new Vector3(transform.position.x, 0.8f, transform.position.z);
         }
         if (randDir == 2)
         {
             transform.position = Vector3.Lerp(transform.position, targetRight.position, Time.deltaTime);
             rb.rotation = Quaternion.Euler(Vector3.forward * Force * titleAngle);
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            transform.position = new Vector3(transform.position.x, 0.8f, transform.position.z);
         }
 
     }

@@ -14,7 +14,7 @@ public class Boss_Stats
     [Header("Damage")]
     public float FireBallDamage;
     public float FireBallSpeed;
-    public float FlammeThorwerDamge;
+    public float FlammeThorwerDamage;
     public float WindWaveDamage;
 }
 
@@ -105,17 +105,6 @@ public class BossSciript : MonoBehaviour
         else if (stats.currentHealth > LifePhase3)
         {
             Debug.Log("Phase 3 Boss");
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "DestroyAsteroid" || collision.gameObject.tag == "Player")
-        {
-            field.asteroidsClones.Remove(gameObject);
-            isAlvie = false;
-            Destroy(gameObject);
-
         }
     }
     public void InitiateFireBall()

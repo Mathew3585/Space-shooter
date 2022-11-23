@@ -9633,6 +9633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7898952953016512661}
+  - component: {fileID: 3230708628992549209}
   m_Layer: 0
   m_Name: Flamme Thrower EFFECT
   m_TagString: Untagged
@@ -9657,3 +9658,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3230708628992549209
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924267874654192858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.46, y: 2.85, z: 15.731667}
+  m_Center: {x: 0, y: 0, z: 9.475834}

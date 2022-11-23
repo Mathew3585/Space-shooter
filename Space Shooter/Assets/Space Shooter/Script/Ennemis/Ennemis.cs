@@ -98,7 +98,7 @@ public class Ennemis : MonoBehaviour
     {
         if (collision.gameObject.tag == "DestroyAsteroid" || collision.gameObject.tag == "Player")
         {
-            field.asteroidsClones.Remove(gameObject);
+            //field.asteroidsClones.Remove(gameObject);
             isAlvie = false;
             Destroy(gameObject);
         }
