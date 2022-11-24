@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class Bullet_Controller : MonoBehaviour
 {
     [HideInInspector]
@@ -42,7 +43,7 @@ public class Bullet_Controller : MonoBehaviour
         }
         if (collision.gameObject.tag == "Ennemis")
         {
-            collision.transform.GetComponent<Ennemis>().stats.currentHealth -= dammage;
+            collision.transform.GetComponent<LifeStats>().currentHealth -= dammage;
             Destroy(gameObject);
         }
 

@@ -6,21 +6,13 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 [System.Serializable]
-public class Ennemis_Stats
-{
-    public float MaxHealth;
-    [HideInInspector]
-    public float currentHealth;
-    public float dammage;
-
-}
+[RequireComponent(typeof(LifeStats))]
 
 public class Ennemis : MonoBehaviour
 {
-    public Ennemis_Stats stats;
+    public LifeStats stats;
     [Space(10)]
     [Header("Int")]
-    public int MoneyDrop;
     public int RandomDropShield;
 
     [Space(10)]
@@ -49,7 +41,7 @@ public class Ennemis : MonoBehaviour
         field = GameObject.FindObjectOfType<Asteroid_Field>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
         firepointlist = FirePoints.Count();
-        bullet.GetComponent<BulletEnnemis>().dammage = stats.dammage;
+        bullet.GetComponent<BulletEnnemis>().dammage = stats.Damage;
     }
 
     // Update is called once per frame
@@ -60,7 +52,7 @@ public class Ennemis : MonoBehaviour
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             //field.asteroidsClones.Remove(gameObject);
-            gameManager.money += MoneyDrop;
+            gameManager.money += stats.MoneyDrop;
             RandomDropShield = Random.Range(1, 5);
             Debug.Log(RandomDropShield);
             if (RandomDropShield == 4)

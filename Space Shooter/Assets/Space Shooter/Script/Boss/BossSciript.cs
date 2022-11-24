@@ -4,13 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
+[DisallowMultipleComponent]
 [System.Serializable]
-public class Boss_Stats
-{ 
-    [Header("Life")]
-    public float MaxHealth;
-    public float currentHealth;
+
+
+[RequireComponent(typeof(LifeStats))]
+public class BossSciript : MonoBehaviour
+{
+    [Header("Stats")]
+    public LifeStats stats;
+    [Space(5)]
+    [Header("Ints")]
+    public int LifePhase1;
+    public int LifePhase2;
+    public int LifePhase3;
+
     [Header("Damage")]
     public float FireBallDamage;
     public float FireBallSpeed;
@@ -19,20 +27,6 @@ public class Boss_Stats
     [Space(10)]
     public float FeatherDamage;
     public float FeatherSpeed;
-
-}
-
-
-public class BossSciript : MonoBehaviour
-{
-    [Header("Stats")]
-    public Boss_Stats stats;
-    [Space(5)]
-    [Header("Ints")]
-    public int MoneyDrop;
-    public int LifePhase1;
-    public int LifePhase2;
-    public int LifePhase3;
 
 
     [Header("Time")]
@@ -90,8 +84,8 @@ public class BossSciript : MonoBehaviour
         firepointlist = FirePoints.Count();
 
         //Initalize Dommage and speed 
-        bulletController.dammage = stats.FireBallDamage;
-        bulletController.bulletSpeed = stats.FireBallSpeed;
+        bulletController.dammage = FireBallDamage;
+        bulletController.bulletSpeed = FireBallSpeed;
     }
 
     // Update is called once per frame
@@ -101,7 +95,7 @@ public class BossSciript : MonoBehaviour
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             //field.asteroidsClones.Remove(gameObject);
-            gameManager.money += MoneyDrop;
+            gameManager.money += stats.MoneyDrop;
             Destroy(RootObject);
         }
     }

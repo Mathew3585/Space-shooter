@@ -1245,6 +1245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 788845131}
+  - component: {fileID: 788845136}
   - component: {fileID: 788845132}
   - component: {fileID: 788845133}
   - component: {fileID: 788845135}
@@ -1282,18 +1283,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f66710f8aceeca4d829843d345208e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats:
-    MaxHealth: 1000
-    currentHealth: 0
-    FireBallDamage: 15
-    FireBallSpeed: 25
-    FlammeThorwerDamage: 0.5
-    FeatherDamage: 5
-    FeatherSpeed: 0.1
-  MoneyDrop: 100
+  stats: {fileID: 788845136}
   LifePhase1: 600
   LifePhase2: 300
   LifePhase3: 0
+  FireBallDamage: 0
+  FireBallSpeed: 0
+  FlammeThorwerDamage: 0
+  FeatherDamage: 0
+  FeatherSpeed: 0
   WaitTimeBetweenAttack: 8
   WaitTimeValue: 0
   FireBall: {fileID: 365428343792752374, guid: 4e11c908403531147aa06bf4d12fcfda, type: 3}
@@ -1353,6 +1351,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: 30249b1445eebc347b5a7b4973387213, type: 3}
+--- !u!114 &788845136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788845130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdecf2599d3954419e609d6fb2946ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 10000
+  currentHealth: 0
+  Damage: 0
+  MoneyDrop: 0
+  Minautore: 0
+  "P\xE9gase": 0
+  Hydre: 0
 --- !u!1 &813826838
 GameObject:
   m_ObjectHideFlags: 0
@@ -4125,6 +4142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1588325651538218365}
+  - component: {fileID: 5492414697309199069}
   - component: {fileID: 5492414697309199068}
   - component: {fileID: 4017525039381206744}
   m_Layer: 7
@@ -4146,14 +4164,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02befcd8133106442868345fdddb0887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ennemis_Stats:
-    MaxHealth: 60
-    currentHealth: 0
-    dammage: 20
-  TimeTranslate: 0.2
-  speed: 0.2
+  stats: {fileID: 5492414697309199069}
+  TimeTranslate: 0.1
+  speed: 0.05
   explosionPrefabs: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 3}
+--- !u!114 &5492414697309199069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492414697309199067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdecf2599d3954419e609d6fb2946ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 60
+  currentHealth: 0
+  Damage: 5
+  MoneyDrop: 100
+  Minautore: 0
+  "P\xE9gase": 1
+  Hydre: 0
 --- !u!4 &6567354312975884885
 Transform:
   m_ObjectHideFlags: 0

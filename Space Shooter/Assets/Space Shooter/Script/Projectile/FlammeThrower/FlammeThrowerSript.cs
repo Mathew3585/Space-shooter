@@ -17,7 +17,7 @@ public class FlammeThrowerSript : MonoBehaviour
     void Start()
     {
         bossSciript = GameObject.FindObjectOfType<BossSciript>();
-        damage = bossSciript.stats.FlammeThorwerDamage;
+        damage = bossSciript.FlammeThorwerDamage;
 
     }
 

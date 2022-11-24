@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(LifeStats))]
 public class PégaseStats : MonoBehaviour
 {
-    public Ennemis_Stats ennemis_Stats;
+    public LifeStats stats;
     [Space(10)]
     public float TimeTranslate;
     public float speed;
@@ -16,7 +18,7 @@ public class PégaseStats : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
-        ennemis_Stats.currentHealth = ennemis_Stats.MaxHealth;
+        stats.currentHealth = stats.MaxHealth;
     }
 
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class PégaseStats : MonoBehaviour
         Vector3 b = target.position;
         transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, TimeTranslate), speed);
         transform.LookAt(target);
-        if (ennemis_Stats.currentHealth <= 0 )
+        if (stats.currentHealth <= 0 )
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             Destroy(gameObject);
@@ -39,11 +41,11 @@ public class PégaseStats : MonoBehaviour
         {
             if (ship_Controller.ShieldActivate)
             {
-                ship_Controller.shipStats.CurrentShield -= ennemis_Stats.dammage;
+                ship_Controller.shipStats.CurrentShield -= stats.Damage;
                 Destroy(gameObject);
             }
             else
-                ship_Controller.shipStats.CurrentHealth -= ennemis_Stats.dammage;
+                ship_Controller.shipStats.CurrentHealth -= stats.Damage;
                 Destroy(gameObject);
         }
     }
