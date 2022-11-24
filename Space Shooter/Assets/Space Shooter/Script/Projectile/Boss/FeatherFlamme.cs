@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 
 public class FeatherFlamme : MonoBehaviour
 {
+
     public float dammage;
     public float t;
     public float speed;
@@ -19,6 +20,8 @@ public class FeatherFlamme : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         Boss = GameObject.FindGameObjectWithTag("Boss");
         ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
+        dammage = Boss.gameObject.GetComponentInChildren<BossSciript>().stats.FeatherDamage;
+        speed = Boss.gameObject.GetComponentInChildren<BossSciript>().stats.FeatherSpeed;
     }
 
     // Update is called once per frame
@@ -28,7 +31,13 @@ public class FeatherFlamme : MonoBehaviour
         Vector3 b = target.position;
         transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), speed);
         transform.LookAt(target);
-        Physics.IgnoreCollision(Boss.transform.GetComponent<Collider>(), gameObject.transform.GetComponent<Collider>());
+        if (Boss.gameObject.GetComponentInChildren<BossSciript>().isAlvie)
+        {
+            Physics.IgnoreCollision(Boss.transform.GetComponentInChildren<Collider>(), gameObject.transform.GetComponent<Collider>());
+        }
+        else
+            Destroy(gameObject);
+
     }
 
     private void OnCollisionEnter(Collision collision)

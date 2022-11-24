@@ -18,6 +18,8 @@ public class Boss_Stats
     public float FlammeThorwerDamage;
     [Space(10)]
     public float FeatherDamage;
+    public float FeatherSpeed;
+
 }
 
 
@@ -31,17 +33,26 @@ public class BossSciript : MonoBehaviour
     public int LifePhase1;
     public int LifePhase2;
     public int LifePhase3;
-    public int WaitFlammeThorwerValue;
-    public int waitTime;
+
+
+    [Header("Time")]
+    public int WaitTimeBetweenAttack;
+    public float WaitTimeValue;
+
 
     [Space(5)]
     [Header("GameObject")]
     public GameObject FireBall;
     public GameObject FlammeThower;
-    public GameObject WindWave;
+    public GameObject FheaterFlamme;
     public GameObject explosionPrefabs;
+    public GameObject RootObject;
+
+    [Space(10)]
+    [Header("List")]
     public Transform[] FirePoints;
-    public GameObject FlammeThowerclone;
+    public Transform[] FheaterFlammePoints;
+    private GameObject FlammeThowerclone;
     private Asteroid_Field field;   
     private GameManager gameManager;
     private BulletEnnemis bulletController;
@@ -49,7 +60,7 @@ public class BossSciript : MonoBehaviour
     [Space(5)]
     [Header("Floats")]
     public float fireRate;
-    public float WaitFlammeThorwer;
+
     private float nextFire;
     private float firepointlist;
 
@@ -57,9 +68,10 @@ public class BossSciript : MonoBehaviour
     [Space(5)]
     [Header("Bools")]
     public bool isAlvie;
-    private bool FlammeThorwerActivate;
-    public bool WindWaveActivate;
+    public bool FlammeThorwerActivate;
+    public bool FheaterFlammeActivate;
     public bool Attack2;
+    public bool Attack3;
 
 
     // Start is called before the first frame update
@@ -68,7 +80,9 @@ public class BossSciript : MonoBehaviour
         //Initalize Gameobject and bool 
         isAlvie = true;
         FlammeThorwerActivate = true;
+        FheaterFlammeActivate = true;
         Attack2 = true;
+        Attack3 = true;
         stats.currentHealth = stats.MaxHealth;
         bulletController = FireBall.gameObject.GetComponent<BulletEnnemis>();
         field = GameObject.FindObjectOfType<Asteroid_Field>();
@@ -88,7 +102,7 @@ public class BossSciript : MonoBehaviour
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             //field.asteroidsClones.Remove(gameObject);
             gameManager.money += MoneyDrop;
-            Destroy(gameObject);
+            Destroy(RootObject);
         }
     }
 
@@ -107,6 +121,7 @@ public class BossSciript : MonoBehaviour
         else if (stats.currentHealth > LifePhase3)
         {
             Debug.Log("Phase 3 Boss");
+            AttackTotalPhase3();
         }
     }
     public void InitiateFireBall()
@@ -114,7 +129,7 @@ public class BossSciript : MonoBehaviour
         Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
         if (isAlvie)
         {
-            if (WaitFlammeThorwer <= WaitFlammeThorwerValue)
+            if (WaitTimeValue <= WaitTimeBetweenAttack)
             {
                 nextFire -= Time.fixedDeltaTime;
                 if (nextFire <= 0)
@@ -136,21 +151,22 @@ public class BossSciript : MonoBehaviour
         Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
         if (isAlvie)
         {
-            if (WaitFlammeThorwer <= WaitFlammeThorwerValue)
+            if (WaitTimeValue <= WaitTimeBetweenAttack)
             {
-                WaitFlammeThorwer += Time.fixedDeltaTime;
+                WaitTimeValue += Time.fixedDeltaTime;
 
                 if (FlammeThorwerActivate)
                 {
                     FlammeThowerclone = Instantiate(FlammeThower, FirePoints[1]);
+                    Debug.Log(FlammeThowerclone);
                     FlammeThorwerActivate = false;
                     Debug.Log(FlammeThorwerActivate);
                 }
             } 
-            else if(WaitFlammeThorwer >= WaitFlammeThorwerValue)
+            else if(WaitTimeValue >= WaitTimeBetweenAttack)
             {
                 Debug.Log("Reste en cour timer Attack2");
-                WaitFlammeThorwer = 0;
+                WaitTimeValue = 0;
                 Attack2 = false;
                 Destroy(FlammeThowerclone);
             }
@@ -163,21 +179,87 @@ public class BossSciript : MonoBehaviour
     {
         if (Attack2 == true)
         {
-            WaitFlammeThorwer += Time.fixedDeltaTime;
+            WaitTimeValue += Time.fixedDeltaTime;
             InitiateFlammethorwer();
         }
         else if (Attack2 == false)
         {
             InitiateFireBall();
-            WaitFlammeThorwer += Time.fixedDeltaTime;
-            if (WaitFlammeThorwer >= WaitFlammeThorwerValue)
+            WaitTimeValue += Time.fixedDeltaTime;
+            if (WaitTimeValue >= WaitTimeBetweenAttack)
             {
-                WaitFlammeThorwer = 0;
+                WaitTimeValue = 0;
                 Attack2 = true;
                 FlammeThorwerActivate = true;
                 Debug.Log("Acitvation fLAMME tHOROWER");
             }
 
         }
+    }
+    public void InitiateFheaterFlamme()
+    {
+        Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
+        if (isAlvie)
+        {
+            if (WaitTimeValue <= WaitTimeBetweenAttack)
+            {
+                Debug.Log("Attack3");
+                WaitTimeValue += Time.fixedDeltaTime;
+
+                if (FheaterFlammeActivate)
+                {
+
+                    for (int x = 0; x < FheaterFlammePoints.Length; x++)
+                    {
+                        GameObject FlammeThowerclone = Instantiate(FheaterFlamme, FheaterFlammePoints[x].position, FheaterFlamme.gameObject.transform.rotation);
+                    }
+
+                    FheaterFlammeActivate = false;
+                }
+            }
+            else if (WaitTimeValue >= WaitTimeBetweenAttack)
+            {
+                Debug.Log("Reste en cour timer Attack3");
+                WaitTimeValue = 0;
+                Attack3 = false;
+
+            }
+
+        }
+    }
+    public void AttackTotalPhase3()
+    {
+        if (Attack3 == true)
+        {
+            InitiateFheaterFlamme();
+            WaitTimeValue += Time.fixedDeltaTime;
+            if (WaitTimeValue >= WaitTimeBetweenAttack)
+            {
+                WaitTimeValue = 0;
+                Attack2 = true;
+                FlammeThorwerActivate = true;
+                Debug.Log("Acitvation Fheather Flamme");
+            }
+
+        }
+        else if (Attack2 == true)
+        {
+            WaitTimeValue += Time.fixedDeltaTime;
+            InitiateFlammethorwer();
+        }
+        else if (Attack2 == false)
+        {
+            InitiateFireBall();
+            WaitTimeValue += Time.fixedDeltaTime;
+            if (WaitTimeValue >= WaitTimeBetweenAttack)
+            {
+                WaitTimeValue = 0;
+                Attack2 = true;
+                FlammeThorwerActivate = true;
+                Debug.Log("Acitvation Flamme Thrower");
+            }
+
+        }
+
     }
 }
