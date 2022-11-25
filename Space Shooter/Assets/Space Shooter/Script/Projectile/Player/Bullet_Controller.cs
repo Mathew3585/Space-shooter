@@ -6,14 +6,14 @@ using UnityEngine;
 public class Bullet_Controller : MonoBehaviour
 {
     [HideInInspector]
-    public float bulletSpeed;
+    public float bulletSpeed = 0;
     [HideInInspector]
-    public float dammage;
+    public float dammage = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.GetComponent<Rigidbody>().velocity = -transform.forward * bulletSpeed;
+        transform.GetComponent<Rigidbody>().velocity = transform.right * bulletSpeed;
     }
 
     // Update is called once per frame
@@ -49,7 +49,7 @@ public class Bullet_Controller : MonoBehaviour
 
         if (collision.gameObject.tag == "Boss")
         {
-            collision.transform.GetComponent<BossSciript>().stats.currentHealth -= dammage;
+            collision.transform.GetComponent<LifeStats>().currentHealth -= dammage;
             Destroy(gameObject);
         }
 

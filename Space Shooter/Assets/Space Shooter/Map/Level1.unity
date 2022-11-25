@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 119357589}
   - component: {fileID: 119357590}
   m_Layer: 6
-  m_Name: Cube (3)
+  m_Name: BackBlocker
   m_TagString: BlockPalyer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119357588}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.18308932, y: 5.07, z: 13.21}
+  m_LocalPosition: {x: -0.18308932, y: 5.07, z: 10.5}
   m_LocalScale: {x: 1.3771, y: 14.95, z: 62.028}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 164552091}
   - component: {fileID: 164552092}
   m_Layer: 6
-  m_Name: Cube (2)
+  m_Name: FrontBlocker
   m_TagString: BlockPalyer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,7 +234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164552090}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.18311173, y: 5.07, z: -24.6}
+  m_LocalPosition: {x: 0.18311173, y: 5.07, z: -26}
   m_LocalScale: {x: 1.3771, y: 14.95, z: 62.028}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -898,7 +898,7 @@ GameObject:
   - component: {fileID: 707642321}
   - component: {fileID: 707642322}
   m_Layer: 6
-  m_Name: Cube (1)
+  m_Name: LeftBlocker
   m_TagString: BlockPalyer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -912,7 +912,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707642320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31, y: 5.07, z: -4.46}
+  m_LocalPosition: {x: 33.73, y: 5.07, z: -4.46}
   m_LocalScale: {x: 1.3771, y: 14.95, z: 62.028}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1287,11 +1287,11 @@ MonoBehaviour:
   LifePhase1: 600
   LifePhase2: 300
   LifePhase3: 0
-  FireBallDamage: 0
-  FireBallSpeed: 0
-  FlammeThorwerDamage: 0
-  FeatherDamage: 0
-  FeatherSpeed: 0
+  FireBallDamage: 15
+  FireBallSpeed: 30
+  FlammeThorwerDamage: 2
+  FeatherDamage: 4
+  FeatherSpeed: 0.1
   WaitTimeBetweenAttack: 8
   WaitTimeValue: 0
   FireBall: {fileID: 365428343792752374, guid: 4e11c908403531147aa06bf4d12fcfda, type: 3}
@@ -1329,7 +1329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  timerMax: 0.5
+  timerMax: 2
   titleAngle: 40
   Force: 0.2
   Speed: 50
@@ -1363,9 +1363,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fdecf2599d3954419e609d6fb2946ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10000
+  MaxHealth: 1000
   currentHealth: 0
-  Damage: 0
+  Damage: 15
+  BulletSpeed: 30
   MoneyDrop: 0
   Minautore: 0
   "P\xE9gase": 0
@@ -2755,7 +2756,7 @@ GameObject:
   - component: {fileID: 1404530264}
   - component: {fileID: 1404530265}
   m_Layer: 6
-  m_Name: Cube
+  m_Name: RightBlocker
   m_TagString: BlockPalyer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2769,7 +2770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404530263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31, y: 5.07, z: -2.2}
+  m_LocalPosition: {x: -33.38, y: 5.07, z: -2.2}
   m_LocalScale: {x: 1.3771, y: 14.95, z: 62.028}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2881,6 +2882,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1177681271271265358, guid: 1b516b0974c90c249ba48f0727ac6587,
         type: 3}
+      propertyPath: shipStats.bulletSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177681271271265358, guid: 1b516b0974c90c249ba48f0727ac6587,
+        type: 3}
+      propertyPath: shipStats.bulletDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177681271271265358, guid: 1b516b0974c90c249ba48f0727ac6587,
+        type: 3}
       propertyPath: shipStats.MaxTimeShield
       value: 5
       objectReference: {fileID: 0}
@@ -2987,6 +2998,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4488951380327785324, guid: 1b516b0974c90c249ba48f0727ac6587,
         type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 4488951380327785324, guid: 1b516b0974c90c249ba48f0727ac6587,
+        type: 3}
       propertyPath: m_Name
       value: GunBase2
       objectReference: {fileID: 0}
@@ -3074,6 +3091,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463822489661735274, guid: 1b516b0974c90c249ba48f0727ac6587,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8770368
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463822489661735274, guid: 1b516b0974c90c249ba48f0727ac6587,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.48042333
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463822489661735274, guid: 1b516b0974c90c249ba48f0727ac6587,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 57.426
       objectReference: {fileID: 0}
     - target: {fileID: 7632138139549961296, guid: 1b516b0974c90c249ba48f0727ac6587,
         type: 3}
@@ -4184,6 +4216,7 @@ MonoBehaviour:
   MaxHealth: 60
   currentHealth: 0
   Damage: 5
+  BulletSpeed: 0
   MoneyDrop: 100
   Minautore: 0
   "P\xE9gase": 1
@@ -4234,4 +4267,4 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1

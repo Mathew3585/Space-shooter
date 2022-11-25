@@ -68,8 +68,7 @@ public class BossSciript : MonoBehaviour
     public bool Attack3;
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         //Initalize Gameobject and bool 
         isAlvie = true;
@@ -79,6 +78,12 @@ public class BossSciript : MonoBehaviour
         Attack3 = true;
         stats.currentHealth = stats.MaxHealth;
         bulletController = FireBall.gameObject.GetComponent<BulletEnnemis>();
+        bulletController.dammage = stats.Damage;
+        bulletController.bulletSpeed = stats.BulletSpeed;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         field = GameObject.FindObjectOfType<Asteroid_Field>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
         firepointlist = FirePoints.Count();

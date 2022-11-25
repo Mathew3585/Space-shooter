@@ -5,7 +5,7 @@ using System.Linq;
 
 public class BulletEnnemis : MonoBehaviour
 {
-    [HideInInspector]
+
     public float bulletSpeed;
     [HideInInspector]
     public float dammage;

@@ -9674,7 +9674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dammage: 0
   t: 0.1
-  speed: 0
+  speed: 10
 --- !u!65 &2042235284374587942
 BoxCollider:
   m_ObjectHideFlags: 0

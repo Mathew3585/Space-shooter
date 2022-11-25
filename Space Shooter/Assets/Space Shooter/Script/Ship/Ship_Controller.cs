@@ -28,6 +28,10 @@ public class ShipStats
     public float CurrentPower;
     [Header("Fire rate")]
     public float fireRate;
+    [Space(10)]
+    [Header("Bullet")]
+    public float bulletSpeed;
+    public float bulletDamage;
 
 }
 
@@ -76,6 +80,8 @@ public class Ship_Controller : MonoBehaviour
         rb = transform.GetComponent<Rigidbody>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
         Shield.SetActive(false);
+        bulletController.dammage = shipStats.bulletDamage;
+        bulletController.bulletSpeed = shipStats.bulletSpeed;
     }
 
     // Start is called before the first frame update
@@ -261,7 +267,7 @@ public class Ship_Controller : MonoBehaviour
                     {
                         for (int i = 0; i < CurrentIndexGun; i++)
                         {
-                            GameObject bulletClone = Instantiate(Bullet, FirePointsBaseShip[i].position, Quaternion.identity);
+                            GameObject bulletClone = Instantiate(Bullet, FirePointsBaseShip[i].position, Bullet.transform.rotation);
 
                             for (int x = 0; x < shipCollider.Length; x++)
                             {

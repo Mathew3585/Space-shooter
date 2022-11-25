@@ -7,10 +7,11 @@ public class LifeStats : MonoBehaviour
 {
     public float MaxHealth;
 
-    [HideInInspector]
     public float currentHealth;
 
     public float Damage;
+
+    public float BulletSpeed;
 
     public int MoneyDrop;
 
