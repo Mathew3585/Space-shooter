@@ -10,25 +10,36 @@ public class TutoManager : MonoBehaviour
 {
     //Fonction
     public KeyCode NextpopupTuto;
+    [Space(10)]
     [Header("Popup"), Tooltip("Cette Variable permet de gère le nombre de popup")]
     public GameObject[] popUps;
     public int popUpIndex;
+
+    [Space(10)]
     [Header("Timer")]
     public float WaitTime;
     public float MaxWaitTime;
+    public float WaitTimePortail;
     public int TimeSpeedDivide;
+
+    [Space(10)]
     [Header("Time Reste Option")]
     public float TimeMoveLeftRight;
     public float ActivateTimeAsteroid;
     public float TimeAsteroidEtap1;
+
+    [Space(10)]
     [Header("Text tuto")]
     public TextMeshProUGUI[] text;
     public string[] TextTuto;
     public string[] Commende;
 
+    [Space(10)]
+    [Header("GameObject")]
     public GameObject Life;
     public GameObject Ultimate;
     public GameObject Money;
+    public GameObject Portail;
 
     [Space(10)]
     [Header("Bools")]
@@ -40,18 +51,22 @@ public class TutoManager : MonoBehaviour
     public bool Fire;
     public bool desactivateText;
     public bool AsteroidEtape1;
+    public bool AsteroidFinalEtape;
 
+    [Space(10)]
     [Header("List Audio"), Tooltip("Cette Variable permet de renseigner la List Audio")]
     public List<AudioClip> ListAudio;
 
     private float _timer = 0;
     private GameManager gameManager;
-    private Asteroid_Field asteroid_Field;  
+    private Asteroid_Field asteroid_Field;
+    private Ship_Controller ship_Controller;
 
     private void Awake()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
         asteroid_Field = GameObject.FindObjectOfType<Asteroid_Field>();
+        ship_Controller = GameObject.FindObjectOfType<Ship_Controller>();
         asteroid_Field.enabled = false;
         Life.SetActive(false);
         Money.SetActive(false);
@@ -63,6 +78,9 @@ public class TutoManager : MonoBehaviour
         text[4].text = TextTuto[4].Replace("{4}", Commende[4]).ToString();
         text[5].text = TextTuto[5].ToString();
         text[6].text = TextTuto[6].ToString();
+        text[7].text = TextTuto[7].ToString();
+        text[8].text = TextTuto[8].ToString();
+        text[9].text = TextTuto[9].ToString();
     }
 
     //Update
@@ -210,16 +228,6 @@ public class TutoManager : MonoBehaviour
                 popUpIndex++;
             }
         }
-        else if (popUpIndex == 6)
-        {
-            Life.SetActive(true);
-            Time.timeScale = 0;
-            if (Input.GetKeyDown(NextpopupTuto))
-            {
-                Time.timeScale = 1;
-                popUpIndex++;
-            }
-        }
 
         else if (popUpIndex == 6)
         {
@@ -228,6 +236,75 @@ public class TutoManager : MonoBehaviour
             if (Input.GetKeyDown(NextpopupTuto))
             {
                 Time.timeScale = 1;
+                WaitTime = 0;
+                popUpIndex++;
+            }
+        }
+
+        else if (popUpIndex == 7)
+        {
+            text[7].enabled = false;
+            WaitTime += Time.deltaTime / TimeSpeedDivide;
+            if (WaitTime >= MaxWaitTime)
+            {
+                Ultimate.SetActive(true);
+                text[7].enabled = true;
+                ship_Controller.shipStats.CurrentPower = 100;
+                Time.timeScale = 0;
+                if (Input.GetButtonDown("Ultimate"))
+                {
+                    Time.timeScale = 1;
+                    ship_Controller.shipStats.CurrentPower = 0;
+                    WaitTime = 0;
+                    popUpIndex++;
+                }
+            }
+        }
+
+        else if (popUpIndex == 8)
+        {
+            text[8].enabled = false;
+            WaitTime += Time.deltaTime / TimeSpeedDivide;
+            if (WaitTime >= MaxWaitTime)
+            {
+                Money.SetActive(true);
+                text[8].enabled = true;
+                Time.timeScale = 0;
+                if (Input.GetKeyDown(NextpopupTuto))
+                {
+                    Time.timeScale = 1;
+                    WaitTime = 0;
+                    MaxWaitTime = WaitTimePortail;
+                    popUpIndex++;
+                }
+            }
+        }
+        else if (popUpIndex == 9)
+        {
+            asteroid_Field.enabled = false;
+            WaitTime += Time.deltaTime / TimeSpeedDivide;
+            if (WaitTime >= MaxWaitTime && AsteroidFinalEtape == false)
+            {
+                desactivateText = true;
+                AsteroidFinalEtape = true;
+            }
+            if (desactivateText)
+            {
+                text[9].enabled = false;
+                Portail.SetActive(false);
+                ResteTimer = true;
+
+            }
+            if (ResteTimer)
+            {
+                WaitTime = 0;
+                Portail.SetActive(true);
+                popUps[9].SetActive(true);
+                ResteTimer = false;
+                desactivateText = false;
+            }
+            if (WaitTime >= MaxWaitTime)
+            {
                 popUpIndex++;
             }
         }

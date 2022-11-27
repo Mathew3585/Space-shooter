@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e682a448642a8624a98ad157a65ff8d6, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.114642195, g: 0.33011943, b: 0.71255326, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -339,7 +339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 236979455}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -370,7 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 240739663}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -630,7 +630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 563576870}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: PointFheather2
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -864,7 +864,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 684400483}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1042,7 +1042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 747003274}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: PointFheather1
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -1248,8 +1248,8 @@ GameObject:
   - component: {fileID: 788845136}
   - component: {fileID: 788845132}
   - component: {fileID: 788845133}
-  - component: {fileID: 788845135}
-  m_Layer: 7
+  - component: {fileID: 788845137}
+  m_Layer: 3
   m_Name: Script
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -1265,7 +1265,7 @@ Transform:
   m_GameObject: {fileID: 788845130}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.4093543, y: 0.40935433, z: 0.40935433}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2978003608211021427}
@@ -1337,20 +1337,6 @@ MonoBehaviour:
   targetLeft: {fileID: 236979455}
   targetRight: {fileID: 240739663}
   rootObject: {fileID: 2978003608211021427}
---- !u!64 &788845135
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788845130}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: 30249b1445eebc347b5a7b4973387213, type: 3}
 --- !u!114 &788845136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1371,6 +1357,20 @@ MonoBehaviour:
   Minautore: 0
   "P\xE9gase": 0
   Hydre: 0
+--- !u!64 &788845137
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788845130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: -1
+  m_Mesh: {fileID: -5495902117074765545, guid: 30249b1445eebc347b5a7b4973387213, type: 3}
 --- !u!1 &813826838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,7 +1515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 831350421}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: FhaterPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1623,7 +1623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 869579369}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: PointFheather2
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -1691,7 +1691,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 918513128}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1877,7 +1877,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1031165380}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: PointFheather2
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -2023,7 +2023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1054532908}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Lanceflamme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2236,7 +2236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1163975252}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3342,7 +3342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1609041064}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3519,7 +3519,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1826364515}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3580,8 +3580,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872508989}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.30088043, y: 0.21682787, z: 28.94}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.30090332, y: 0.21685791, z: 28.94}
   m_LocalScale: {x: 55.77912, y: 30.354912, z: 12.949}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4107,7 +4107,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 30249b1445eebc347b5a7b4973387213,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 30249b1445eebc347b5a7b4973387213,
         type: 3}
@@ -4183,7 +4183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &5492414697309199068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4245,7 +4245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6567354312975884885}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -4261,7 +4261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2978003608211021427}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}

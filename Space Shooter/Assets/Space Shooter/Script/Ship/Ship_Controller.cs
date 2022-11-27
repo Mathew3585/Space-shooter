@@ -76,9 +76,12 @@ public class Ship_Controller : MonoBehaviour
 
     private void Awake()
     {
-        bulletController = Bullet.gameObject.GetComponent<Bullet_Controller>();
-        rb = transform.GetComponent<Rigidbody>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        if (gameManager.Game == true)
+        {
+            bulletController = Bullet.gameObject.GetComponent<Bullet_Controller>();
+            rb = transform.GetComponent<Rigidbody>();
+        }
         Shield.SetActive(false);
         bulletController.dammage = shipStats.bulletDamage;
         bulletController.bulletSpeed = shipStats.bulletSpeed;

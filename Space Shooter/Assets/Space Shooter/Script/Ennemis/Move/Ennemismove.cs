@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI; //important
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
@@ -19,19 +20,12 @@ public class Ennemismove : MonoBehaviour
 
     public int randDir;
 
-    Rigidbody rb;
-
-
     public Transform targetLeft;
 
     public Transform targetRight;
 
     public Transform rootObject;
 
-    private void Awake()
-    {
-        rb = gameObject.GetComponent<Rigidbody>();
-    }
     void Update()
     {
 
@@ -64,11 +58,11 @@ public class Ennemismove : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("collision");
         if (collision.gameObject.tag == "BlockPalyer")
         {
             Debug.Log("collision");
             randDir = Random.Range(1, 3);
         }
     }
-
 }

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1588325650522299674}
   - component: {fileID: 7439574486878785338}
   - component: {fileID: 4017525038501299903}
+  - component: {fileID: 1813682204064429}
   m_Layer: 7
-  m_Name: Ennemis
+  m_Name: Minautor
   m_TagString: Ennemis
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,11 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4c5433328a7d1478871de9ebcd1a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats:
-    MaxHealth: 200
-    currentHealth: 0
-    dammage: 20
-  MoneyDrop: 200
+  stats: {fileID: 1813682204064429}
   RandomDropShield: 0
   explosionPrefabs: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 3}
@@ -78,6 +75,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &1813682204064429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492414698591193788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdecf2599d3954419e609d6fb2946ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 80
+  currentHealth: 0
+  Damage: 20
+  BulletSpeed: 5
+  MoneyDrop: 10
+  Minautore: 1
+  "P\xE9gase": 0
+  Hydre: 0
 --- !u!1 &6728424719743862423
 GameObject:
   m_ObjectHideFlags: 0

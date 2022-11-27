@@ -216,7 +216,7 @@ public class BossSciript : MonoBehaviour
                     FheaterFlammeActivate = false;
                 }
             }
-            else if (WaitTimeValue >= WaitTimeBetweenAttack)
+            if (WaitTimeValue >= WaitTimeBetweenAttack)
             {
                 Debug.Log("Reste en cour timer Attack3");
                 WaitTimeValue = 0;
@@ -241,20 +241,21 @@ public class BossSciript : MonoBehaviour
             }
 
         }
-        else if (Attack2 == true)
+        if (Attack2 == true)
         {
             WaitTimeValue += Time.fixedDeltaTime;
             InitiateFlammethorwer();
         }
-        else if (Attack2 == false)
+        if (Attack2 == false)
         {
             InitiateFireBall();
             WaitTimeValue += Time.fixedDeltaTime;
             if (WaitTimeValue >= WaitTimeBetweenAttack)
             {
                 WaitTimeValue = 0;
-                Attack2 = true;
+                Attack3 = true;
                 FlammeThorwerActivate = true;
+                FheaterFlammeActivate = true;
                 Debug.Log("Acitvation Flamme Thrower");
             }
 
