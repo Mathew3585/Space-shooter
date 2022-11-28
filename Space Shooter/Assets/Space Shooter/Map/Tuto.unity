@@ -1001,6 +1001,103 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &471701772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 471701773}
+  - component: {fileID: 471701776}
+  - component: {fileID: 471701775}
+  - component: {fileID: 471701774}
+  m_Layer: 5
+  m_Name: FadeLoad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &471701773
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471701772}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1889470246}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &471701774
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471701772}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 81500bc60fcbd6643bb6ffacab6f4ede, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &471701775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471701772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &471701776
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471701772}
+  m_CullTransparentMesh: 1
 --- !u!1 &475338034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2369,6 +2466,7 @@ MonoBehaviour:
   Game: 1
   WarpMode: 0
   money: 0
+  transition: {fileID: 471701774}
   changeShip: {fileID: 902578038}
   game:
     TimeSpeedDivide: 2
@@ -3643,6 +3741,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NumberMap: Warp
+  transitions: {fileID: 471701774}
+  TransitionTime: 1
+  FadeLoad: {fileID: 0}
 --- !u!1 &1368823669
 GameObject:
   m_ObjectHideFlags: 0
@@ -4652,9 +4753,9 @@ MonoBehaviour:
   - {fileID: 1684420679}
   - {fileID: 1085034623}
   TextTuto:
-  - Wow ok, il faut qu'on fuit maintenant, ils sont a nos trousses
-  - On ne peut pas se ratter veut tu que je t'expique les commande du vaisseaux 
-    Press  A for Yes or E for No
+  - "Il faut qu'on fu\xEEt maintenant, ils sont a nos trousses"
+  - On ne peut pas se rater veux tu que je t'explique les commandes du vaisseau 
+    Press A for Yes or E for No
   - Ok, laisse-moi te monter comment on deplace ce vaisseau. Pour aller vers l'avant
     appui sur {0} puis pour reculer appuis sur {1}
   - "Maintenant, d\xE9place-toi sur les cot\xE9s avec {2} et {3}"
@@ -4662,13 +4763,12 @@ MonoBehaviour:
     le vaisseau en appuyant sur {4}"
   - "On rentre dans une zone avec des ast\xE9ro\xEFdes d\xE9truire pour ne pas prendre
     des d\xE9g\xE2ts sur la coque"
-  - 'Voici la vie de votre vaiseaux elle sera afficher ici '
-  - En tirant sur les asteroides et les ennemis votre bar d'ultimate se recharge
-    Appuiez sur E pour utiliser votre ultimate
-  - "Votre argent se trouve ici vous pouvez en gengier en tuant des ennemis ou biend
-    des ast\xE9roide"
-  - 'J''active le portail InterTemporel pour fuire c est le seul moin sinon il vont
-    nous rattrapper fonce dans le protail '
+  - 'Voici la vie de votre vaisseau elle sera afficher ici '
+  - "En tirant sur les ast\xE9ro\xEFdes et les ennemis, votre barre d'ultimate se
+    recharge. Appui sur E pour utiliser votre ultimate"
+  - "Votre argent se trouve ici, vous pouvez en gagner en tuant des ennemis ou biens
+    des ast\xE9ro\xEFdes."
+  - J'active le portail intertemporel, c'est le seul moyen de fuir alors fonce.
   Commende:
   - Z
   - S
@@ -4888,6 +4988,7 @@ RectTransform:
   - {fileID: 479414504}
   - {fileID: 1336715685}
   - {fileID: 1134883546}
+  - {fileID: 471701773}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

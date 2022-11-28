@@ -2,15 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEditor.PackageManager;
 
 public class SceneLoadTuto : MonoBehaviour
 {
     public string NumberMap;
+
+    public Animator transitions;
+
+    public float TransitionTime = 1;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(NumberMap);
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
         }
+    }
+
+
+    IEnumerator LoadLevel(int LevelIndex)
+    {
+
+        transitions.SetTrigger("Load");
+
+        yield return new WaitForSeconds(TransitionTime);
+
+        SceneManager.LoadScene(LevelIndex);
     }
 }
