@@ -81,10 +81,10 @@ public class Ship_Controller : MonoBehaviour
         {
             bulletController = Bullet.gameObject.GetComponent<Bullet_Controller>();
             rb = transform.GetComponent<Rigidbody>();
+            Shield.SetActive(false);
+            bulletController.dammage = shipStats.bulletDamage;
+            bulletController.bulletSpeed = shipStats.bulletSpeed;
         }
-        Shield.SetActive(false);
-        bulletController.dammage = shipStats.bulletDamage;
-        bulletController.bulletSpeed = shipStats.bulletSpeed;
     }
 
     // Start is called before the first frame update
