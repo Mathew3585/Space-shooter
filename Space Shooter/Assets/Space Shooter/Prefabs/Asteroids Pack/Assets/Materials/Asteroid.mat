@@ -57,6 +57,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -102,12 +106,12 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LightProbeContribution: 3.5
+    - _LightProbeContribution: 0.78
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _OutlineDepthSensitivity: 1
     - _OutlineNormalsSensitivity: 1
-    - _OutlineThickness: 1
+    - _OutlineThickness: 1.69
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0

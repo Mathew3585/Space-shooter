@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -2618617295201363111}
   - component: {fileID: -6772892584089187509}
   - component: {fileID: 3138136950125999038}
+  - component: {fileID: 313419392906885411}
   m_Layer: 13
   m_Name: test_asteroid2_LOD0
   m_TagString: Asteroid
@@ -112,11 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: decfac1b8810d8d43b284524c02b47e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats:
-    MaxHealth: 100
-    currentHealth: 0
-    dammage: 30
-  MoneyDrop: 50
+  stats: {fileID: 0}
   explosionPrefabs: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 3}
 --- !u!54 &3138136950125999038
@@ -135,3 +132,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
+--- !u!114 &313419392906885411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6290480521747022863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdecf2599d3954419e609d6fb2946ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 60
+  Speed: 0
+  currentHealth: 0
+  Damage: 10
+  BulletSpeed: 0
+  MoneyDrop: 10
+  Minautore: 0
+  "P\xE9gase": 0
+  Hydre: 0

@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class Astéroide_Controller : MonoBehaviour
 {
+
     public LifeStats stats;
 
     private Quaternion randomRotaion;
@@ -20,6 +21,7 @@ public class Astéroide_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stats = gameObject.GetComponent<LifeStats>();
         stats.currentHealth = stats.MaxHealth;
 
         randomRotaion = Random.rotation;

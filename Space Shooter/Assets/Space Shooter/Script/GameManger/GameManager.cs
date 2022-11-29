@@ -184,16 +184,27 @@ public class GameManager : MonoBehaviour
         //Si Game est Activer
         if (Game == true)
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             game.ship_Controller = GameObject.FindObjectOfType<Ship_Controller>();
             game.UILose.SetActive(false);
             game.UIInGame.SetActive(true);
             CurrentMoney = PlayerPrefs.GetInt("Money", money);
             game.asteroid_ = GameObject.FindObjectOfType<Asteroid_Field>();
             Debug.Log("Game Activer");
+
         }
         if (WarpMode)
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             warp.cameraShaker = GameObject.FindObjectOfType<CameraShaker>();
+
+        }
+        if (Menu)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
     }

@@ -135,7 +135,7 @@ public class TutoManager : MonoBehaviour
             if (Input.GetButton("RefuseTuto"))
             {
                 popUps[1].SetActive(false);
-                gameObject.SetActive(false);
+                popUpIndex = 9;
             }
         }
 

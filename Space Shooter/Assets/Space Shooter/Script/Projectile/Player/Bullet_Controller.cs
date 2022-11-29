@@ -32,7 +32,7 @@ public class Bullet_Controller : MonoBehaviour
     {
         if (collision.gameObject.tag == "Asteroid")
         {
-            collision.transform.GetComponent<Astéroide_Controller>().stats.currentHealth -= dammage;
+            collision.transform.GetComponent<LifeStats>().currentHealth -= dammage;
             Destroy(gameObject);
         }
 

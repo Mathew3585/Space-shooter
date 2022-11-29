@@ -9,7 +9,6 @@ public class LifeStats : MonoBehaviour
 
     public float Speed;
 
-    [HideInInspector]
     public float currentHealth;
 
     public float Damage;
