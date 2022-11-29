@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
     public int money;
     private int CurrentMoney;
 
+    public Animator transition;
     public ChangeShip changeShip;
     public Game game;
     public ShipUnlock shipUnlock;
@@ -179,6 +180,7 @@ public class GameManager : MonoBehaviour
 
         shipUnlock.BaseShip = true;
 
+        transition.SetTrigger("Start");
         //Si Game est Activer
         if (Game == true)
         {
@@ -198,6 +200,8 @@ public class GameManager : MonoBehaviour
 
     async void Start()
     {
+
+
         try
         {
             await UnityServices.InitializeAsync();

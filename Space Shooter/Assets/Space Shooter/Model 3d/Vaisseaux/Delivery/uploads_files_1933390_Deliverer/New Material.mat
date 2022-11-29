@@ -102,7 +102,7 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineDepthSensitivity: 1
     - _OutlineNormalsSensitivity: 1
-    - _OutlineThickness: 1
+    - _OutlineThickness: 4.67
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -119,7 +119,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SpecularColor: {r: 0, g: 0.6745095, b: 1, a: 0}
+    - _SpecularColor: {r: 0, g: 0.6899173, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6060906314303217519
 MonoBehaviour:

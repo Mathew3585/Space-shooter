@@ -55,11 +55,15 @@ Material:
     - _FrenelPower: 1.87
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ShereMask: 0
+    - _ShereRadius: 0.5
+    - _Sphere_Hardness: 0.5
     - _VertexFrequency: 1
     - _VrtexAmount: 0
     m_Colors:
     - _BackColor: {r: 0, g: 0.007843138, b: 2, a: 1}
     - _FrenelColor: {r: 1.2705883, g: 0, b: 2.9960785, a: 1}
     - _FrontColor: {r: 0, g: 0.6117647, b: 2.9960785, a: 1}
+    - _ShereCenter: {r: 0, g: 0, b: 0, a: 0}
     - _VertexPostion: {r: 0.001, g: 0.001, b: 0.001, a: 0}
   m_BuildTextureStacks: []

@@ -14,11 +14,13 @@ TagManager:
   - Ship4
   - Ship5
   - BulletEnemis
+  - Boss
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Boss
   - Water
   - UI
   - BlockPlayer

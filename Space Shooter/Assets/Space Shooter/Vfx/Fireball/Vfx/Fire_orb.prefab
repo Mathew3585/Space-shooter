@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 365428341830745833}
   - component: {fileID: 365428341830745835}
   - component: {fileID: 365428341830745832}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365428341830745838}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 100
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 365428342792881815}
   - component: {fileID: 365428342792881809}
   - component: {fileID: 365428342792881814}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Outerglow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4862,7 +4862,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365428342792881812}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 100
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4870,7 +4870,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -9644,7 +9644,7 @@ GameObject:
   - component: {fileID: 365428342962609169}
   - component: {fileID: 365428342962609171}
   - component: {fileID: 365428342962609168}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Fire_orb_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9674,7 +9674,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365428342962609174}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 100
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -14465,9 +14465,12 @@ GameObject:
   - component: {fileID: 365428343792752371}
   - component: {fileID: 365428343792752368}
   - component: {fileID: 365428343792752369}
-  m_Layer: 0
+  - component: {fileID: -5493973355806078614}
+  - component: {fileID: 8244016185697615445}
+  - component: {fileID: 5136159183792526246}
+  m_Layer: 12
   m_Name: Fire_orb
-  m_TagString: Untagged
+  m_TagString: BulletEnemis
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14499,7 +14502,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365428343792752374}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 100
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -19279,6 +19282,49 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-5493973355806078614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365428343792752374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e2f8d71f8b6c34997f3b2749afcb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 25
+  dammage: 15
+--- !u!135 &8244016185697615445
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365428343792752374}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5136159183792526246
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365428343792752374}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &8425626229768881074
 GameObject:
   m_ObjectHideFlags: 0
@@ -19290,7 +19336,7 @@ GameObject:
   - component: {fileID: 3901612642617271397}
   - component: {fileID: 4910303778140874592}
   - component: {fileID: 3414190782477631208}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19320,7 +19366,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8425626229768881074}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 100
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -19394,8 +19440,8 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 1
+      minMaxState: 0
+      scalar: 100
       minScalar: 0.5
       maxCurve:
         serializedVersion: 2
