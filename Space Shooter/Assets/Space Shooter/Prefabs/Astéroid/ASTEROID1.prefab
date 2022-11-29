@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 1444082474844289351}
   - component: {fileID: 2949228287944616083}
   - component: {fileID: 7796711311006689173}
-  - component: {fileID: 8212276933456090266}
+  - component: {fileID: 5144331144917016978}
+  - component: {fileID: 3264651000976941280}
   m_Layer: 13
   m_Name: ASTEROID1
   m_TagString: Asteroid
@@ -116,7 +117,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!114 &8212276933456090266
+--- !u!114 &5144331144917016978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,10 +129,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: decfac1b8810d8d43b284524c02b47e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats:
-    MaxHealth: 100
-    currentHealth: 0
-    dammage: 30
-  MoneyDrop: 50
+  stats: {fileID: 3264651000976941280}
   explosionPrefabs: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 3}
+--- !u!114 &3264651000976941280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083842677316409490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdecf2599d3954419e609d6fb2946ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 60
+  currentHealth: 0
+  Damage: 10
+  BulletSpeed: 0
+  MoneyDrop: 20
+  Minautore: 0
+  "P\xE9gase": 0
+  Hydre: 0

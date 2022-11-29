@@ -311,7 +311,7 @@ public class Ship_Controller : MonoBehaviour
         {
             if (collision.gameObject.tag == "Asteroid")
             {
-                shipStats.CurrentHealth -= collision.transform.GetComponent<Astéroide_Controller>().stats.dammage;
+                shipStats.CurrentHealth -= collision.transform.GetComponent<Astéroide_Controller>().stats.Damage;
                 Destroy(collision.gameObject);
             }
         }

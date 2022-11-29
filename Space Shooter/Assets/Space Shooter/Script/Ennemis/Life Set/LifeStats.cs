@@ -7,14 +7,20 @@ public class LifeStats : MonoBehaviour
 {
     public float MaxHealth;
 
+    public float Speed;
+
+    [HideInInspector]
     public float currentHealth;
 
     public float Damage;
 
     public float BulletSpeed;
 
+
+    [Space(10)]
     public int MoneyDrop;
 
+    [Space(10)]
     public bool Minautore;
 
     public bool Pégase;

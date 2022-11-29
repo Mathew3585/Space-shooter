@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEditor.PackageManager;
 
 public class SceneLoadTuto : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class SceneLoadTuto : MonoBehaviour
     IEnumerator LoadLevel(int LevelIndex)
     {
 
-        transitions.SetTrigger("Load");
+        transitions.SetTrigger("Start");
 
         yield return new WaitForSeconds(TransitionTime);
 

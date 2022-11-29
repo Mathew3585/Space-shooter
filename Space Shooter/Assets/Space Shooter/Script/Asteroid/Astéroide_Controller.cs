@@ -3,28 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
+[RequireComponent(typeof(LifeStats))]
 [System.Serializable]
-public class Asteroid_Stats 
-{
-    public float MaxHealth;
-    [HideInInspector]
-    public float currentHealth;
-    public float dammage;
-
-}
 
 public class Astéroide_Controller : MonoBehaviour
 {
-    public Asteroid_Stats stats;
-    [Header("Argent drop")]
-    public int MoneyDrop;
+    public LifeStats stats;
+
     private Quaternion randomRotaion;
     private Asteroid_Field field;
     private GameManager gameManager;
 
     public GameObject explosionPrefabs;
-    public Ship_Controller shipController;
+    private Ship_Controller shipController;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +37,7 @@ public class Astéroide_Controller : MonoBehaviour
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
-            gameManager.money += MoneyDrop;
+            gameManager.money += stats.MoneyDrop;
             if(shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
             {
                 gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
