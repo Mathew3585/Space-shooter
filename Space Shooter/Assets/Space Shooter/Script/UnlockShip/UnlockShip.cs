@@ -80,7 +80,7 @@ public class UnlockShip : MonoBehaviour
             }
         }
 
-        if (gameManager.Menu)
+        if (gameManager.GreekMenu)
         {
             if (IsShipBase == true)
             {
@@ -111,7 +111,7 @@ public class UnlockShip : MonoBehaviour
     // Si Il est acheter
     void Update()
     {
-        if (gameManager.Menu)
+        if (gameManager.GreekMenu)
         {
             // Si ce n est pas Unlock alors affiche le button Unlock
             if (IsUnlock == false)

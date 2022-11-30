@@ -43,7 +43,7 @@ public class ChangeShip : MonoBehaviour
         CurrentSpaceShipSelect = PlayerPrefs.GetInt("Current_Space_Ship_Select", CurrentSpaceShipSelect);
         CurrentUnlockShipsSciprt = SpaceShip[CurrentSpaceShipSelect].gameObject.GetComponent<UnlockShip>();
 
-        if (gameManager.Menu)
+        if (gameManager.GreekMenu)
         {
             i = CurrentSpaceShipSelect;
             CurrentSpaceShipSelect = i;
@@ -115,7 +115,7 @@ public class ChangeShip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.Menu)
+        if (gameManager.GreekMenu)
         {
             // Activer Les bools dans le game Manager 
             if (gameManager.shipUnlock.Ship2 == true)

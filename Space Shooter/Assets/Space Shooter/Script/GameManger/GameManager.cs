@@ -133,7 +133,8 @@ public class GameManager : MonoBehaviour
 {
 
     [Header("Mode")]
-    public bool Menu;
+    public bool GreekMenu;
+    public bool TutoMenu;
     public bool Game;
     public bool WarpMode;
 
@@ -153,10 +154,16 @@ public class GameManager : MonoBehaviour
     public float MaxHealthAllShip;
     public float MaxSpeedAllShip;
     public float MaxFireRateAllShip;
+    public float TransitionTime;
 
 
     public void Awake()
     {
+        transition.SetTrigger("Start");
+        if (TutoMenu)
+        {
+            return;
+        }
         //Load bools ShipUnlock
         shipUnlock.Ship2 = PlayerPrefs.GetInt("shipUnlock.Ship2") == 1 ? true : false;
         shipUnlock.Ship3 = PlayerPrefs.GetInt("shipUnlock.Ship3") == 1 ? true : false;
@@ -180,7 +187,7 @@ public class GameManager : MonoBehaviour
 
         shipUnlock.BaseShip = true;
 
-        transition.SetTrigger("Start");
+
         //Si Game est Activer
         if (Game == true)
         {
@@ -201,7 +208,7 @@ public class GameManager : MonoBehaviour
             warp.cameraShaker = GameObject.FindObjectOfType<CameraShaker>();
 
         }
-        if (Menu)
+        if (GreekMenu)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -212,6 +219,10 @@ public class GameManager : MonoBehaviour
     async void Start()
     {
 
+        if (TutoMenu)
+        {
+            return;
+        }
 
         try
         {
@@ -224,7 +235,7 @@ public class GameManager : MonoBehaviour
         }
 
         //Si Menu est activer
-        if (Menu == true)
+        if (GreekMenu == true)
         {
             if(changeShip.CurrentSpaceShipSelect == 0)
             {
@@ -356,7 +367,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-       if(Menu == true)
+        if (TutoMenu)
+        {
+            return;
+        }
+
+        if (GreekMenu == true)
         {
             //Changer les prix en fonction du vaissau selectionner et Activer ou desactiver
             if (changeShip.CurrentSpaceShipSelect == 0)
@@ -647,16 +663,26 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Menu de Start avec le button Quitter, Start , Option
     /// </summary>
+    /// 
+
+    public void Play()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
     public void QuitGame()
     {
         Application.Quit();
         PlayerPrefs.SetInt("Money", money);
     }
 
-
-    public void LoadScene()
+    IEnumerator LoadLevel(int LevelIndex)
     {
-        SceneManager.LoadScene(1);
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(TransitionTime);
+
+        SceneManager.LoadScene(LevelIndex);
     }
+
 
 }

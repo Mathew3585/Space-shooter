@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Space Shooter/Map/IdleScreen.unity
+    guid: c73cf5bf52f67dd4bb5e20f084cbc397
+  - enabled: 1
+    path: Assets/Space Shooter/Map/Menu1.unity
+    guid: 39ac4ac59115284429e1cd6eb6dcdffc
+  - enabled: 1
     path: Assets/Space Shooter/Map/Tuto.unity
     guid: 2d7d5a3fa38074f46a561c4acd42c52f
   - enabled: 1
