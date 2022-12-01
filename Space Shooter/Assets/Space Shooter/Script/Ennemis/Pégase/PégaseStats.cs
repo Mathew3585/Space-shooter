@@ -7,16 +7,28 @@ using UnityEngine;
 public class PégaseStats : MonoBehaviour
 {
     public LifeStats stats;
-    [Space(10)]
-    public float TimeTranslate;
-    public float speed;
-    public GameObject explosionPrefabs; 
-    private Transform target;
+
+    public float timer;
+
+    public float timerMax;
+
+    public float titleAngle;
+    public float Force;
+
+    public int Speed;
+
+    public int randDir;
+
+    public Transform targetLeft;
+
+    public Transform targetRight;
+
+    public Transform rootObject;
+
     private Ship_Controller ship_Controller;
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
         stats.currentHealth = stats.MaxHealth;
     }
@@ -24,14 +36,36 @@ public class PégaseStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 a = transform.position;
-        Vector3 b = target.position;
-        transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, TimeTranslate), speed);
-        transform.LookAt(target);
-        if (stats.currentHealth <= 0 )
+        Vector3 Position = rootObject.position;
+        Position.z += Time.deltaTime * Speed;
+        rootObject.position = Position;
+
+        timer += Time.deltaTime;
+
+        rootObject.position = Vector3.MoveTowards(rootObject.position, targetRight.position, Time.deltaTime * Speed);
+
+        if (timer > timerMax)
         {
-            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            // pick a new direction
+            randDir = Random.Range(1, 3);
+            Debug.Log(randDir);
+            timer = 0;
+        }
+        // movement here
+        // ....
+        if (randDir == 1)
+        {
+            rootObject.position = Vector3.Lerp(rootObject.position, targetLeft.position, Time.deltaTime * Speed);
+            Quaternion rotation = Quaternion.Euler(Vector3.forward * Force * -titleAngle);
+            rootObject.rotation = Quaternion.Lerp(rootObject.rotation, rotation, Time.deltaTime);
+            rootObject.position = new Vector3(rootObject.position.x, 0.8f, transform.position.z);
+        }
+        if (randDir == 2)
+        {
+            rootObject.position = Vector3.Lerp(rootObject.position, targetRight.position, Time.deltaTime * Speed);
+            Quaternion rotation = Quaternion.Euler(Vector3.forward * Force * titleAngle);
+            rootObject.rotation = Quaternion.Lerp(rootObject.rotation, rotation, Time.deltaTime);
+            rootObject.position = new Vector3(rootObject.position.x, 0.8f, transform.position.z);
         }
     }
 

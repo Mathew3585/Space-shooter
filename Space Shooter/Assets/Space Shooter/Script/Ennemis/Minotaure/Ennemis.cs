@@ -73,7 +73,7 @@ public class Ennemis : MonoBehaviour
             {
                 for (int i = 0; i < firepointlist; i++)
                 {
-                    GameObject bulletClone = Instantiate(bullet, FirePoints[i].position, FirePoints[i].rotation);
+                    GameObject bulletClone = Instantiate(bullet, FirePoints[i].position, bullet.transform.rotation);
 
                     for (int x = 0; x < shipCollider.Length; x++)
                     {

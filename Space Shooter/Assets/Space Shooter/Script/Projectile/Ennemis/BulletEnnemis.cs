@@ -12,7 +12,7 @@ public class BulletEnnemis : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.GetComponent<Rigidbody>().velocity = -transform.forward * bulletSpeed;
+        transform.GetComponent<Rigidbody>().velocity = -transform.right * bulletSpeed;
     }
 
     // Update is called once per frame
