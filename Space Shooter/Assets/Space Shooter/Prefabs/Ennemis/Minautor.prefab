@@ -71,6 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 1813682204064429}
   RandomDropShield: 0
+  Speed: 5
   explosionPrefabs: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 3}
   bullet: {fileID: 8729678851105911181, guid: c03ffa5823aaa094f9e8b51ad2acbd0a, type: 3}
@@ -78,6 +79,7 @@ MonoBehaviour:
     type: 3}
   FirePoints:
   - {fileID: 7240326609066303804}
+  rootObject: {fileID: 1588325650522299674}
   isAlvie: 1
   fireRate: 1
 --- !u!54 &4017525038501299903

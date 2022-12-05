@@ -8,13 +8,20 @@ public class PégaseStats : MonoBehaviour
 {
     public LifeStats stats;
 
+    [Space(10)]
     public float timer;
 
     public float timerMax;
 
+    [Space(10)]
     public float titleAngle;
     public float Force;
 
+    [Space(10)]
+    public float XAxiesMin;
+    public float XAxiesMax;
+
+    [Space(10)]
     public int Speed;
 
     public int randDir;
@@ -25,11 +32,17 @@ public class PégaseStats : MonoBehaviour
 
     public Transform rootObject;
 
+    public bool Left;
+    public bool Right;
+
     private Ship_Controller ship_Controller;
+    private Asteroid_Field field;
+
     // Start is called before the first frame update
     void Start()
     {
         ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
+        field = GameObject.FindObjectOfType<Asteroid_Field>();
         stats.currentHealth = stats.MaxHealth;
     }
 
@@ -42,7 +55,8 @@ public class PégaseStats : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        rootObject.position = Vector3.MoveTowards(rootObject.position, targetRight.position, Time.deltaTime * Speed);
+
+
 
         if (timer > timerMax)
         {
@@ -55,18 +69,40 @@ public class PégaseStats : MonoBehaviour
         // ....
         if (randDir == 1)
         {
+            Right = false;
+            Left = true;
+            if (rootObject.position.x <= XAxiesMin && Left)
+            {
+                randDir = 2;
+                Debug.Log("Limit left");
+            }
             rootObject.position = Vector3.Lerp(rootObject.position, targetLeft.position, Time.deltaTime * Speed);
             Quaternion rotation = Quaternion.Euler(Vector3.forward * Force * -titleAngle);
             rootObject.rotation = Quaternion.Lerp(rootObject.rotation, rotation, Time.deltaTime);
             rootObject.position = new Vector3(rootObject.position.x, 0.8f, transform.position.z);
+
         }
-        if (randDir == 2)
+
+        else if (randDir == 2)
         {
+            Right = true;
+            Left = false;
+            if (rootObject.position.x >= XAxiesMax && Right)
+            {
+                randDir = 1;
+                Debug.Log("Limit Right");
+            }
             rootObject.position = Vector3.Lerp(rootObject.position, targetRight.position, Time.deltaTime * Speed);
             Quaternion rotation = Quaternion.Euler(Vector3.forward * Force * titleAngle);
             rootObject.rotation = Quaternion.Lerp(rootObject.rotation, rotation, Time.deltaTime);
             rootObject.position = new Vector3(rootObject.position.x, 0.8f, transform.position.z);
+
         }
+
+
+
+
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -76,11 +112,21 @@ public class PégaseStats : MonoBehaviour
             if (ship_Controller.ShieldActivate)
             {
                 ship_Controller.shipStats.CurrentShield -= stats.Damage;
+                field.asteroidsClones.Remove(gameObject);
                 Destroy(gameObject);
             }
             else
+            {
                 ship_Controller.shipStats.CurrentHealth -= stats.Damage;
+                field.asteroidsClones.Remove(gameObject);
                 Destroy(gameObject);
+            }
+
+        }
+        if (collision.gameObject.tag == "DestroyAsteroid")
+        {
+            field.asteroidsClones.Remove(gameObject);
+            Destroy(gameObject);
         }
     }
 }

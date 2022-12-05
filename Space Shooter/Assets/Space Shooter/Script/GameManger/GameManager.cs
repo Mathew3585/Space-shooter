@@ -156,6 +156,26 @@ public class GameManager : MonoBehaviour
     public float MaxFireRateAllShip;
     public float TransitionTime;
 
+    [Space(10)]
+    [Header("Progress Value")]
+    public int ProgressPhase1;
+    public int ProgressPhase2;
+    public int ProgressPhase3;
+
+    [Space(5)]
+    public bool ProgressPhaseBoss;
+    public bool ValidatePhase1;
+    public bool ValidatePhase2;
+    public bool ValidatePhase3;
+
+    [Header("Ennemis Phase")]
+    public int NumbresEnnemisPhase1;
+    public int NumbresEnnemisPhase2;
+    public int NumbresEnnemisPhase3;
+
+
+
+
 
     public void Awake()
     {
@@ -332,7 +352,7 @@ public class GameManager : MonoBehaviour
             changeShip.SpaceShip[3].SetActive(false);
             changeShip.SpaceShip[4].SetActive(false);
         }
-        if (changeShip.CurrentSpaceShipSelect == 1)
+        else if (changeShip.CurrentSpaceShipSelect == 1)
         {
             changeShip.SpaceShip[0].SetActive(false);
             changeShip.SpaceShip[1].SetActive(true);
@@ -340,7 +360,7 @@ public class GameManager : MonoBehaviour
             changeShip.SpaceShip[3].SetActive(false);
             changeShip.SpaceShip[4].SetActive(false);
         }
-        if (changeShip.CurrentSpaceShipSelect == 2)
+        else if (changeShip.CurrentSpaceShipSelect == 2)
         {
             changeShip.SpaceShip[0].SetActive(false);
             changeShip.SpaceShip[1].SetActive(false);
@@ -348,7 +368,7 @@ public class GameManager : MonoBehaviour
             changeShip.SpaceShip[3].SetActive(false);
             changeShip.SpaceShip[4].SetActive(false);
         }
-        if (changeShip.CurrentSpaceShipSelect == 3)
+        else if (changeShip.CurrentSpaceShipSelect == 3)
         {
             changeShip.SpaceShip[0].SetActive(false);
             changeShip.SpaceShip[1].SetActive(false);
@@ -356,7 +376,7 @@ public class GameManager : MonoBehaviour
             changeShip.SpaceShip[3].SetActive(true);
             changeShip.SpaceShip[4].SetActive(false);
         }
-        if (changeShip.CurrentSpaceShipSelect == 4)
+        else if (changeShip.CurrentSpaceShipSelect == 4)
         {
             changeShip.SpaceShip[0].SetActive(false);
             changeShip.SpaceShip[1].SetActive(false);
@@ -418,6 +438,28 @@ public class GameManager : MonoBehaviour
         {
 
             game.ProgressHightScore = PlayerPrefs.GetFloat("Progress", game.Progress);
+            if (game.Progress <= ProgressPhase1)
+            {
+                ValidatePhase1 = true;
+                ValidatePhase2 = false;
+                ValidatePhase3 = false;
+
+            }
+            else if (game.Progress >= ProgressPhase1)
+            {
+                ValidatePhase1 = false;
+                ValidatePhase2 = true;
+                ValidatePhase3 = false;
+
+            }
+            else if (game.Progress >= ProgressPhase2)
+            {
+                ValidatePhase1 = false;
+                ValidatePhase2 = false;
+                ValidatePhase3 = true;
+
+            }
+
             if (game.IsDead == false)
             {
                 game.Progress += Time.deltaTime / game.TimeSpeedDivide;
