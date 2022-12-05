@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 60
-  Speed: 0
+  Speed: 4
   currentHealth: 0
   Damage: 10
   BulletSpeed: 0

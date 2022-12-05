@@ -9,7 +9,6 @@ public class ChangeScene : MonoBehaviour
 {
     public float speed;
     public int sceneId;
-    public string NumberMap;
 
     public Animator transitions;
 
@@ -24,7 +23,7 @@ public class ChangeScene : MonoBehaviour
     IEnumerator LoadSceneAsync()
     {
         yield return new WaitForSeconds(10);
-        transitions.SetTrigger("Load");
+        transitions.SetTrigger("Start");
         yield return new WaitForSeconds(TransitionTime);
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
         yield return new WaitForSeconds(10);
