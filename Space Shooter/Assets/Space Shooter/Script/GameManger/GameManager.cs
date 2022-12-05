@@ -472,6 +472,8 @@ public class GameManager : MonoBehaviour
                 game.IsDead = true;
                 game.UILose.SetActive(true);
                 game.UIInGame.SetActive(false);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 PlayerPrefs.SetInt("Money", money);
                 if (game.ProgressHightScore < game.Progress)
                 {
@@ -710,6 +712,12 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
+
+    public void Retry()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
     }
     public void QuitGame()
     {

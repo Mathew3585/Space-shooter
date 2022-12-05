@@ -14,7 +14,6 @@ public class Ennemis : MonoBehaviour
     [Space(10)]
     [Header("Int")]
     public int RandomDropShield;
-    public int Speed;
 
     [Space(10)]
     [Header("GameObject/List")]
@@ -51,7 +50,7 @@ public class Ennemis : MonoBehaviour
     {
 
         Vector3 Position = rootObject.position;
-        Position.z += Time.deltaTime * Speed;
+        Position.z += Time.deltaTime * stats.Speed;
         rootObject.position = Position;
 
         if (stats.currentHealth <= 0)
@@ -59,9 +58,9 @@ public class Ennemis : MonoBehaviour
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
             gameManager.money += stats.MoneyDrop;
-            RandomDropShield = Random.Range(1, 5);
+            RandomDropShield = Random.Range(1, 11);
             Debug.Log(RandomDropShield);
-            if (RandomDropShield == 4)
+            if (RandomDropShield == 9)
             {
                 Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
             }
@@ -94,10 +93,22 @@ public class Ennemis : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "DestroyAsteroid" || collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Sheild")
         {
-            field.asteroidsClones.Remove(gameObject);
             isAlvie = false;
+            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+            field.asteroidsClones.Remove(gameObject);
+            gameManager.money += stats.MoneyDrop;
+            Destroy(gameObject);
+        }
+
+
+
+        if (collision.gameObject.tag == "DestroyAsteroid")
+        {
+            isAlvie = false;
+            field.asteroidsClones.Remove(gameObject);
+            gameManager.money += stats.MoneyDrop;
             Destroy(gameObject);
         }
     }
