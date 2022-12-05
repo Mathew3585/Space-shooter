@@ -11,6 +11,11 @@ using UnityEngine.Rendering;
 public class Ennemis : MonoBehaviour
 {
     public LifeStats stats;
+
+    [Space(10)]
+    [Header("CrashDamage")]
+    public int CrashDamage;
+
     [Space(10)]
     [Header("Int")]
     public int RandomDropShield;
@@ -66,14 +71,11 @@ public class Ennemis : MonoBehaviour
             }
             Destroy(gameObject);
         }
-    }
 
-    private void FixedUpdate()
-    {
         Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
         if (isAlvie)
         {
-            nextFire -= Time.fixedDeltaTime;
+            nextFire -= Time.deltaTime;
             if (nextFire <= 0)
             {
                 for (int i = 0; i < firepointlist; i++)
@@ -88,18 +90,33 @@ public class Ennemis : MonoBehaviour
                 nextFire += 1 / fireRate;
             }
         }
-
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Sheild")
+
+        if (collision.gameObject.tag == "Sheild")
         {
             isAlvie = false;
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
             gameManager.money += stats.MoneyDrop;
+            collision.gameObject.GetComponent<ShieldDommageDetect>().ship_Controller.shipStats.CurrentShield -= CrashDamage;
             Destroy(gameObject);
+        }
+
+        else if (collision.gameObject.tag == "Player")
+        {
+            if (collision.transform.GetComponent<Ship_Controller>().ShieldActivate == false)
+            {
+                isAlvie = false;
+                Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+                field.asteroidsClones.Remove(gameObject);
+                gameManager.money += stats.MoneyDrop;
+                collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentHealth -= CrashDamage;
+                Destroy(gameObject);
+            }
         }
 
 

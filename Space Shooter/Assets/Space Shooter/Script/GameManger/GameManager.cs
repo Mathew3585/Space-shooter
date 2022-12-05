@@ -19,8 +19,12 @@ public class Game
     public float TimeSpeedDivide;
     public float Progress;
     public float ProgressHightScore;
+
     [Header("Text")]
     public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI ProgressHightScoreText;
+    public TextMeshProUGUI ProgressText;
+
     [Header("Player Is Alive?")]
     public bool IsDead;
     public bool UltimateActive;
@@ -480,6 +484,10 @@ public class GameManager : MonoBehaviour
                     PlayerPrefs.SetFloat("Progress", game.Progress);
                     game.ProgressHightScore = PlayerPrefs.GetFloat("Progress", game.Progress);
                 }
+                int ProgressText = (int) game.Progress;
+                int ProgressHightScoreText = (int)game.ProgressHightScore;
+                game.ProgressText.text = ProgressText.ToString() + "%";
+                game.ProgressHightScoreText.text = ProgressHightScoreText.ToString() + "%";
             }
             if (game.Progress >= 70)
             {
