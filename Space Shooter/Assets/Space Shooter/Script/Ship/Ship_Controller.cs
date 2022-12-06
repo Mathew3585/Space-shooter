@@ -67,6 +67,11 @@ public class Ship_Controller : MonoBehaviour
     public Transform[] FirePointsShip4;
     public List <Transform> CurrentFirePoint;
 
+    [Space(10)]
+    [Header("Audio")]
+    public AudioClip[] AudioClip;
+    private AudioSource audioSource;
+
 
     private float nextFire;
     private GameManager gameManager;
@@ -85,6 +90,8 @@ public class Ship_Controller : MonoBehaviour
             bulletController.dammage = shipStats.bulletDamage;
             bulletController.bulletSpeed = shipStats.bulletSpeed;
         }
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -291,6 +298,8 @@ public class Ship_Controller : MonoBehaviour
                         for (int i = 0; i < CurrentIndexGun; i++)
                         {
                             GameObject bulletClone = Instantiate(Bullet, FirePointsShip1[i].position, Quaternion.identity);
+                            audioSource.PlayOneShot(AudioClip[Random.Range(0, AudioClip.Length)]);
+
 
                             for (int x = 0; x < shipCollider.Length; x++)
                             {
