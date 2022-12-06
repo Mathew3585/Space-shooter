@@ -33,6 +33,10 @@ public class Astéroide_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 Position = transform.position;
+        Position.z += Time.deltaTime * stats.Speed;
+        transform.position = Position;
+
         transform.Rotate(randomRotaion.eulerAngles * 0.1f * Time.deltaTime);
 
         if(stats.currentHealth <= 0)

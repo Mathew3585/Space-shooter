@@ -12,13 +12,13 @@ public class BulletEnnemis : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.GetComponent<Rigidbody>().velocity = -transform.forward * bulletSpeed;
+        transform.GetComponent<Rigidbody>().velocity = -transform.right * bulletSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 10);
     }
 
 
@@ -28,21 +28,22 @@ public class BulletEnnemis : MonoBehaviour
     /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            if (collision.transform.GetComponent<Ship_Controller>().ShieldActivate)
-            {
-                collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentShield -= dammage;
-                Destroy(gameObject);
-            }
 
+        if (collision.gameObject.tag == "Sheild")
+        {
+            collision.gameObject.GetComponent<ShieldDommageDetect>().ship_Controller.shipStats.CurrentShield -= dammage;
+            Destroy(gameObject);
+        }
+
+        else if (collision.gameObject.tag == "Player")
+        {
             if (collision.transform.GetComponent<Ship_Controller>().ShieldActivate == false)
             {
                 collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentHealth -= dammage;
                 Destroy(gameObject);
             }
         }
-            
+
         if (collision.gameObject.tag == "DestroyAsteroid")
         {
             Destroy(gameObject);

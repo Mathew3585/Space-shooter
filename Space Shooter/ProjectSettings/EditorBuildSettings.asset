@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Space Shooter/Map/Warp.unity
     guid: 85cc5c688d4a6fd4e9a6864aadca8d4d
   - enabled: 1
+    path: Assets/Space Shooter/Map/Level 1.unity
+    guid: 3495920b283de5b439e419e16fe0e1d8
+  - enabled: 1
     path: Assets/Space Shooter/Map/Menu.unity
     guid: 0e09afbe7c39c52478e26fb70656ad31
   m_configObjects: {}

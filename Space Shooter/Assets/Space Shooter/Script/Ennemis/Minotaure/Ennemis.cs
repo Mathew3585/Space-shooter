@@ -11,6 +11,11 @@ using UnityEngine.Rendering;
 public class Ennemis : MonoBehaviour
 {
     public LifeStats stats;
+
+    [Space(10)]
+    [Header("CrashDamage")]
+    public int CrashDamage;
+
     [Space(10)]
     [Header("Int")]
     public int RandomDropShield;
@@ -21,6 +26,7 @@ public class Ennemis : MonoBehaviour
     public GameObject bullet;
     public GameObject ShieldSpaceBall;
     public Transform[] FirePoints;
+    public Transform rootObject;
 
     [Space(10)]
     [Header("Bools")]
@@ -48,32 +54,33 @@ public class Ennemis : MonoBehaviour
     void Update()
     {
 
+        Vector3 Position = rootObject.position;
+        Position.z += Time.deltaTime * stats.Speed;
+        rootObject.position = Position;
+
         if (stats.currentHealth <= 0)
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-            //field.asteroidsClones.Remove(gameObject);
+            field.asteroidsClones.Remove(gameObject);
             gameManager.money += stats.MoneyDrop;
-            RandomDropShield = Random.Range(1, 5);
+            RandomDropShield = Random.Range(1, 11);
             Debug.Log(RandomDropShield);
-            if (RandomDropShield == 4)
+            if (RandomDropShield == 9)
             {
                 Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
             }
             Destroy(gameObject);
         }
-    }
 
-    private void FixedUpdate()
-    {
         Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
         if (isAlvie)
         {
-            nextFire -= Time.fixedDeltaTime;
+            nextFire -= Time.deltaTime;
             if (nextFire <= 0)
             {
                 for (int i = 0; i < firepointlist; i++)
                 {
-                    GameObject bulletClone = Instantiate(bullet, FirePoints[i].position, FirePoints[i].rotation);
+                    GameObject bulletClone = Instantiate(bullet, FirePoints[i].position, bullet.transform.rotation);
 
                     for (int x = 0; x < shipCollider.Length; x++)
                     {
@@ -83,15 +90,42 @@ public class Ennemis : MonoBehaviour
                 nextFire += 1 / fireRate;
             }
         }
-
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "DestroyAsteroid" || collision.gameObject.tag == "Player")
+
+        if (collision.gameObject.tag == "Sheild")
         {
-            //field.asteroidsClones.Remove(gameObject);
             isAlvie = false;
+            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+            field.asteroidsClones.Remove(gameObject);
+            gameManager.money += stats.MoneyDrop;
+            collision.gameObject.GetComponent<ShieldDommageDetect>().ship_Controller.shipStats.CurrentShield -= CrashDamage;
+            Destroy(gameObject);
+        }
+
+        else if (collision.gameObject.tag == "Player")
+        {
+            if (collision.transform.GetComponent<Ship_Controller>().ShieldActivate == false)
+            {
+                isAlvie = false;
+                Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+                field.asteroidsClones.Remove(gameObject);
+                gameManager.money += stats.MoneyDrop;
+                collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentHealth -= CrashDamage;
+                Destroy(gameObject);
+            }
+        }
+
+
+
+        if (collision.gameObject.tag == "DestroyAsteroid")
+        {
+            isAlvie = false;
+            field.asteroidsClones.Remove(gameObject);
+            gameManager.money += stats.MoneyDrop;
             Destroy(gameObject);
         }
     }

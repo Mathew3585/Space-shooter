@@ -9,6 +9,13 @@ public class ShieldDommageDetect : MonoBehaviour
     public GameObject shieldRipples;
     private VisualEffect shieldRippleVfx;
     public GameObject Ship;
+    public Ship_Controller ship_Controller;
+
+    public void Start()
+    {
+        ship_Controller = FindObjectOfType<Ship_Controller>();
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,7 +27,7 @@ public class ShieldDommageDetect : MonoBehaviour
 
             Destroy(ripples, 2);
         }
-        Physics.IgnoreCollision(Ship.gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+        Physics.IgnoreCollision(Ship.gameObject.GetComponentInChildren<Collider>(), gameObject.GetComponent<Collider>());
     }
 
 }
