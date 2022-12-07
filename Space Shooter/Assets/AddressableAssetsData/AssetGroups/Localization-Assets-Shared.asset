@@ -21,6 +21,17 @@ MonoBehaviour:
     m_Address: Assets/Space Shooter/Langue/Localize Table/TextUi Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 88eab00ed001aad488085d5e40a6bb77
+    m_Address: Assets/Space Shooter/Langue/Localise Table Image/Image Table Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 2d2006a89254c654b8c635839ec007b1
+    m_Address: Option
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Locale-fr-FR
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: a4b932c2c96e4e34983c56fa126b23ab, type: 2}
   m_SchemaSet:

@@ -27,6 +27,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
+  - m_GUID: 7d2468d7581caca478f5f0a0a85cff70
+    m_Address: Breton (France) (br-FR)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: a4b932c2c96e4e34983c56fa126b23ab, type: 2}
   m_SchemaSet:

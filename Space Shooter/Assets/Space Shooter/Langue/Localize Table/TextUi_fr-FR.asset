@@ -26,6 +26,22 @@ MonoBehaviour:
     m_Localized: Principale
     m_Metadata:
       m_Items: []
+  - m_Id: 257523292876800
+    m_Localized: Bas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 257869591392256
+    m_Localized: Moyen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258218893029376
+    m_Localized: Haut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258538738069504
+    m_Localized: Ultra
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

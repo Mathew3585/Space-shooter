@@ -23,6 +23,22 @@ MonoBehaviour:
     m_Key: Master Sound
     m_Metadata:
       m_Items: []
+  - m_Id: 257523292876800
+    m_Key: Bas Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 257869591392256
+    m_Key: Graphisme Moyen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258218893029376
+    m_Key: Graphisme Haut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258538738069504
+    m_Key: Grphisme Ultra
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
