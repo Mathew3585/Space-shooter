@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: TextUi Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: TextUi
+  m_TableCollectionNameGuidString: d94a78712ec31244dbad24bdab9d423d
+  m_Entries:
+  - m_Id: 2671627370496
+    m_Key: Music Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 579080716288
+    m_Key: Master Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 257523292876800
+    m_Key: Bas Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 257869591392256
+    m_Key: Graphisme Moyen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258218893029376
+    m_Key: Graphisme Haut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258538738069504
+    m_Key: Grphisme Ultra
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7781041635010543784
+  references:
+    version: 2
+    RefIds:
+    - rid: 7781041635010543784
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1670360290037

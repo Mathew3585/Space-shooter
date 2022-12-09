@@ -229,7 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d638a2604bef84abfd2ade578e6f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Menu: 0
+  GreekMenu: 0
+  TutoMenu: 0
   Game: 0
   WarpMode: 1
   money: 0
@@ -295,6 +296,17 @@ MonoBehaviour:
   MaxHealthAllShip: 0
   MaxSpeedAllShip: 0
   MaxFireRateAllShip: 0
+  TransitionTime: 0
+  ProgressPhase1: 0
+  ProgressPhase2: 0
+  ProgressPhase3: 0
+  ProgressPhaseBoss: 0
+  ValidatePhase1: 0
+  ValidatePhase2: 0
+  ValidatePhase3: 0
+  NumbresEnnemisPhase1: 0
+  NumbresEnnemisPhase2: 0
+  NumbresEnnemisPhase3: 0
 --- !u!4 &73001324
 Transform:
   m_ObjectHideFlags: 0
@@ -323,8 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  sceneId: 2
-  NumberMap: 
+  sceneId: 4
   transitions: {fileID: 1049724105}
   TransitionTime: 1
 --- !u!114 &73001326
@@ -344,7 +355,7 @@ MonoBehaviour:
   Unlockbutton: {fileID: 0}
   SelectShip: {fileID: 0}
   SpaceShip:
-  - {fileID: 1829702269}
+  - {fileID: 1200185047}
   - {fileID: 1582737595}
   - {fileID: 2004819595}
   - {fileID: 1736896723}
@@ -1260,6 +1271,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b516b0974c90c249ba48f0727ac6587, type: 3}
+--- !u!1 &1200185047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 332399982622794721, guid: 1b516b0974c90c249ba48f0727ac6587,
+    type: 3}
+  m_PrefabInstance: {fileID: 1200185046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1262487054 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6456404585516272075, guid: 1b516b0974c90c249ba48f0727ac6587,
@@ -1495,38 +1512,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1829702269 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4320019422824920940, guid: 1b516b0974c90c249ba48f0727ac6587,
-    type: 3}
-  m_PrefabInstance: {fileID: 1200185046}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1829702271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829702269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a7bfc5d7c516744985a4a31e0c7ea3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  specShip:
-    maxHealth: 100
-    MoveSpeed: 20
-    fireRate: 5
-    maxPower: 100
-    Price: 0
-  Holograme: []
-  materials: []
-  renderers: []
-  waitTime: 0
-  IsShipBase: 1
-  IsUnlock: 0
-  ship_Controller: {fileID: 0}
-  i: 0
 --- !u!23 &1847173555 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4744626006697868672, guid: 1b516b0974c90c249ba48f0727ac6587,

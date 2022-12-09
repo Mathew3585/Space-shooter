@@ -16,6 +16,7 @@ TagManager:
   - BulletEnemis
   - Boss
   - Bullet
+  - Sheild
   layers:
   - Default
   - TransparentFX

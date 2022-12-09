@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e2f8d71f8b6c34997f3b2749afcb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 10
+  bulletSpeed: 25
   dammage: 20
 --- !u!65 &1233653463685788578
 BoxCollider:

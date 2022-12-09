@@ -26,4 +26,9 @@ public class LoadScene : MonoBehaviour
 
         SceneManager.LoadScene(LevelIndex);
     }
+
+    public void SkipIntro()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
 }
