@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-French (France) (fr-FR)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-French (France) (fr-FR)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 4a3e1585b3096294a867c51f52bed642
+  m_SerializeEntries:
+  - m_GUID: 8f27697d740a65542ac444c3a581d155
+    m_Address: Francais button
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+  - m_GUID: 45f343d5b372d28448a44ae09e590ba8
+    m_Address: Quitter
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+  - m_GUID: d6419a2572e7ad343a8fe517e85ed5b6
+    m_Address: Jouer
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+  - m_GUID: 2018172ea1d54514e89ecf4522a7d6cf
+    m_Address: Graphisme Button
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+  - m_GUID: f9408619bf0ecfe4e90d472dfd436b48
+    m_Address: Auddio Button
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+  - m_GUID: 2a45a8dba63f2954b84e8d9d76c949d9
+    m_Address: Langue Button
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+  - m_GUID: 31374f1b8cb641d4abdfd246653d05e4
+    m_Address: Anglais button
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr-FR
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: a4b932c2c96e4e34983c56fa126b23ab, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7d4940aa56a8b784593ff84205352fdc, type: 2}
+    - {fileID: 11400000, guid: 66878d82ba28a1f458db04b864e70358, type: 2}
