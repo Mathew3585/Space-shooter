@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Image Table Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: Image Table
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
+  m_TableCollectionNameGuidString: 32e739ba98606784c814becdb811dbc1
   m_Entries: []
   m_Metadata:
     m_Items: []
