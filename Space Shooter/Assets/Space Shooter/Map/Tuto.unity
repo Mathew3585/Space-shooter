@@ -1829,6 +1829,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1338138988}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &612866168 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5877029147072107313, guid: 1b516b0974c90c249ba48f0727ac6587,
+    type: 3}
+  m_PrefabInstance: {fileID: 1338138988}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &617061963 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3502170242029226301, guid: 1b516b0974c90c249ba48f0727ac6587,
@@ -2799,7 +2805,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GreekMenu: 0
   TutoMenu: 0
-  Game: 1
+  Game: 0
+  Tuto: 1
   WarpMode: 0
   money: 0
   transition: {fileID: 471701774}
@@ -2870,13 +2877,15 @@ MonoBehaviour:
   ProgressPhase1: 100
   ProgressPhase2: 0
   ProgressPhase3: 0
-  ProgressPhaseBoss: 0
+  BossFight: 0
   ValidatePhase1: 0
   ValidatePhase2: 0
   ValidatePhase3: 0
-  NumbresEnnemisPhase1: 25
+  ValidateBossFight: 0
+  NumbresEnnemisPhase1: 15
   NumbresEnnemisPhase2: 15
-  NumbresEnnemisPhase3: 25
+  NumbresEnnemisPhase3: 15
+  NumbresBoss: 15
 --- !u!4 &902578040
 Transform:
   m_ObjectHideFlags: 0
@@ -3702,6 +3711,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunBase1
       objectReference: {fileID: 0}
+    - target: {fileID: 1177681271271265358, guid: 1b516b0974c90c249ba48f0727ac6587,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 612866168}
     - target: {fileID: 1177681271271265358, guid: 1b516b0974c90c249ba48f0727ac6587,
         type: 3}
       propertyPath: Bullet
@@ -4663,14 +4677,17 @@ MonoBehaviour:
   gameManager: {fileID: 902578039}
   asteroid:
   - {fileID: 1083842677316409490, guid: 6051323430822de4ea42f3caeec801a1, type: 3}
-  - {fileID: 5286713139587843148, guid: 855d7e417757d414abd601eb02c55fd2, type: 3}
-  - {fileID: 6290480521747022863, guid: 609b33cc8501e194b8cf75e2a42093c2, type: 3}
-  NumberOfEnnemis: 0
+  NumberOfEnnemis: 15
   randomAsteroid: 
   speedRange: []
   spawnRange: {x: 30, y: 0, z: 25}
   seed: 0
   asteroidsClones: []
+  "P\xE9gasNumberMax": 0
+  HydreNumberMax: 0
+  "P\xE9gasNumber": 0
+  HydreNumber: 0
+  game: 0
 --- !u!4 &1428579038
 Transform:
   m_ObjectHideFlags: 0
