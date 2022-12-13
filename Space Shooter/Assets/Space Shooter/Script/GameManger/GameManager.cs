@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
     public bool GreekMenu;
     public bool TutoMenu;
     public bool Game;
+    public bool Tuto;
     public bool WarpMode;
 
     [Header("Value")]
@@ -165,17 +166,19 @@ public class GameManager : MonoBehaviour
     public int ProgressPhase1;
     public int ProgressPhase2;
     public int ProgressPhase3;
+    public int BossFight;
 
     [Space(5)]
-    public bool ProgressPhaseBoss;
     public bool ValidatePhase1;
     public bool ValidatePhase2;
     public bool ValidatePhase3;
+    public bool ValidateBossFight;
 
     [Header("Ennemis Phase")]
     public int NumbresEnnemisPhase1;
     public int NumbresEnnemisPhase2;
     public int NumbresEnnemisPhase3;
+    public int NumbresBoss;
 
 
 
@@ -225,6 +228,12 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game Activer");
 
         }
+        if (Tuto)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         if (WarpMode)
         {
             Cursor.visible = false;
@@ -456,15 +465,33 @@ public class GameManager : MonoBehaviour
                 ValidatePhase3 = false;
 
             }
-            else if (game.Progress >= ProgressPhase2)
-            {
-                ValidatePhase1 = false;
-                ValidatePhase2 = false;
-                ValidatePhase3 = true;
 
+            if (game.Progress >= ProgressPhase3)
+            {
+                if (game.Progress >= BossFight)
+                {
+                    ValidatePhase1 = false;
+                    ValidatePhase2 = false;
+                    ValidatePhase3 = false;
+                    ValidateBossFight = true;
+                }
+                else
+                {
+                    ValidatePhase1 = false;
+                    ValidatePhase2 = false;
+                    ValidatePhase3 = true;
+                    ValidateBossFight = false;
+                }
             }
 
-            if (game.IsDead == false)
+
+            if (ValidateBossFight)
+            {
+                game.Progress = 90;
+                Debug.Log("Boss fight");
+            }
+
+            else if (game.IsDead == false)
             {
                 game.Progress += Time.deltaTime / game.TimeSpeedDivide;
             }
@@ -488,11 +515,6 @@ public class GameManager : MonoBehaviour
                 int ProgressHightScoreText = (int)game.ProgressHightScore;
                 game.ProgressText.text = ProgressText.ToString() + "%";
                 game.ProgressHightScoreText.text = ProgressHightScoreText.ToString() + "%";
-            }
-            if (game.Progress >= 70)
-            {
-                game.asteroid_.enabled = false;
-                Debug.Log("Boss fight");
             }
 
         }

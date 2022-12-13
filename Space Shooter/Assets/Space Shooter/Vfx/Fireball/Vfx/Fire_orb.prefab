@@ -14464,8 +14464,8 @@ GameObject:
   m_Component:
   - component: {fileID: 365428343792752371}
   - component: {fileID: 365428343792752368}
+  - component: {fileID: 3258322458160858564}
   - component: {fileID: 365428343792752369}
-  - component: {fileID: -5493973355806078614}
   - component: {fileID: 8244016185697615445}
   - component: {fileID: 5136159183792526246}
   m_Layer: 12
@@ -19210,6 +19210,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &3258322458160858564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365428343792752374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3a0fc6fe2e4b54ea598c2431adba74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 25
+  dammage: 0
 --- !u!199 &365428343792752369
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -19282,20 +19296,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &-5493973355806078614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365428343792752374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e2f8d71f8b6c34997f3b2749afcb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 25
-  dammage: 15
 --- !u!135 &8244016185697615445
 SphereCollider:
   m_ObjectHideFlags: 0

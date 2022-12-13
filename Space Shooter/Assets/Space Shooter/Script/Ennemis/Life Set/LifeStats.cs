@@ -19,11 +19,4 @@ public class LifeStats : MonoBehaviour
     [Space(10)]
     public int MoneyDrop;
 
-    [Space(10)]
-    public bool Minautore;
-
-    public bool Pégase;
-
-    public bool Hydre;
-
 }

@@ -30,30 +30,37 @@ public class Bullet_Controller : MonoBehaviour
     /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Asteroid")
+        if (collision.gameObject.CompareTag("Asteroid"))
         {
             collision.transform.GetComponent<LifeStats>().currentHealth -= dammage;
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.tag == "DestroyAsteroid")
+        if (collision.gameObject.CompareTag("DestroyAsteroid"))
         {
             Destroy(gameObject);
 
         }
-        if (collision.gameObject.tag == "Ennemis")
-        {
-            collision.transform.GetComponent<LifeStats>().currentHealth -= dammage;
-            Destroy(gameObject);
-        }
-
-        if (collision.gameObject.tag == "Boss")
+        if (collision.gameObject.CompareTag("Ennemis"))
         {
             collision.transform.GetComponent<LifeStats>().currentHealth -= dammage;
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.tag == "BlockPalyer")
+        if (collision.gameObject.CompareTag("Hydre"))
+        {
+            collision.transform.GetComponent<LifeStats>().currentHealth -= dammage;
+            Destroy(gameObject);
+        }
+
+
+        if (collision.gameObject.CompareTag("Boss"))
+        {
+            collision.transform.GetComponent<LifeStats>().currentHealth -= dammage;
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("BlockPalyer"))
         {
             Destroy(gameObject);
         }

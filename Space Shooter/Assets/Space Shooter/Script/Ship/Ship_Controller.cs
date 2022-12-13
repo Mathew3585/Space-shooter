@@ -38,7 +38,7 @@ public class ShipStats
 public class Ship_Controller : MonoBehaviour
 {
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
     public ShipStats shipStats;
     public CameraShaker cameraShaker;
@@ -82,10 +82,9 @@ public class Ship_Controller : MonoBehaviour
     private void Awake()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        if (gameManager.Game == true)
+        if (gameManager.Tuto || gameManager.Game)
         {
             bulletController = Bullet.gameObject.GetComponent<Bullet_Controller>();
-            rb = transform.GetComponent<Rigidbody>();
             Shield.SetActive(false);
             bulletController.dammage = shipStats.bulletDamage;
             bulletController.bulletSpeed = shipStats.bulletSpeed;
@@ -97,7 +96,7 @@ public class Ship_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gameManager.Game)
+        if (gameManager.Tuto || gameManager.Game)
         {
             if (gameManager.changeShip.CurrentSpaceShipSelect == 0)
             {
@@ -207,7 +206,7 @@ public class Ship_Controller : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.Game)
+        if (gameManager.Tuto || gameManager.Game)
         {
             //Voir si le joueur et mort 
             if (shipStats.CurrentHealth <= 0)
@@ -254,7 +253,7 @@ public class Ship_Controller : MonoBehaviour
     void FixedUpdate()
     {
         //Tires des projectiles
-        if (gameManager.Game)
+        if (gameManager.Tuto || gameManager.Game)
         {
             float moveRL = Input.GetAxis("Horizontal");
             float moveFB = Input.GetAxis("Vertical");
@@ -316,7 +315,7 @@ public class Ship_Controller : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (gameManager.Game)
+        if (gameManager.Tuto || gameManager.Game)
         {
             if (collision.gameObject.tag == "Asteroid")
             {

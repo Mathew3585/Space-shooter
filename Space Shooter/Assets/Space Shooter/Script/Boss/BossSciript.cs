@@ -41,15 +41,18 @@ public class BossSciript : MonoBehaviour
     public GameObject FheaterFlamme;
     public GameObject explosionPrefabs;
     public GameObject RootObject;
+    private Transform PostionStart;
+    public BossMove ennemismove;
 
     [Space(10)]
     [Header("List")]
     public Transform[] FirePoints;
     public Transform[] FheaterFlammePoints;
     private GameObject FlammeThowerclone;
+
     private Asteroid_Field field;   
     private GameManager gameManager;
-    private BulletEnnemis bulletController;
+    private BulletBoss bulletController;
 
     [Space(5)]
     [Header("Floats")]
@@ -62,6 +65,7 @@ public class BossSciript : MonoBehaviour
     [Space(5)]
     [Header("Bools")]
     public bool isAlvie;
+    public bool PositionStartValidate;
     public bool FlammeThorwerActivate;
     public bool FheaterFlammeActivate;
     public bool Attack2;
@@ -77,17 +81,19 @@ public class BossSciript : MonoBehaviour
         Attack2 = true;
         Attack3 = true;
         stats.currentHealth = stats.MaxHealth;
-        bulletController = FireBall.gameObject.GetComponent<BulletEnnemis>();
+        bulletController = FireBall.gameObject.GetComponent<BulletBoss>();
+        PostionStart = GameObject.FindGameObjectWithTag("BossPostion").GetComponent<Transform>();
         bulletController.dammage = stats.Damage;
         bulletController.bulletSpeed = stats.BulletSpeed;
+        ennemismove.enabled = false;
     }
     // Start is called before the first frame update
     void Start()
     {
+
         field = GameObject.FindObjectOfType<Asteroid_Field>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
         firepointlist = FirePoints.Count();
-
         //Initalize Dommage and speed 
         bulletController.dammage = FireBallDamage;
         bulletController.bulletSpeed = FireBallSpeed;
@@ -96,10 +102,19 @@ public class BossSciript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PositionStartValidate)
+        {
+            RootObject.gameObject.transform.position = Vector3.MoveTowards(RootObject.gameObject.transform.position, PostionStart.position, stats.Speed * Time.deltaTime);
+        }
+
+        if (RootObject.gameObject.transform.position == PostionStart.position)
+        {
+            PositionStartValidate = false;
+        }
         if (stats.currentHealth <= 0)
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-            //field.asteroidsClones.Remove(gameObject);
+            field.asteroidsClones.Remove(RootObject);
             gameManager.money += stats.MoneyDrop;
             Destroy(RootObject);
         }
@@ -107,20 +122,24 @@ public class BossSciript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(stats.currentHealth > LifePhase1)
+        if(PositionStartValidate == false)
         {
-            Debug.Log("Phase 1 Boss");
-            InitiateFireBall();
-        }
-       else  if (stats.currentHealth > LifePhase2)
-        {
-            Debug.Log("Phase 2 Boss");
-            AttackTotalPhase2();
-        }
-        else if (stats.currentHealth > LifePhase3)
-        {
-            Debug.Log("Phase 3 Boss");
-            AttackTotalPhase3();
+            ennemismove.enabled = true;
+            if (stats.currentHealth > LifePhase1)
+            {
+                Debug.Log("Phase 1 Boss");
+                InitiateFireBall();
+            }
+            else if (stats.currentHealth > LifePhase2)
+            {
+                Debug.Log("Phase 2 Boss");
+                AttackTotalPhase2();
+            }
+            else if (stats.currentHealth > LifePhase3)
+            {
+                Debug.Log("Phase 3 Boss");
+                AttackTotalPhase3();
+            }
         }
     }
     public void InitiateFireBall()
@@ -130,6 +149,8 @@ public class BossSciript : MonoBehaviour
         {
             if (WaitTimeValue <= WaitTimeBetweenAttack)
             {
+                WaitTimeValue += Time.fixedDeltaTime;
+
                 nextFire -= Time.fixedDeltaTime;
                 if (nextFire <= 0)
                 {
@@ -139,9 +160,15 @@ public class BossSciript : MonoBehaviour
                     {
                         Physics.IgnoreCollision(bulletClone.transform.GetComponent<Collider>(), shipCollider[x]);
                     }
+
                     nextFire += 1 / fireRate;
                 }
   
+            }
+            else if (WaitTimeValue >= WaitTimeBetweenAttack)
+            {
+                Debug.Log("Reste en cour timer Attack 1");
+                WaitTimeValue = 0;
             }
         }
     }

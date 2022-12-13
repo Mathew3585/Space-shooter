@@ -31,19 +31,35 @@ public class PégaseStats : MonoBehaviour
     public Transform targetRight;
 
     public Transform rootObject;
+    private GameObject rootGameObject;
+    public GameObject explosionPrefabs;
 
     public bool Left;
     public bool Right;
 
     private Ship_Controller ship_Controller;
     private Asteroid_Field field;
+    private GameManager gameManager;
 
+
+    private void Awake()
+    {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
+        if(gameManager.game.IsDead == false)
+        {
+            ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
+        }
+        else
+        {
+            ship_Controller = null;
+        }
         field = GameObject.FindObjectOfType<Asteroid_Field>();
         stats.currentHealth = stats.MaxHealth;
+        rootGameObject = rootObject.gameObject;
     }
 
     // Update is called once per frame
@@ -111,22 +127,35 @@ public class PégaseStats : MonoBehaviour
         {
             if (ship_Controller.ShieldActivate)
             {
+                Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
                 ship_Controller.shipStats.CurrentShield -= stats.Damage;
-                field.asteroidsClones.Remove(gameObject);
-                Destroy(gameObject);
+                field.asteroidsClones.Remove(rootGameObject);
+                field.PégasNumber--;
+                Destroy(rootGameObject);
             }
             else
             {
+                Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
                 ship_Controller.shipStats.CurrentHealth -= stats.Damage;
-                field.asteroidsClones.Remove(gameObject);
-                Destroy(gameObject);
+                field.asteroidsClones.Remove(rootGameObject);
+                field.PégasNumber--;
+                Destroy(rootGameObject);
             }
 
         }
         if (collision.gameObject.tag == "DestroyAsteroid")
         {
-            field.asteroidsClones.Remove(gameObject);
-            Destroy(gameObject);
+            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+            field.asteroidsClones.Remove(rootGameObject);
+            field.PégasNumber--;
+            Destroy(rootGameObject);
+        }
+        if (collision.gameObject.CompareTag("Sheild"))
+        {
+            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+            field.asteroidsClones.Remove(rootGameObject);
+            field.PégasNumber--;
+            Destroy(rootGameObject);
         }
     }
 }

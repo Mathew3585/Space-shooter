@@ -17,6 +17,10 @@ TagManager:
   - Boss
   - Bullet
   - Sheild
+  - "P\xE9gas"
+  - Hydre
+  - BossPostion
+  - BlockBoss
   layers:
   - Default
   - TransparentFX
