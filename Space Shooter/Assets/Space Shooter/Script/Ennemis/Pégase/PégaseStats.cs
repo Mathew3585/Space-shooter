@@ -40,6 +40,7 @@ public class PégaseStats : MonoBehaviour
     private Ship_Controller ship_Controller;
     private Asteroid_Field field;
     private GameManager gameManager;
+    bool IsAlive;
 
 
     private void Awake()
@@ -49,7 +50,8 @@ public class PégaseStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(gameManager.game.IsDead == false)
+        IsAlive = true;
+        if (gameManager.game.IsDead == false)
         {
             ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
         }
@@ -74,14 +76,7 @@ public class PégaseStats : MonoBehaviour
 
         if (stats.currentHealth <= 0)
         {
-            if (ship_Controller.shipStats.CurrentPower == ship_Controller.shipStats.maxPower)
-            {
-                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
-            }
-            else
-            {
-                gameManager.game.ship_Controller.shipStats.CurrentPower += 10;
-            }
+            IsAlive = false;
         }
 
             if (timer > timerMax)
@@ -133,7 +128,30 @@ public class PégaseStats : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            if (IsAlive == false)
+            {
+                if (ship_Controller.ShieldActivate)
+                {
+                    Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+                    gameManager.money += stats.MoneyDrop;
+                    if (ship_Controller.shipStats.CurrentPower == ship_Controller.shipStats.maxPower)
+                    {
+                        gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+                    }
+                    else
+                    {
+                        gameManager.game.ship_Controller.shipStats.CurrentPower++;
+                    }
+                    field.asteroidsClones.Remove(rootGameObject);
+                    field.PégasNumber--;
+                    Destroy(rootGameObject);
+                }
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (ship_Controller.ShieldActivate)
             {

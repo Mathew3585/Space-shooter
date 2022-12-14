@@ -8,6 +8,7 @@ using EZCameraShake;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 [System.Serializable]
 public class ShipStats
@@ -267,7 +268,8 @@ public class Ship_Controller : MonoBehaviour
 
             Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
 
-            if(gameManager.changeShip.CurrentSpaceShipSelect == 0)
+
+            if (gameManager.changeShip.CurrentSpaceShipSelect == 0)
             {
                 if (fireButton)
                 {
@@ -277,6 +279,8 @@ public class Ship_Controller : MonoBehaviour
                         for (int i = 0; i < CurrentIndexGun; i++)
                         {
                             GameObject bulletClone = Instantiate(Bullet, FirePointsBaseShip[i].position, Bullet.transform.rotation);
+                            audioSource.clip = AudioClip[0];
+                            audioSource.Play();
 
                             for (int x = 0; x < shipCollider.Length; x++)
                             {

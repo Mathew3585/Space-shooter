@@ -50,11 +50,6 @@ public class Ennemis : MonoBehaviour
         bullet.GetComponent<BulletEnnemis>().dammage = stats.Damage;
         shipController = FindObjectOfType<Ship_Controller>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -66,23 +61,7 @@ public class Ennemis : MonoBehaviour
 
         if (stats.currentHealth <= 0)
         {
-            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-            field.asteroidsClones.Remove(gameObject);
-            if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
-            {
-                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
-            }
-            else
-            {
-                gameManager.game.ship_Controller.shipStats.CurrentPower++;
-            }
-            RandomDropShield = Random.Range(1, 11);
-            Debug.Log(RandomDropShield);
-            if (RandomDropShield == 9)
-            {
-                Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
-            }
-            Destroy(gameObject);
+            isAlvie = false;
         }
 
         Collider[] shipCollider = transform.GetComponentsInChildren<Collider>();
@@ -109,6 +88,14 @@ public class Ennemis : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            if (isAlvie == false)
+            {
+                Dead();
+            }
+        }
+
         if (collision.gameObject.tag == "Sheild")
         {
             isAlvie = false;
@@ -132,8 +119,6 @@ public class Ennemis : MonoBehaviour
             }
         }
 
-
-
         if (collision.gameObject.tag == "DestroyAsteroid")
         {
             isAlvie = false;
@@ -142,4 +127,27 @@ public class Ennemis : MonoBehaviour
         }
     }
 
+    void Dead()
+    {
+        Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+        field.asteroidsClones.Remove(gameObject);
+        gameManager.money += stats.MoneyDrop;
+        if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
+        {
+            gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+        }
+        else
+        {
+            gameManager.game.ship_Controller.shipStats.CurrentPower++;
+        }
+        RandomDropShield = Random.Range(1, 11);
+        Debug.Log(RandomDropShield);
+        if (RandomDropShield == 9)
+        {
+            Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
+        }
+        Debug.Log(RandomDropShield);
+
+        Destroy(gameObject);
+    }
 }
