@@ -405,7 +405,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (GreekMenu == true)
+        if (GreekMenu)
         {
             //Changer les prix en fonction du vaissau selectionner et Activer ou desactiver
             if (changeShip.CurrentSpaceShipSelect == 0)
@@ -447,7 +447,7 @@ public class GameManager : MonoBehaviour
             }
        }
         //Si Game est Activer
-        if(Game == true)
+        if(Game || Tuto)
         {
 
             game.ProgressHightScore = PlayerPrefs.GetFloat("Progress", game.Progress);
@@ -526,7 +526,6 @@ public class GameManager : MonoBehaviour
             warp.cameraShaker.ShakeOnce(0.7f, 0.2f, 0.2f, 0.7f);
         }
 
-
         //Afficher et Changer les emplacement des upgrades par rapport au vaisau au start  
         if (changeShip.CurrentSpaceShipSelect == 0)
         {
@@ -537,28 +536,35 @@ public class GameManager : MonoBehaviour
                     return;
                 }
             }
-
-            Debug.Log("Vaiseaux de Base Activer");
-            upgradeScript.UpagrdeBaseShip[0].SetActive(true);
-            //A Ameliorer 
-            upgradeScript.UpagrdeShip1[0].SetActive(false);
-            upgradeScript.UpagrdeShip1[1].SetActive(false);
-            upgradeScript.UpagrdeShip1[2].SetActive(false);
-            //Upagrade Gun
-            if (upgrade.UpagradeBaseShip[1] == true)
+            if (game.IsDead)
             {
-                Debug.Log("Upgrade 1 mise a jour");
-                upgradeScript.UpagrdeBaseShip[0].SetActive(true);
-                upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                return;
             }
 
-            if (upgrade.UpagradeBaseShip[2] == true)
+            else if(game.IsDead == false)
             {
-                Debug.Log("Upgrade 2 mise a jour");
+                Debug.Log("Vaiseaux de Base Activer");
                 upgradeScript.UpagrdeBaseShip[0].SetActive(true);
-                upgradeScript.UpagrdeBaseShip[1].SetActive(true);
-                upgradeScript.UpagrdeBaseShip[2].SetActive(true);
-            }
+                //A Ameliorer 
+                upgradeScript.UpagrdeShip1[0].SetActive(false);
+                upgradeScript.UpagrdeShip1[1].SetActive(false);
+                upgradeScript.UpagrdeShip1[2].SetActive(false);
+                //Upagrade Gun
+                if (upgrade.UpagradeBaseShip[1] == true)
+                {
+                    Debug.Log("Upgrade 1 mise a jour");
+                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                }
+
+                if (upgrade.UpagradeBaseShip[2] == true)
+                {
+                    Debug.Log("Upgrade 2 mise a jour");
+                    upgradeScript.UpagrdeBaseShip[0].SetActive(true);
+                    upgradeScript.UpagrdeBaseShip[1].SetActive(true);
+                    upgradeScript.UpagrdeBaseShip[2].SetActive(true);
+                }
+            } 
         }
 
         if (changeShip.CurrentSpaceShipSelect == 1)
@@ -571,28 +577,30 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            upgradeScript.UpagrdeShip1[0].SetActive(true);
-            //A Ameliorer 
-            upgradeScript.UpagrdeBaseShip[0].SetActive(false);
-            upgradeScript.UpagrdeBaseShip[1].SetActive(false);
-            upgradeScript.UpagrdeBaseShip[2].SetActive(false);
-            Debug.Log("Vaiseaux 2 Activer");
-            //Upagrade Gun
-            if (upgrade.GunUpgardeShip1[1] == true)
+            if(game.IsDead == false)
             {
-                Debug.Log("Upgrade 1 mise a jour");
                 upgradeScript.UpagrdeShip1[0].SetActive(true);
-                upgradeScript.UpagrdeShip1[1].SetActive(true);
-            }
+                //A Ameliorer 
+                upgradeScript.UpagrdeBaseShip[0].SetActive(false);
+                upgradeScript.UpagrdeBaseShip[1].SetActive(false);
+                upgradeScript.UpagrdeBaseShip[2].SetActive(false);
+                Debug.Log("Vaiseaux 2 Activer");
+                //Upagrade Gun
+                if (upgrade.GunUpgardeShip1[1] == true)
+                {
+                    Debug.Log("Upgrade 1 mise a jour");
+                    upgradeScript.UpagrdeShip1[0].SetActive(true);
+                    upgradeScript.UpagrdeShip1[1].SetActive(true);
+                }
 
-            if (upgrade.GunUpgardeShip1[2] == true)
-            {
-                Debug.Log("Upgrade 2 mise a jour");
-                upgradeScript.UpagrdeShip1[0].SetActive(true);
-                upgradeScript.UpagrdeShip1[1].SetActive(true);
-                upgradeScript.UpagrdeShip1[2].SetActive(true);
+                if (upgrade.GunUpgardeShip1[2] == true)
+                {
+                    Debug.Log("Upgrade 2 mise a jour");
+                    upgradeScript.UpagrdeShip1[0].SetActive(true);
+                    upgradeScript.UpagrdeShip1[1].SetActive(true);
+                    upgradeScript.UpagrdeShip1[2].SetActive(true);
+                }
             }
-
         }
 
     }
@@ -748,6 +756,10 @@ public class GameManager : MonoBehaviour
     public void Retry()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+    }
+    public void Menu()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex - 3));
     }
     public void QuitGame()
     {

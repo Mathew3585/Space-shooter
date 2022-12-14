@@ -72,9 +72,19 @@ public class PégaseStats : MonoBehaviour
         timer += Time.deltaTime;
 
 
+        if (stats.currentHealth <= 0)
+        {
+            if (ship_Controller.shipStats.CurrentPower == ship_Controller.shipStats.maxPower)
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+            }
+            else
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += 10;
+            }
+        }
 
-
-        if (timer > timerMax)
+            if (timer > timerMax)
         {
             // pick a new direction
             randDir = Random.Range(1, 3);
@@ -129,6 +139,7 @@ public class PégaseStats : MonoBehaviour
             {
                 Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
                 ship_Controller.shipStats.CurrentShield -= stats.Damage;
+                gameManager.money += stats.MoneyDrop;
                 field.asteroidsClones.Remove(rootGameObject);
                 field.PégasNumber--;
                 Destroy(rootGameObject);
@@ -153,6 +164,7 @@ public class PégaseStats : MonoBehaviour
         if (collision.gameObject.CompareTag("Sheild"))
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+            gameManager.money += stats.MoneyDrop;
             field.asteroidsClones.Remove(rootGameObject);
             field.PégasNumber--;
             Destroy(rootGameObject);

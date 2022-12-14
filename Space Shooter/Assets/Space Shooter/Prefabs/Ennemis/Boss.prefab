@@ -249,6 +249,7 @@ MonoBehaviour:
   targetRight: {fileID: 2427291372246624453}
   rootObject: {fileID: 647539937226773497}
   AxesY: 1.2
+  AxesZ: -20.35
 --- !u!1 &2427291372831526915
 GameObject:
   m_ObjectHideFlags: 0

@@ -61,6 +61,7 @@ public class Astéroide_Controller : MonoBehaviour
         if(collision.gameObject.tag == "DestroyAsteroid")
         {
             field.asteroidsClones.Remove(gameObject);
+            field.AsteroidNumber--;
             Destroy(gameObject);
 
         }

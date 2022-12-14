@@ -35,12 +35,12 @@ public class Ennemis : MonoBehaviour
     private Asteroid_Field field;
     private GameManager gameManager;
     private Bullet_Controller bulletController;
+    private Ship_Controller shipController;
     private float firepointlist;
     public float fireRate;
     private float nextFire;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         stats.currentHealth = stats.MaxHealth;
         bulletController = bullet.gameObject.GetComponent<Bullet_Controller>();
@@ -48,6 +48,12 @@ public class Ennemis : MonoBehaviour
         gameManager = GameObject.FindObjectOfType<GameManager>();
         firepointlist = FirePoints.Count();
         bullet.GetComponent<BulletEnnemis>().dammage = stats.Damage;
+        shipController = FindObjectOfType<Ship_Controller>();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -62,7 +68,14 @@ public class Ennemis : MonoBehaviour
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
-            gameManager.money += stats.MoneyDrop;
+            if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+            }
+            else
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower++;
+            }
             RandomDropShield = Random.Range(1, 11);
             Debug.Log(RandomDropShield);
             if (RandomDropShield == 9)
@@ -125,7 +138,6 @@ public class Ennemis : MonoBehaviour
         {
             isAlvie = false;
             field.asteroidsClones.Remove(gameObject);
-            gameManager.money += stats.MoneyDrop;
             Destroy(gameObject);
         }
     }

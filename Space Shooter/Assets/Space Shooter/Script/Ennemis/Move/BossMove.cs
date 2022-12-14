@@ -28,6 +28,7 @@ public class BossMove : MonoBehaviour
 
     [Space(10)]
     public float AxesY;
+    public float AxesZ;
 
     void Update()
     {
@@ -47,14 +48,14 @@ public class BossMove : MonoBehaviour
             rootObject.position = Vector3.Lerp(rootObject.position, targetLeft.position, Time.deltaTime* Speed);
             Quaternion rotation = Quaternion.Euler(Vector3.forward * Force * -titleAngle);
             rootObject.rotation = Quaternion.Lerp(rootObject.rotation, rotation, Time.deltaTime);
-            rootObject.position = new Vector3(rootObject.position.x, AxesY, transform.position.z);
+            rootObject.position = new Vector3(rootObject.position.x, AxesY, AxesZ);
         }
         if (randDir == 2)
         {
             rootObject.position = Vector3.Lerp(rootObject.position, targetRight.position, Time.deltaTime* Speed);
             Quaternion rotation = Quaternion.Euler(Vector3.forward * Force * titleAngle);
             rootObject.rotation = Quaternion.Lerp(rootObject.rotation, rotation, Time.deltaTime);
-            rootObject.position = new Vector3(rootObject.position.x, AxesY, transform.position.z);
+            rootObject.position = new Vector3(rootObject.position.x, AxesY, AxesZ);
         }
 
     }

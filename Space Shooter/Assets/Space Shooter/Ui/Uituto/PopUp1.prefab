@@ -164,8 +164,9 @@ MonoBehaviour:
     des colonies.\r\nAfin de nous defendre, vous devrez apprendre a utiliser notre
     syst\xE8me d'armement : les tourelles."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1b9b04afefdce6843b7fc1508a86b3db, type: 2}
+  m_sharedMaterial: {fileID: -1246320485617560857, guid: 1b9b04afefdce6843b7fc1508a86b3db,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

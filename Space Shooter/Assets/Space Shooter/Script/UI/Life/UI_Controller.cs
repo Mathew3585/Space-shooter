@@ -13,7 +13,7 @@ public class UI_Controller : MonoBehaviour
     public Slider PowerBar;
     public Image PowerBarFill;
 
-    public Color[] fillColour = new Color[3];
+    public Sprite[] fillColour = new Sprite[3];
 
     private void Start()
     {
@@ -21,10 +21,6 @@ public class UI_Controller : MonoBehaviour
         healthBar.wholeNumbers = true;
         healthBar.minValue = 0;
         PowerBar.minValue = 0;
-
-        fillColour[0] = new Color(0, 255, 0);
-        fillColour[1] = new Color(255, 194, 0);
-        fillColour[2] = new Color(255, 0, 0);
 
     }
 
@@ -35,8 +31,8 @@ public class UI_Controller : MonoBehaviour
         PowerBar.value = shipController.shipStats.CurrentPower;
 
 
-        healthBarFill.color = fillColour[0];
-        if (healthBar.value <= shipController.shipStats.maxHealth / 2) healthBarFill.color = fillColour[1];
-        if (healthBar.value <= shipController.shipStats.maxHealth / 10) healthBarFill.color = fillColour[2];
+        healthBarFill.sprite = fillColour[0];
+        if (healthBar.value <= shipController.shipStats.maxHealth / 2) healthBarFill.sprite = fillColour[1];
+        if (healthBar.value <= shipController.shipStats.maxHealth / 10) healthBarFill.sprite = fillColour[2];
     }
 }

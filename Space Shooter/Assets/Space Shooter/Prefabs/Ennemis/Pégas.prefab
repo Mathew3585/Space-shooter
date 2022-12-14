@@ -210,15 +210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fdecf2599d3954419e609d6fb2946ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 40
+  MaxHealth: 15
   Speed: 0
   currentHealth: 0
   Damage: 5
   BulletSpeed: 0
   MoneyDrop: 100
-  Minautore: 0
-  "P\xE9gase": 1
-  Hydre: 0
 --- !u!64 &7242867531888633643
 MeshCollider:
   m_ObjectHideFlags: 0

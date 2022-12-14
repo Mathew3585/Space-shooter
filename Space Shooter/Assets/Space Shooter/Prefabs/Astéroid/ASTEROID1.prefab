@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c627d84430364c046b9384a8e52aa51a, type: 2}
+  - {fileID: 2100000, guid: 7a2bfa2590984ff41bb1366f54e85a61, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145,11 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 60
-  Speed: 4
+  Speed: 7
   currentHealth: 0
   Damage: 10
   BulletSpeed: 0
   MoneyDrop: 20
-  Minautore: 0
-  "P\xE9gase": 0
-  Hydre: 0

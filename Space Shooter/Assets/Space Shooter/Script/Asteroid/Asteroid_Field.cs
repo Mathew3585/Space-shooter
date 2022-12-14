@@ -26,9 +26,12 @@ public class Asteroid_Field : MonoBehaviour
 
     public int PégasNumberMax;
     public int HydreNumberMax;
+    public int AsteroidNumberMax;
 
     [HideInInspector]
     public int PégasNumber;
+    [HideInInspector]
+    public int AsteroidNumber;
 
     [HideInInspector]
     public int HydreNumber;
@@ -41,22 +44,28 @@ public class Asteroid_Field : MonoBehaviour
         speedRange = new float[NumberOfEnnemis];
         asteroidsClones = new List<GameObject>(NumberOfEnnemis);
         NumberOfEnnemis = gameManager.NumbresEnnemisPhase1;
+        AsteroidNumber = 0;
 
 
         Random.InitState(seed);
 
-        if (gameManager.game.Progress >= gameManager.ProgressPhase1)
+        if (game)
         {
-            for (int i = 0; i < NumberOfEnnemis; i++)
+            if (gameManager.game.Progress >= gameManager.ProgressPhase1)
             {
+                for (int i = 0; i < NumberOfEnnemis; i++)
+                {
 
-                GameObject Asteroid = Instantiate(asteroid[0], new Vector3(transform.position.x + Random.Range(-spawnRange.x, spawnRange.x),
-                                                                                          transform.position.y + Random.Range(-spawnRange.y, spawnRange.y),
-                                                                                          transform.position.z + Random.Range(-spawnRange.z, spawnRange.z)), Quaternion.identity);
+                    GameObject Asteroid = Instantiate(asteroid[0], new Vector3(transform.position.x + Random.Range(-spawnRange.x, spawnRange.x),
+                                                                                              transform.position.y + Random.Range(-spawnRange.y, spawnRange.y),
+                                                                                              transform.position.z + Random.Range(-spawnRange.z, spawnRange.z)), Quaternion.identity);
 
-                asteroidsClones.Add(Asteroid);
+                    asteroidsClones.Add(Asteroid);
+                }
             }
+
         }
+
 
     }
 
@@ -64,8 +73,30 @@ public class Asteroid_Field : MonoBehaviour
 
     private void Update()
     {
+        if (game == false)
+        {
+            NumberOfEnnemis = AsteroidNumberMax;
 
-        if (asteroidsClones.Count < NumberOfEnnemis)
+            for (int i = 0; i < NumberOfEnnemis; i++)
+            {
+                Debug.Log(i);
+                if (AsteroidNumber < AsteroidNumberMax)
+                {
+                    GameObject Asteroid = Instantiate(asteroid[Random.Range(0,4)], new Vector3(transform.position.x + Random.Range(-spawnRange.x, spawnRange.x),
+                                                          transform.position.y + Random.Range(-spawnRange.y, spawnRange.y),
+                                                          transform.position.z + Random.Range(-spawnRange.z, spawnRange.z)), Quaternion.identity);
+                    asteroidsClones.Add(Asteroid);
+
+                    if (Asteroid.CompareTag("Asteroid"))
+                    {
+                        AsteroidNumber++;
+                    }
+
+                }
+            }
+        }
+
+        else if (asteroidsClones.Count < NumberOfEnnemis)
         {
             if (game)
             {
@@ -173,19 +204,7 @@ public class Asteroid_Field : MonoBehaviour
 
         }
 
-        if(game == false)
-        {
-            Debug.Log("Phase 1");
-            for (int i = 0; i < NumberOfEnnemis; i++)
-            {
 
-                GameObject Asteroid = Instantiate(asteroid[0], new Vector3(transform.position.x + Random.Range(-spawnRange.x, spawnRange.x),
-                                                                          transform.position.y + Random.Range(-spawnRange.y, spawnRange.y),
-                                                                          transform.position.z + Random.Range(-spawnRange.z, spawnRange.z)), Quaternion.identity);
-                asteroidsClones.Add(Asteroid);
-
-            }
-        }
     }
 
     private void OnDrawGizmos()

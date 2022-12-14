@@ -6417,6 +6417,7 @@ MonoBehaviour:
   GreekMenu: 0
   TutoMenu: 1
   Game: 0
+  Tuto: 0
   WarpMode: 0
   money: 0
   transition: {fileID: 1721618375}
@@ -6487,13 +6488,15 @@ MonoBehaviour:
   ProgressPhase1: 0
   ProgressPhase2: 0
   ProgressPhase3: 0
-  ProgressPhaseBoss: 0
+  BossFight: 0
   ValidatePhase1: 0
   ValidatePhase2: 0
   ValidatePhase3: 0
+  ValidateBossFight: 0
   NumbresEnnemisPhase1: 0
   NumbresEnnemisPhase2: 0
   NumbresEnnemisPhase3: 0
+  NumbresBoss: 0
 --- !u!4 &1540140095
 Transform:
   m_ObjectHideFlags: 0

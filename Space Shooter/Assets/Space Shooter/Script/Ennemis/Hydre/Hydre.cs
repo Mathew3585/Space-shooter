@@ -38,10 +38,16 @@ public class Hydre : MonoBehaviour
     private Asteroid_Field field;
     private GameManager gameManager;
     private Bullet_Controller bulletController;
+    private Ship_Controller shipController;
     private float firepointlist;
     public float fireRate;
     private float nextFire;
 
+
+    private void Awake()
+    {
+        shipController = FindObjectOfType<Ship_Controller>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +72,14 @@ public class Hydre : MonoBehaviour
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
-            gameManager.money += stats.MoneyDrop;
+            if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+            }
+            else
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += 15;
+            }
             RandomDropShield = Random.Range(1, 11);
             Debug.Log(RandomDropShield);
             if (RandomDropShield == 9)
@@ -141,7 +154,6 @@ public class Hydre : MonoBehaviour
             isAlvie = false;
             field.asteroidsClones.Remove(gameObject);
             field.HydreNumber--;
-            gameManager.money += stats.MoneyDrop;
             Destroy(gameObject);
         }
     }

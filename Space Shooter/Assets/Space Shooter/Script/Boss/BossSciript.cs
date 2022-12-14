@@ -115,6 +115,8 @@ public class BossSciript : MonoBehaviour
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(RootObject);
+            field.enabled = false;
+            gameManager.game.Progress = 100;
             gameManager.money += stats.MoneyDrop;
             Destroy(RootObject);
         }
