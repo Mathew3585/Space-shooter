@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 5789976942508627260}
   m_Layer: 0
   m_Name: UltimateVfx
-  m_TagString: Untagged
+  m_TagString: Ultimate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,8 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13125473dc87d94e863d5959cbbd2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ennemis: {fileID: 0}
-  "ast\xE9roide_": {fileID: 0}
   Dammage: 200
 --- !u!136 &5654498844901202135
 CapsuleCollider:

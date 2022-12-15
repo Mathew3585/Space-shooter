@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4632052150853390782}
   m_Layer: 7
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: "P\xE9gas"
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4293597796892002937}
   m_Layer: 7
   m_Name: uploads_files_1933390_Deliverer
-  m_TagString: Untagged
+  m_TagString: "P\xE9gas"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 2284135412446387288}
   m_Layer: 7
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: "P\xE9gas"
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,13 +169,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4393341400157164626}
-  - component: {fileID: 7406855042697708530}
-  - component: {fileID: 7242867531888633643}
-  - component: {fileID: 99331493410216623}
-  - component: {fileID: 2368796779056467247}
   m_Layer: 7
   m_Name: "P\xE9gase"
-  m_TagString: Ennemis
+  m_TagString: "P\xE9gas"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,82 +194,6 @@ Transform:
   m_Father: {fileID: 8072402323157053383}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7406855042697708530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7406855042697708532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fdecf2599d3954419e609d6fb2946ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 10
-  Speed: 0
-  currentHealth: 0
-  Damage: 5
-  BulletSpeed: 0
-  MoneyDrop: 100
---- !u!64 &7242867531888633643
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7406855042697708532}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
---- !u!114 &99331493410216623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7406855042697708532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02befcd8133106442868345fdddb0887, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 7406855042697708530}
-  timer: 0
-  timerMax: 2
-  titleAngle: 20
-  Force: 0.2
-  XAxiesMin: -10
-  XAxiesMax: 10
-  Speed: 3
-  randDir: 0
-  targetLeft: {fileID: 4632052150853390782}
-  targetRight: {fileID: 2284135412446387288}
-  rootObject: {fileID: 8072402323157053383}
-  explosionPrefabs: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
-    type: 3}
-  Left: 0
-  Right: 0
---- !u!54 &2368796779056467247
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7406855042697708532}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!1 &8296793941653782757
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +203,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8072402323157053383}
+  - component: {fileID: 8182362266969079715}
+  - component: {fileID: 2239338654188556710}
+  - component: {fileID: 2023418956026149921}
   m_Layer: 0
   m_Name: "P\xE9gas"
   m_TagString: "P\xE9gas"
@@ -306,3 +229,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &8182362266969079715
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296793941653782757}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
+--- !u!114 &2239338654188556710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296793941653782757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdecf2599d3954419e609d6fb2946ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 10
+  Speed: 0
+  currentHealth: 0
+  Damage: 5
+  BulletSpeed: 0
+  MoneyDrop: 100
+--- !u!114 &2023418956026149921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296793941653782757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02befcd8133106442868345fdddb0887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 2239338654188556710}
+  timer: 0
+  timerMax: 2
+  titleAngle: 20
+  Force: 0.2
+  XAxiesMin: -10
+  XAxiesMax: 10
+  Speed: 3
+  Power: 3
+  randDir: 0
+  RandomDropShield: 0
+  targetLeft: {fileID: 4632052150853390782}
+  targetRight: {fileID: 2284135412446387288}
+  rootObject: {fileID: 8072402323157053383}
+  explosionPrefabs: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
+    type: 3}
+  LifeSpaceBall: {fileID: 365428343792752374, guid: 7e1ae7545b7662e4dafc00008aea9dd3,
+    type: 3}
+  ShieldSpaceBall: {fileID: 365428343792752374, guid: 96bc165990915e14b950d5695a948025,
+    type: 3}
+  Left: 0
+  Right: 0

@@ -6646,8 +6646,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: E.R.A
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1b9b04afefdce6843b7fc1508a86b3db, type: 2}
-  m_sharedMaterial: {fileID: -1246320485617560857, guid: 1b9b04afefdce6843b7fc1508a86b3db,
+  m_fontAsset: {fileID: 11400000, guid: c6e7a6f2420a8b84383fc9b57feb4dfc, type: 2}
+  m_sharedMaterial: {fileID: -1246320485617560857, guid: c6e7a6f2420a8b84383fc9b57feb4dfc,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

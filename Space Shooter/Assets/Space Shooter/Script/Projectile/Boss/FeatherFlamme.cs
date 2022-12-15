@@ -27,17 +27,19 @@ public class FeatherFlamme : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 a = transform.position;
-        Vector3 b = target.position;
-        transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), speed);
-        transform.LookAt(target);
-        if (Boss.gameObject.GetComponentInChildren<BossSciript>().isAlvie)
+        if (ship_Controller.Isdead == false)
         {
-            Physics.IgnoreCollision(Boss.transform.GetComponentInChildren<Collider>(), gameObject.transform.GetComponent<Collider>());
+            Vector3 a = transform.position;
+            Vector3 b = target.position;
+            transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), speed);
+            transform.LookAt(target);
+            if (Boss.gameObject.GetComponentInChildren<BossSciript>().isAlvie)
+            {
+                Physics.IgnoreCollision(Boss.transform.GetComponentInChildren<Collider>(), gameObject.transform.GetComponent<Collider>());
+            }
+            else
+                Destroy(gameObject);
         }
-        else
-            Destroy(gameObject);
-
     }
 
     private void OnCollisionEnter(Collision collision)

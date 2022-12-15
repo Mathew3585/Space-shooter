@@ -1,3 +1,4 @@
+using EZCameraShake;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,10 @@ public class PégaseStats : MonoBehaviour
     [Space(10)]
     public int Speed;
 
+    public int Power;
+
     public int randDir;
+    public int RandomDropShield;
 
     public Transform targetLeft;
 
@@ -33,6 +37,8 @@ public class PégaseStats : MonoBehaviour
     public Transform rootObject;
     private GameObject rootGameObject;
     public GameObject explosionPrefabs;
+    public GameObject LifeSpaceBall;
+    public GameObject ShieldSpaceBall;
 
     public bool Left;
     public bool Right;
@@ -40,12 +46,14 @@ public class PégaseStats : MonoBehaviour
     private Ship_Controller ship_Controller;
     private Asteroid_Field field;
     private GameManager gameManager;
+    private CameraShaker cameraShaker;
     bool IsAlive;
 
 
     private void Awake()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        cameraShaker = GameObject.FindObjectOfType<CameraShaker>();
     }
     // Start is called before the first frame update
     void Start()
@@ -130,25 +138,7 @@ public class PégaseStats : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            if (IsAlive == false)
-            {
-                if (ship_Controller.ShieldActivate)
-                {
-                    Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-                    gameManager.money += stats.MoneyDrop;
-                    if (ship_Controller.shipStats.CurrentPower == ship_Controller.shipStats.maxPower)
-                    {
-                        gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
-                    }
-                    else
-                    {
-                        gameManager.game.ship_Controller.shipStats.CurrentPower++;
-                    }
-                    field.asteroidsClones.Remove(rootGameObject);
-                    field.PégasNumber--;
-                    Destroy(rootGameObject);
-                }
-            }
+            Dead();
         }
 
         if (collision.gameObject.CompareTag("Player"))
@@ -166,6 +156,7 @@ public class PégaseStats : MonoBehaviour
             {
                 Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
                 ship_Controller.shipStats.CurrentHealth -= stats.Damage;
+                cameraShaker.ShakeOnce(3f, 3f, 0.5f, 0.5f);
                 field.asteroidsClones.Remove(rootGameObject);
                 field.PégasNumber--;
                 Destroy(rootGameObject);
@@ -187,5 +178,42 @@ public class PégaseStats : MonoBehaviour
             field.PégasNumber--;
             Destroy(rootGameObject);
         }
+
+        if (collision.gameObject.CompareTag("Ultimate"))
+        {
+            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+            gameManager.money += stats.MoneyDrop;
+            field.asteroidsClones.Remove(rootGameObject);
+            field.PégasNumber--;
+            Destroy(rootGameObject);
+        }
+    }
+
+
+    public void Dead()
+    {
+        Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+        gameManager.money += stats.MoneyDrop;
+        if (ship_Controller.shipStats.CurrentPower == ship_Controller.shipStats.maxPower)
+        {
+            gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+        }
+        else
+        {
+            gameManager.game.ship_Controller.shipStats.CurrentPower = +Power;
+        }
+        RandomDropShield = Random.Range(1, 11);
+        Debug.Log(RandomDropShield);
+        if (RandomDropShield == 9)
+        {
+            Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
+        }
+        else if (RandomDropShield == 6)
+        {
+            Instantiate(LifeSpaceBall, transform.position, transform.rotation);
+        }
+        field.asteroidsClones.Remove(rootGameObject);
+        field.PégasNumber--;
+        Destroy(rootGameObject);
     }
 }

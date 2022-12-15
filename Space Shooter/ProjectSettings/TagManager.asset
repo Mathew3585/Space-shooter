@@ -21,6 +21,7 @@ TagManager:
   - Hydre
   - BossPostion
   - BlockBoss
+  - Ultimate
   layers:
   - Default
   - TransparentFX
@@ -33,11 +34,11 @@ TagManager:
   - Lighting
   - Ground
   - Postprocessing
-  - 
+  - ShieldShepre
   - BulletEnnemis
   - "Ast\xE9roid"
   - Bullet
-  - 
+  - Sheild
   - 
   - 
   - 

@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.76964474, g: 0, b: 1, a: 0.41960785}
+      maxColor: {r: 0, g: 1, b: 0.055066347, a: 0.41960785}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5035,7 +5035,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.61763066, g: 0.0141509175, b: 1, a: 1}
+      maxColor: {r: 0.015686274, g: 1, b: 0.032371223, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9582,7 +9582,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3509f42668765c04d9b61ada15ef6eb2, type: 2}
+  - {fileID: 2100000, guid: ec2595668f1f9f641aa32c57ad83e9a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9647,7 +9647,7 @@ GameObject:
   - component: {fileID: 6484509641782237436}
   - component: {fileID: 5225116281027932360}
   m_Layer: 11
-  m_Name: Space_orb
+  m_Name: Orb Life
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14407,7 +14407,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3509f42668765c04d9b61ada15ef6eb2, type: 2}
+  - {fileID: 2100000, guid: ec2595668f1f9f641aa32c57ad83e9a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14485,6 +14485,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   Speed: 10
-  Life: 0
-  Sheild: 1
-  lifeReg: 0
+  Life: 1
+  Sheild: 0
+  lifeReg: 30

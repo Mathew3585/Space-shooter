@@ -1,3 +1,4 @@
+using EZCameraShake;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using UnityEngine.Rendering;
 public class Hydre : MonoBehaviour
 {
     public LifeStats stats;
+    public GameObject LifeSpaceBall;
 
     [Space(10)]
     [Header("CrashDamage")]
@@ -19,6 +21,7 @@ public class Hydre : MonoBehaviour
     [Space(10)]
     [Header("Int")]
     public int RandomDropShield;
+    public int Power;
 
     [Space(10)]
     [Header("GameObject/List")]
@@ -42,6 +45,7 @@ public class Hydre : MonoBehaviour
     private float firepointlist;
     public float fireRate;
     private float nextFire;
+    private CameraShaker cameraShaker;
 
 
     private void Awake()
@@ -57,6 +61,7 @@ public class Hydre : MonoBehaviour
         gameManager = GameObject.FindObjectOfType<GameManager>();
         firepointlist = FirePoints.Count();
         bullet.GetComponent<BulletEnnemis>().dammage = stats.Damage;
+        cameraShaker = GameObject.FindObjectOfType<CameraShaker>();
         Ennemis = true;
     }
 
@@ -70,23 +75,7 @@ public class Hydre : MonoBehaviour
 
         if (stats.currentHealth <= 0)
         {
-            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-            field.asteroidsClones.Remove(gameObject);
-            if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
-            {
-                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
-            }
-            else
-            {
-                gameManager.game.ship_Controller.shipStats.CurrentPower += 15;
-            }
-            RandomDropShield = Random.Range(1, 11);
-            Debug.Log(RandomDropShield);
-            if (RandomDropShield == 9)
-            {
-                Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
-            }
-            Destroy(gameObject);
+            isAlvie = false;
         }
 
         if (stats.currentHealth <= 30 && Ennemis)
@@ -122,12 +111,38 @@ public class Hydre : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            if (isAlvie == false)
+            {
+                Dead();
+            }
+        }
+
         if (collision.gameObject.tag == "Sheild")
         {
             isAlvie = false;
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
             field.HydreNumber--;
+            if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+            }
+            else
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower = +Power;
+            }
+            RandomDropShield = Random.Range(1, 11);
+            Debug.Log(RandomDropShield);
+            if (RandomDropShield == 9)
+            {
+                Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
+            }
+            else if (RandomDropShield == 6)
+            {
+                Instantiate(LifeSpaceBall, transform.position, transform.rotation);
+            }
             gameManager.money += stats.MoneyDrop;
             collision.gameObject.GetComponent<ShieldDommageDetect>().ship_Controller.shipStats.CurrentShield -= CrashDamage;
             Destroy(gameObject);
@@ -140,14 +155,32 @@ public class Hydre : MonoBehaviour
                 isAlvie = false;
                 Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
                 field.asteroidsClones.Remove(gameObject);
+                cameraShaker.ShakeOnce(3f, 3f, 0.5f, 0.5f);
                 field.HydreNumber--;
+                if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
+                {
+                    gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+                }
+                else
+                {
+                    gameManager.game.ship_Controller.shipStats.CurrentPower = +Power;
+                }
+                RandomDropShield = Random.Range(1, 11);
+                Debug.Log(RandomDropShield);
+                if (RandomDropShield == 9)
+                {
+                    Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
+                }
+                else if (RandomDropShield == 6)
+                {
+                    Instantiate(LifeSpaceBall, transform.position, transform.rotation);
+                }
+
                 gameManager.money += stats.MoneyDrop;
                 collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentHealth -= CrashDamage;
                 Destroy(gameObject);
             }
         }
-
-
 
         if (collision.gameObject.tag == "DestroyAsteroid")
         {
@@ -156,6 +189,40 @@ public class Hydre : MonoBehaviour
             field.HydreNumber--;
             Destroy(gameObject);
         }
-    }
+        if (collision.gameObject.CompareTag("Ultimate"))
+        {
+            Dead();
+            Debug.Log("Enter ulti");
+        }
 
+
+
+    }
+   public void Dead()
+    {
+        Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+        field.asteroidsClones.Remove(gameObject);
+        gameManager.money += stats.MoneyDrop;
+        if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
+        {
+            gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+        }
+        else
+        {
+            gameManager.game.ship_Controller.shipStats.CurrentPower = +Power;
+        }
+        RandomDropShield = Random.Range(1, 11);
+        Debug.Log(RandomDropShield);
+        if (RandomDropShield == 9)
+        {
+            Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
+        }
+        else if (RandomDropShield == 6)
+        {
+            Instantiate(LifeSpaceBall, transform.position, transform.rotation);
+        }
+        Debug.Log(RandomDropShield);
+
+        Destroy(gameObject);
+    }
 }

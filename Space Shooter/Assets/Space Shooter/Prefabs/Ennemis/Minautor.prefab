@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7099963395930359486}
-  - component: {fileID: 5906854260744977789}
   m_Layer: 7
   m_Name: Nique ca mere
-  m_TagString: Untagged
+  m_TagString: Ennemis
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,19 +32,6 @@ Transform:
   m_Father: {fileID: 1588325650522299674}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5906854260744977789
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330613817203837481}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7.84, y: 3.53, z: 6.37}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5492414698591193788
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +44,7 @@ GameObject:
   - component: {fileID: 1813682204064429}
   - component: {fileID: 7439574486878785338}
   - component: {fileID: 4017525038501299903}
+  - component: {fileID: 1732773516328404220}
   m_Layer: 7
   m_Name: Minautor
   m_TagString: Ennemis
@@ -115,10 +102,13 @@ MonoBehaviour:
   stats: {fileID: 1813682204064429}
   CrashDamage: 10
   RandomDropShield: 0
+  Power: 5
   explosionPrefabs: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
     type: 3}
   bullet: {fileID: 8729678851105911181, guid: c03ffa5823aaa094f9e8b51ad2acbd0a, type: 3}
   ShieldSpaceBall: {fileID: 365428343792752374, guid: 96bc165990915e14b950d5695a948025,
+    type: 3}
+  LifeSpaceBall: {fileID: 365428343792752374, guid: 7e1ae7545b7662e4dafc00008aea9dd3,
     type: 3}
   FirePoints:
   - {fileID: 7240326609066303804}
@@ -141,6 +131,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!65 &1732773516328404220
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492414698591193788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.84, y: 3.53, z: 6.37}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6728424719743862423
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +155,7 @@ GameObject:
   - component: {fileID: 7240326609066303804}
   m_Layer: 7
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: Ennemis
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,3 +1,4 @@
+using EZCameraShake;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,15 @@ public class Ennemis : MonoBehaviour
     [Space(10)]
     [Header("Int")]
     public int RandomDropShield;
+    public int Power;
+
 
     [Space(10)]
     [Header("GameObject/List")]
     public GameObject explosionPrefabs;
     public GameObject bullet;
     public GameObject ShieldSpaceBall;
+    public GameObject LifeSpaceBall;
     public Transform[] FirePoints;
     public Transform rootObject;
 
@@ -39,6 +43,7 @@ public class Ennemis : MonoBehaviour
     private float firepointlist;
     public float fireRate;
     private float nextFire;
+    private CameraShaker cameraShaker;
 
     private void Awake()
     {
@@ -49,6 +54,7 @@ public class Ennemis : MonoBehaviour
         firepointlist = FirePoints.Count();
         bullet.GetComponent<BulletEnnemis>().dammage = stats.Damage;
         shipController = FindObjectOfType<Ship_Controller>();
+        cameraShaker = GameObject.FindObjectOfType<CameraShaker>();
     }
 
     // Update is called once per frame
@@ -96,17 +102,25 @@ public class Ennemis : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.tag == "Sheild")
+        if (collision.gameObject.CompareTag("Sheild"))
         {
             isAlvie = false;
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             field.asteroidsClones.Remove(gameObject);
             gameManager.money += stats.MoneyDrop;
+            if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+            }
+            else
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += Power;
+            }
             collision.gameObject.GetComponent<ShieldDommageDetect>().ship_Controller.shipStats.CurrentShield -= CrashDamage;
             Destroy(gameObject);
         }
 
-        else if (collision.gameObject.tag == "Player")
+        else if (collision.gameObject.CompareTag("Player"))
         {
             if (collision.transform.GetComponent<Ship_Controller>().ShieldActivate == false)
             {
@@ -114,20 +128,33 @@ public class Ennemis : MonoBehaviour
                 Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
                 field.asteroidsClones.Remove(gameObject);
                 gameManager.money += stats.MoneyDrop;
+                cameraShaker.ShakeOnce(3f, 3f, 0.5f, 0.5f);
+                if (shipController.shipStats.CurrentPower == shipController.shipStats.maxPower)
+                {
+                    gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+                }
+                else
+                {
+                    gameManager.game.ship_Controller.shipStats.CurrentPower += Power;
+                }
                 collision.transform.GetComponent<Ship_Controller>().shipStats.CurrentHealth -= CrashDamage;
                 Destroy(gameObject);
             }
         }
 
-        if (collision.gameObject.tag == "DestroyAsteroid")
+        if (collision.gameObject.CompareTag("DestroyAsteroid"))
         {
             isAlvie = false;
             field.asteroidsClones.Remove(gameObject);
             Destroy(gameObject);
         }
+        if (collision.gameObject.CompareTag("Ultimate"))
+        {
+            Dead();
+        }
     }
 
-    void Dead()
+    public void Dead()
     {
         Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
         field.asteroidsClones.Remove(gameObject);
@@ -138,13 +165,17 @@ public class Ennemis : MonoBehaviour
         }
         else
         {
-            gameManager.game.ship_Controller.shipStats.CurrentPower++;
+            gameManager.game.ship_Controller.shipStats.CurrentPower += Power;
         }
         RandomDropShield = Random.Range(1, 11);
         Debug.Log(RandomDropShield);
         if (RandomDropShield == 9)
         {
             Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
+        }
+        else if(RandomDropShield == 6)
+        {
+            Instantiate(LifeSpaceBall, transform.position, transform.rotation);
         }
         Debug.Log(RandomDropShield);
 

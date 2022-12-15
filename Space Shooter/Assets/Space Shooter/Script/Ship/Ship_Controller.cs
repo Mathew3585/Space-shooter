@@ -8,7 +8,6 @@ using EZCameraShake;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 [System.Serializable]
 public class ShipStats
@@ -219,7 +218,7 @@ public class Ship_Controller : MonoBehaviour
 
 
             //Ulti Activation/Tire
-            if (shipStats.CurrentPower == 100)
+            if (shipStats.CurrentPower == shipStats.maxPower)
             {
                 Debug.Log("Ultimate is ready");
                 if (Input.GetButtonDown("Ultimate"))
@@ -232,6 +231,11 @@ public class Ship_Controller : MonoBehaviour
                     gameManager.game.UltimateActive = false;
                     shipStats.CurrentPower = 0;
                 }
+            }
+
+            if(shipStats.CurrentPower >= shipStats.maxPower)
+            {
+                shipStats.CurrentPower = shipStats.maxPower;
             }
 
             //Activation du shield

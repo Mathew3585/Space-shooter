@@ -1,37 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class UltimateDammage : MonoBehaviour
 {
-    public Ennemis ennemis;
-    public Astéroide_Controller astéroide_;
+    private Ennemis MinautorLife;
+    private Hydre HydreLife;
+    private LifeStats lifeStats;
+    private PégaseStats pégaseStats;
     public int Dammage = 200;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Ennemis")
+        if(other.gameObject.CompareTag("Ennemis"))
         {
-            ennemis = gameObject.GetComponent<Ennemis>();
-            ennemis.stats.currentHealth -= Dammage;
+            MinautorLife = other.gameObject.GetComponent<Ennemis>();
+            MinautorLife.Dead();
         }
-
-        if(other.gameObject.tag == "Asteroid")
+        if(other.gameObject.CompareTag("Asteroid"))
         {
-            astéroide_ = other.gameObject.GetComponent<Astéroide_Controller>();
-            astéroide_.stats.currentHealth -= Dammage;
+            lifeStats = other.gameObject.GetComponent<LifeStats>();
+            lifeStats.currentHealth -= Dammage;
+        }
+        if(other.gameObject.CompareTag("Pégas"))
+        {
+            Debug.Log("Pégas");
+            pégaseStats = other.gameObject.GetComponentInParent<PégaseStats>();
+            pégaseStats.Dead();
+        }
+        if(other.gameObject.CompareTag("Hydre"))
+        {
+            HydreLife = other.gameObject.GetComponent<Hydre>();
+            HydreLife.Dead();
+        }
+        else if (other.gameObject.CompareTag("Boss"))
+        {
+            lifeStats = other.gameObject.GetComponent<LifeStats>();
+            lifeStats.currentHealth -= Dammage;
         }
     }
 }
