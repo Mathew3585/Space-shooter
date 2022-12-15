@@ -200,7 +200,7 @@ public class PégaseStats : MonoBehaviour
         }
         else
         {
-            gameManager.game.ship_Controller.shipStats.CurrentPower = +Power;
+            gameManager.game.ship_Controller.shipStats.CurrentPower += Power;
         }
         RandomDropShield = Random.Range(1, 11);
         Debug.Log(RandomDropShield);
