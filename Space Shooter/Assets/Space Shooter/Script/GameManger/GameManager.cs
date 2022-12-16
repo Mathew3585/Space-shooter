@@ -32,6 +32,7 @@ public class Game
     [Header("GameObject")]
     public GameObject UIInGame;
     public GameObject UILose;
+    public GameObject Portail;
 
     [Header("Script")]
     [Tooltip("Il trouve le player tout seul")]
@@ -450,6 +451,10 @@ public class GameManager : MonoBehaviour
         if(Game || Tuto)
         {
 
+            if(game.Progress ==100)
+            {
+                game.Portail.SetActive(true);
+            }
             game.ProgressHightScore = PlayerPrefs.GetFloat("Progress", game.Progress);
             if (game.Progress <= ProgressPhase1)
             {

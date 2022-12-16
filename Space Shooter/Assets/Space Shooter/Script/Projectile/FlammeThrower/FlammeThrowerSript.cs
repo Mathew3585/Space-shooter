@@ -12,48 +12,27 @@ public class FlammeThrowerSript : MonoBehaviour
 
     private void Awake()
     {
-        ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
-    }
-    void Start()
-    {
+        ship_Controller = FindObjectOfType<Ship_Controller>(); ;
         bossSciript = GameObject.FindObjectOfType<BossSciript>();
         damage = bossSciript.FlammeThorwerDamage;
 
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Detect");
-            if (ship_Controller.ShieldActivate)
-            {
-                ship_Controller.shipStats.CurrentShield -= damage;
-            }
-            else
-            {
-                ship_Controller.shipStats.CurrentHealth -= damage;
-            }
+            ship_Controller.shipStats.CurrentHealth -= damage;
         }
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            if (ship_Controller.ShieldActivate)
-            {
-                ship_Controller.shipStats.CurrentShield -= damage;
-            }
-            else
-            {
-                ship_Controller.shipStats.CurrentHealth -= damage;
-            }
+            ship_Controller.shipStats.CurrentHealth -= damage;
         }
     }
 

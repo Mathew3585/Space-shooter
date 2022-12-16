@@ -9673,8 +9673,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dammage: 5
-  t: 0.1
-  speed: 3
+  t: 0.3
+  speed: 6
 --- !u!65 &2042235284374587942
 BoxCollider:
   m_ObjectHideFlags: 0

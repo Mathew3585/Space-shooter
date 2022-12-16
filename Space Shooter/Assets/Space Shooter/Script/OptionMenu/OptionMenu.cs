@@ -18,15 +18,12 @@ public class OptionMenu : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        MusicSlider.value = 1;
-        MasterSlider.value = 1;
-        FxSlider.value = 1;
         MasterSlider.onValueChanged.AddListener(SetMasterVolume);
         MusicSlider.onValueChanged.AddListener(SetMusicVolume);
         FxSlider.onValueChanged.AddListener(SetFxVolume);
-        MusicSlider.value = PlayerPrefs.GetFloat("volumeMusic");
-        FxSlider.value = PlayerPrefs.GetFloat("volumeFx");
-        MasterSlider.value = PlayerPrefs.GetFloat("masterMusic");
+        MusicSlider.value = PlayerPrefs.GetFloat("volumeMusic", 1f);
+        FxSlider.value = PlayerPrefs.GetFloat("volumeFx", 1f);
+        MasterSlider.value = PlayerPrefs.GetFloat("masterMusic", 1f);
         SetMusicVolume(MusicSlider.value);
         SetFxVolume(FxSlider.value);
         SetMasterVolume(MasterSlider.value);

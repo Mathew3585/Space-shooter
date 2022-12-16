@@ -10,6 +10,7 @@ public class ShieldPlayer : MonoBehaviour
     public bool Life;
     public bool Sheild;
     public int lifeReg;
+    private GameObject bullet;
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,7 +27,12 @@ public class ShieldPlayer : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            bullet = collision.gameObject;
+            Destroy(bullet);
+        }
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (Life)
             {

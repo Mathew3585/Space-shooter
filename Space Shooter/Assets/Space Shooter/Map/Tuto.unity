@@ -5456,9 +5456,9 @@ MonoBehaviour:
   - {fileID: 1085034623}
   TextTuto:
   - Il faut fuir maintenant, ils sont a nos trousses
-  - Je vais t'explique les commandes du vaisseau  Appui sur  A pour accepter ou E
+  - Je vais t explique les commandes du vaisseau  Appui sur  A pour accepter ou E
     pour decliner
-  - Ok, laisse-moi te montrer comment on pilote ce vaisseau. Pour aller vers l'avant
+  - Ok, laisse-moi te montrer comment on pilote ce vaisseau. Pour aller vers l avant
     appui sur {0} puis pour reculer appuis sur {1}
   - Maintenant, deplace-toi sur les cotes avec {2} et {3}
   - Ok super, tu sais desormais comment te deplacer maintenant tire avec le vaisseau

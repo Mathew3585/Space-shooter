@@ -54,20 +54,13 @@ public class PégaseStats : MonoBehaviour
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
         cameraShaker = GameObject.FindObjectOfType<CameraShaker>();
+        ship_Controller = FindObjectOfType<Ship_Controller>();
+        field = GameObject.FindObjectOfType<Asteroid_Field>();
     }
     // Start is called before the first frame update
     void Start()
     {
         IsAlive = true;
-        if (gameManager.game.IsDead == false)
-        {
-            ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
-        }
-        else
-        {
-            ship_Controller = null;
-        }
-        field = GameObject.FindObjectOfType<Asteroid_Field>();
         stats.currentHealth = stats.MaxHealth;
         rootGameObject = rootObject.gameObject;
     }
@@ -128,92 +121,58 @@ public class PégaseStats : MonoBehaviour
 
         }
 
-
-
-
-
+        if (IsAlive == false)
+        {
+            field.PégasNumber--;
+            field.asteroidsClones.Remove(gameObject);
+            Destroy(rootGameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            Dead();
+            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+            gameManager.money += stats.MoneyDrop;
+            IsAlive = false;
         }
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (ship_Controller.ShieldActivate)
-            {
-                Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-                ship_Controller.shipStats.CurrentShield -= stats.Damage;
-                gameManager.money += stats.MoneyDrop;
-                field.asteroidsClones.Remove(rootGameObject);
-                field.PégasNumber--;
-                Destroy(rootGameObject);
-            }
-            else
-            {
-                Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-                ship_Controller.shipStats.CurrentHealth -= stats.Damage;
-                cameraShaker.ShakeOnce(3f, 3f, 0.5f, 0.5f);
-                field.asteroidsClones.Remove(rootGameObject);
-                field.PégasNumber--;
-                Destroy(rootGameObject);
-            }
-
-        }
-        if (collision.gameObject.tag == "DestroyAsteroid")
-        {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-            field.asteroidsClones.Remove(rootGameObject);
-            field.PégasNumber--;
-            Destroy(rootGameObject);
+            ship_Controller.shipStats.CurrentHealth -= stats.Damage;
+            cameraShaker.ShakeOnce(3f, 3f, 0.5f, 0.5f);
+            IsAlive = false;
         }
+
         if (collision.gameObject.CompareTag("Sheild"))
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-            gameManager.money += stats.MoneyDrop;
-            field.asteroidsClones.Remove(rootGameObject);
-            field.PégasNumber--;
-            Destroy(rootGameObject);
+            collision.gameObject.GetComponent<ShieldDommageDetect>().ship_Controller.shipStats.CurrentShield -= stats.Damage;
+            IsAlive = false;
         }
+
+        if (collision.gameObject.tag == "DestroyAsteroid")
+        {
+            Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
+            IsAlive = false;
+        }
+
 
         if (collision.gameObject.CompareTag("Ultimate"))
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
             gameManager.money += stats.MoneyDrop;
-            field.asteroidsClones.Remove(rootGameObject);
-            field.PégasNumber--;
-            Destroy(rootGameObject);
+            if (ship_Controller.shipStats.CurrentPower == ship_Controller.shipStats.maxPower)
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
+            }
+            else
+            {
+                gameManager.game.ship_Controller.shipStats.CurrentPower += Power;
+            }
+            IsAlive = false;
         }
-    }
-
-
-    public void Dead()
-    {
-        Instantiate(explosionPrefabs, transform.position, Quaternion.identity);
-        gameManager.money += stats.MoneyDrop;
-        if (ship_Controller.shipStats.CurrentPower == ship_Controller.shipStats.maxPower)
-        {
-            gameManager.game.ship_Controller.shipStats.CurrentPower += 0;
-        }
-        else
-        {
-            gameManager.game.ship_Controller.shipStats.CurrentPower += Power;
-        }
-        RandomDropShield = Random.Range(1, 11);
-        Debug.Log(RandomDropShield);
-        if (RandomDropShield == 9)
-        {
-            Instantiate(ShieldSpaceBall, transform.position, transform.rotation);
-        }
-        else if (RandomDropShield == 6)
-        {
-            Instantiate(LifeSpaceBall, transform.position, transform.rotation);
-        }
-        field.asteroidsClones.Remove(rootGameObject);
-        field.PégasNumber--;
-        Destroy(rootGameObject);
     }
 }

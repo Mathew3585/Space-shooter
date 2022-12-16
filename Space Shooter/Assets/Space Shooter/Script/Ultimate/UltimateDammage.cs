@@ -8,7 +8,7 @@ public class UltimateDammage : MonoBehaviour
     private Ennemis MinautorLife;
     private Hydre HydreLife;
     private LifeStats lifeStats;
-    private PégaseStats pégaseStats;
+    private GameObject pégaseStats;
     public int Dammage = 200;
 
     private void OnTriggerEnter(Collider other)
@@ -26,8 +26,8 @@ public class UltimateDammage : MonoBehaviour
         if(other.gameObject.CompareTag("Pégas"))
         {
             Debug.Log("Pégas");
-            pégaseStats = other.gameObject.GetComponentInParent<PégaseStats>();
-            pégaseStats.Dead();
+            pégaseStats = other.gameObject;
+            Destroy(pégaseStats);
         }
         if(other.gameObject.CompareTag("Hydre"))
         {

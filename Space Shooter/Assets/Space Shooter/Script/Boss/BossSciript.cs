@@ -43,6 +43,7 @@ public class BossSciript : MonoBehaviour
     public GameObject RootObject;
     private Transform PostionStart;
     public BossMove ennemismove;
+    public GameObject Portail;
 
     [Space(10)]
     [Header("List")]
@@ -51,7 +52,7 @@ public class BossSciript : MonoBehaviour
     private GameObject FlammeThowerclone;
 
     private Asteroid_Field field;   
-    private GameManager gameManager;
+    public GameManager gameManager;
     private BulletBoss bulletController;
 
     [Space(5)]
@@ -86,13 +87,14 @@ public class BossSciript : MonoBehaviour
         bulletController.dammage = stats.Damage;
         bulletController.bulletSpeed = stats.BulletSpeed;
         ennemismove.enabled = false;
+        field = GameObject.FindObjectOfType<Asteroid_Field>();
+        gameManager = FindObjectOfType<GameManager>();
     }
     // Start is called before the first frame update
     void Start()
     {
 
-        field = GameObject.FindObjectOfType<Asteroid_Field>();
-        gameManager = GameObject.FindObjectOfType<GameManager>();
+
         firepointlist = FirePoints.Count();
         //Initalize Dommage and speed 
         bulletController.dammage = FireBallDamage;
@@ -111,6 +113,7 @@ public class BossSciript : MonoBehaviour
         {
             PositionStartValidate = false;
         }
+
         if (stats.currentHealth <= 0)
         {
             Instantiate(explosionPrefabs, transform.position, Quaternion.identity);

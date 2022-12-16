@@ -14,31 +14,29 @@ public class FeatherFlamme : MonoBehaviour
     private Transform target;
     private Ship_Controller ship_Controller;
     private GameObject Boss;
+    private BossSciript BossScript;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         Boss = GameObject.FindGameObjectWithTag("Boss");
-        ship_Controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Ship_Controller>();
+        ship_Controller = target.GetComponent<Ship_Controller>();
         dammage = Boss.gameObject.GetComponentInChildren<BossSciript>().FeatherDamage;
         speed = Boss.gameObject.GetComponentInChildren<BossSciript>().FeatherSpeed;
+        BossScript = Boss.GetComponent<BossSciript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ship_Controller.Isdead == false)
+        Vector3 a = transform.position;
+        Vector3 b = target.position;
+        transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), speed);
+        transform.LookAt(target);
+        Physics.IgnoreCollision(Boss.transform.GetComponentInChildren<Collider>(), gameObject.transform.GetComponent<Collider>());
+        if (BossScript.isAlvie == false)
         {
-            Vector3 a = transform.position;
-            Vector3 b = target.position;
-            transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), speed);
-            transform.LookAt(target);
-            if (Boss.gameObject.GetComponentInChildren<BossSciript>().isAlvie)
-            {
-                Physics.IgnoreCollision(Boss.transform.GetComponentInChildren<Collider>(), gameObject.transform.GetComponent<Collider>());
-            }
-            else
-                Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -46,17 +44,10 @@ public class FeatherFlamme : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (ship_Controller.ShieldActivate)
-            {
-                ship_Controller.shipStats.CurrentShield -= dammage;
-                Destroy(gameObject);
-            }
-            else
-            ship_Controller.shipStats.CurrentHealth -= dammage;
             Destroy(gameObject);
         }
 
-        if(collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "Bullet")
         {
             Destroy(gameObject);
         }

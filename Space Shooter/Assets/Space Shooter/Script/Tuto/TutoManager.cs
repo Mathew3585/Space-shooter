@@ -232,7 +232,7 @@ public class TutoManager : MonoBehaviour
         else if (popUpIndex == 6)
         {
             Life.SetActive(true);
-            Time.timeScale = 0;
+            Time.timeScale = 0.5f;
             if (Input.GetKeyDown(NextpopupTuto))
             {
                 Time.timeScale = 1;
@@ -250,7 +250,7 @@ public class TutoManager : MonoBehaviour
                 Ultimate.SetActive(true);
                 text[7].enabled = true;
                 ship_Controller.shipStats.CurrentPower = 100;
-                Time.timeScale = 0;
+                Time.timeScale = 0.5f;
                 if (Input.GetButtonDown("Ultimate"))
                 {
                     Time.timeScale = 1;
@@ -269,7 +269,7 @@ public class TutoManager : MonoBehaviour
             {
                 Money.SetActive(true);
                 text[8].enabled = true;
-                Time.timeScale = 0;
+                Time.timeScale = 0.5f;
                 if (Input.GetKeyDown(NextpopupTuto))
                 {
                     Time.timeScale = 1;
