@@ -2,7 +2,7 @@
 ![Logo](https://github.com/Mathew3585/Space-shooter/blob/main/Space%20Shooter/Assets/Space%20Shooter/Ui/Logo/logo_final.png?raw=true)
 
 
-# Project E.R.E
+# Project E.R.A
 
 Ships inspired by Greek mythology. A horde of evil creatures threatening the universe. Take on the role of a pilot and fight with your fast and agile ship. Eliminate enemies and save the universe in an epic journey filled with intense action and epic space battles
 
